@@ -1,0 +1,9 @@
+{
+  "generator-kotlin-android": {
+    "promptValues": {
+      "name": "wordMemKt",
+      "targetSdk": 26,
+      "minSdk": "16"
+    }
+  }
+}
