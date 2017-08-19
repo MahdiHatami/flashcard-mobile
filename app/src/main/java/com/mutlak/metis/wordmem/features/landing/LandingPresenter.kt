@@ -18,9 +18,7 @@ import javax.inject.Inject
 
 @ConfigPersistent
 class LandingPresenter @Inject
-constructor(private val dataManager: DataManager) : BasePresenter<LandingMvpView>() {
-
-    private val repo = WordsRepositoryImpl()
+constructor(private val repo: WordsRepositoryImpl, private val dataManager: DataManager) : BasePresenter<LandingMvpView>() {
 
     private val SIX_ANSWER = 2
     private val TEN_QUESTION = 1
@@ -53,7 +51,7 @@ constructor(private val dataManager: DataManager) : BasePresenter<LandingMvpView
         }
     }
 
-    private fun getSettings(): Settings {
+    fun getSettings(): Settings {
         val settings = repo.settings
         val userLanguage = Locale.getDefault().language
         settings.reviewLimit = SettingsActivity.reviewList[TEN_WORD_PER_REVIEW]
@@ -64,7 +62,7 @@ constructor(private val dataManager: DataManager) : BasePresenter<LandingMvpView
         return settings
     }
 
-    private fun loadWords(lastFetchDate: String = "") {
+    fun loadWords(lastFetchDate: String = "") {
         view?.showBookLoading()
         dataManager.getWords(lastFetchDate)
                 .compose<List<Word>>(SchedulerUtils.ioToMain<List<Word>>())

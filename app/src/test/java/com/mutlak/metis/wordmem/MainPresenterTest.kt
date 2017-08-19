@@ -12,14 +12,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers
-import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
-/**
- * Created by ravindra on 24/12/16.
- */
 @RunWith(MockitoJUnitRunner::class)
 class MainPresenterTest {
 
@@ -51,7 +47,7 @@ class MainPresenterTest {
 
         mMainPresenter?.getPokemon(10)
 
-        verify<MainMvpView>(mMockMainMvpView, times(2)).showProgress(anyBoolean())
+        verify<MainMvpView>(mMockMainMvpView, times(2)).showProgress()
         verify<MainMvpView>(mMockMainMvpView).showPokemon(pokemonList)
         verify<MainMvpView>(mMockMainMvpView, never()).showError(RuntimeException())
 
@@ -65,7 +61,7 @@ class MainPresenterTest {
 
         mMainPresenter?.getPokemon(10)
 
-        verify<MainMvpView>(mMockMainMvpView, times(2)).showProgress(anyBoolean())
+        verify<MainMvpView>(mMockMainMvpView, times(2)).hideProgress()
 //        verify<MainMvpView>(mMockMainMvpView).showError(RuntimeException())
         verify<MainMvpView>(mMockMainMvpView, never()).showPokemon(ArgumentMatchers.anyList<String>())
     }

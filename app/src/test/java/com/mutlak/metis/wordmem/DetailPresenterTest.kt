@@ -12,7 +12,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.*
@@ -53,7 +52,7 @@ class DetailPresenterTest {
 
         mDetailPresenter?.getPokemon(anyString())
 
-        verify<DetailMvpView>(mMockDetailMvpView, times(2)).showProgress(anyBoolean())
+        verify<DetailMvpView>(mMockDetailMvpView, times(2)).showProgress()
         verify<DetailMvpView>(mMockDetailMvpView).showPokemon(pokemon)
         verify<DetailMvpView>(mMockDetailMvpView, never()).showError(RuntimeException())
     }
@@ -66,7 +65,7 @@ class DetailPresenterTest {
 
         mDetailPresenter?.getPokemon("id")
 
-        verify<DetailMvpView>(mMockDetailMvpView, times(2)).showProgress(anyBoolean())
+        verify<DetailMvpView>(mMockDetailMvpView, times(2)).hideProgress()
 //        verify<DetailMvpView>(mMockDetailMvpView).showError(any(Throwable::class.java))
 //        verify<DetailMvpView>(mMockDetailMvpView, never()).showPokemon(any(Pokemon::class.java))
     }

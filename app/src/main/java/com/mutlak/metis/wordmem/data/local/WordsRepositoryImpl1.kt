@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @Singleton
 class WordsRepositoryImpl @Inject
 constructor() : WordsRepository, Closeable {
-    private val realm: Realm = Realm.getDefaultInstance()
+    var realm: Realm = Realm.getDefaultInstance()
 
     override fun getReviewWords(reviewType: Int, limit: Int): List<Word> {
         var limit = limit

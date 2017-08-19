@@ -1,9 +1,6 @@
 package com.mutlak.metis.wordmem.common
 
-import com.mutlak.metis.wordmem.data.model.NamedResource
-import com.mutlak.metis.wordmem.data.model.Pokemon
-import com.mutlak.metis.wordmem.data.model.Sprites
-import com.mutlak.metis.wordmem.data.model.Statistic
+import com.mutlak.metis.wordmem.data.model.*
 import java.util.*
 
 /**
@@ -59,12 +56,27 @@ object TestDataFactory {
         return sprites
     }
 
-    fun makeNamedResource(unique: String): NamedResource {
+    private fun makeNamedResource(unique: String): NamedResource {
         return NamedResource(randomUuid() + unique, randomUuid())
     }
 
     fun makeNamedResourceList(count: Int): List<NamedResource> {
-        val namedResourceList = (0..count - 1).map { makeNamedResource(it.toString()) }
-        return namedResourceList
+        return (0 until count).map { makeNamedResource(it.toString()) }
+    }
+
+    fun makeListRibots(number: Int): List<Word> {
+        val words = arrayListOf<Word>()
+        var i = 0
+        while (i < number) {
+            words.add(makeWord())
+            i++
+        }
+        return words
+    }
+
+    private fun makeWord(): Word {
+        return Word(english = "abandon",
+                    meaning = "to leave someone, especially someone you are responsible for",
+                    turkish = "terk etmek", type = "v");
     }
 }
