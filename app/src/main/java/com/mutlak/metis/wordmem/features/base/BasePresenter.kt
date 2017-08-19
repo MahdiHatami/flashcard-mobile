@@ -14,8 +14,8 @@ open class BasePresenter<T : BaseView> : Presenter<T> {
         private set
     private val mCompositeSubscription = CompositeSubscription()
 
-    override fun attachView(mvpView: T) {
-        this.view = mvpView
+    override fun attachView(view: T) {
+        this.view = view
     }
 
     override fun detachView() {
@@ -25,7 +25,7 @@ open class BasePresenter<T : BaseView> : Presenter<T> {
         }
     }
 
-    val isViewAttached: Boolean
+    private val isViewAttached: Boolean
         get() = view != null
 
     fun checkViewAttached() {

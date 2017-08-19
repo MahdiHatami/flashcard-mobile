@@ -11,8 +11,8 @@ import javax.inject.Inject
 class DetailPresenter @Inject
 constructor(private val mDataManager: DataManager) : BasePresenter<DetailMvpView>() {
 
-    override fun attachView(mvpView: DetailMvpView) {
-        super.attachView(mvpView)
+    override fun attachView(view: DetailMvpView) {
+        super.attachView(view)
     }
 
     fun getPokemon(name: String) {

@@ -1,5 +1,6 @@
 package com.mutlak.metis.wordmem.injection.component
 
+import com.mutlak.metis.wordmem.features.review.ReviewFragment
 import com.mutlak.metis.wordmem.injection.PerFragment
 import com.mutlak.metis.wordmem.injection.module.FragmentModule
 import dagger.Subcomponent
@@ -9,4 +10,7 @@ import dagger.Subcomponent
  */
 @PerFragment
 @Subcomponent(modules = arrayOf(FragmentModule::class))
-interface FragmentComponent
+interface FragmentComponent {
+
+  fun inject(reviewFragment: ReviewFragment)
+}

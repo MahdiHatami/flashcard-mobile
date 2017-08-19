@@ -10,8 +10,8 @@ import javax.inject.Inject
 class MainPresenter @Inject
 constructor(private val mDataManager: DataManager) : BasePresenter<MainMvpView>() {
 
-    override fun attachView(mvpView: MainMvpView) {
-        super.attachView(mvpView)
+    override fun attachView(view: MainMvpView) {
+        super.attachView(view)
     }
 
     fun getPokemon(limit: Int) {

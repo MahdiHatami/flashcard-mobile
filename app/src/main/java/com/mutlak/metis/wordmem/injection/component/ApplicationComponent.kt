@@ -3,6 +3,7 @@ package com.mutlak.metis.wordmem.injection.component
 import android.app.Application
 import android.content.Context
 import com.mutlak.metis.wordmem.data.DataManager
+import com.mutlak.metis.wordmem.data.local.PreferencesHelper
 import com.mutlak.metis.wordmem.data.local.WordsRepositoryImpl
 import com.mutlak.metis.wordmem.data.remote.MutlakService
 import com.mutlak.metis.wordmem.injection.ApplicationContext
@@ -14,14 +15,16 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(ApplicationModule::class))
 interface ApplicationComponent {
 
-    @ApplicationContext
-    fun context(): Context
+  @ApplicationContext
+  fun context(): Context
 
-    fun application(): Application
+  fun application(): Application
 
-    fun dataManager(): DataManager
+  fun dataManager(): DataManager
 
-    fun mutlakService(): MutlakService
+  fun mutlakService(): MutlakService
 
-    fun wordRepository(): WordsRepositoryImpl
+  fun wordRepository(): WordsRepositoryImpl
+
+  fun preferencesHelper(): PreferencesHelper
 }
