@@ -1,8 +1,8 @@
 package com.mutlak.metis.wordmem.features.main
 
 import com.mutlak.metis.wordmem.data.DataManager
-import com.mutlak.metis.wordmem.injection.ConfigPersistent
 import com.mutlak.metis.wordmem.features.base.BasePresenter
+import com.mutlak.metis.wordmem.injection.ConfigPersistent
 import com.mutlak.metis.wordmem.util.rx.scheduler.SchedulerUtils
 import javax.inject.Inject
 
@@ -16,15 +16,15 @@ constructor(private val mDataManager: DataManager) : BasePresenter<MainMvpView>(
 
     fun getPokemon(limit: Int) {
         checkViewAttached()
-        mvpView?.showProgress(true)
+        view?.showProgress()
         mDataManager.getPokemonList(limit)
                 .compose(SchedulerUtils.ioToMain<List<String>>())
                 .subscribe({ pokemons ->
-                    mvpView?.showProgress(false)
-                    mvpView?.showPokemon(pokemons)
+                    view?.hideProgress()
+                    view?.showPokemon(pokemons)
                 }) { throwable ->
-                    mvpView?.showProgress(false)
-                    mvpView?.showError(throwable)
+                    view?.hideProgress()
+                    view?.showError(throwable)
                 }
     }
 

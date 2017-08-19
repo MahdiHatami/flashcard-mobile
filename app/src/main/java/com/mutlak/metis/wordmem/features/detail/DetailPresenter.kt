@@ -2,8 +2,8 @@ package com.mutlak.metis.wordmem.features.detail
 
 import com.mutlak.metis.wordmem.data.DataManager
 import com.mutlak.metis.wordmem.data.model.Pokemon
-import com.mutlak.metis.wordmem.injection.ConfigPersistent
 import com.mutlak.metis.wordmem.features.base.BasePresenter
+import com.mutlak.metis.wordmem.injection.ConfigPersistent
 import com.mutlak.metis.wordmem.util.rx.scheduler.SchedulerUtils
 import javax.inject.Inject
 
@@ -17,21 +17,21 @@ constructor(private val mDataManager: DataManager) : BasePresenter<DetailMvpView
 
     fun getPokemon(name: String) {
         checkViewAttached()
-        mvpView?.showProgress(true)
+        view?.showProgress()
         mDataManager.getPokemon(name)
                 .compose<Pokemon>(SchedulerUtils.ioToMain<Pokemon>())
                 .subscribe({ pokemon ->
-                    // It should be always checked if MvpView (Fragment or Activity) is attached.
+                    // It should be always checked if BaseView (Fragment or Activity) is attached.
                     // Calling showProgress() on a not-attached fragment will throw a NPE
                     // It is possible to ask isAdded() in the fragment, but it's better to ask in the presenter
-                    mvpView?.showProgress(false)
-                    mvpView?.showPokemon(pokemon)
+                    view?.hideProgress()
+                    view?.showPokemon(pokemon)
                     for (statistic in pokemon.stats) {
-                        mvpView?.showStat(statistic)
+                        view?.showStat(statistic)
                     }
                 }) { throwable ->
-                    mvpView?.showProgress(false)
-                    mvpView?.showError(throwable)
+                    view?.hideProgress()
+                    view?.showError(throwable)
                 }
     }
 }

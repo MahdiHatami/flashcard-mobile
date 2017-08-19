@@ -1,11 +1,5 @@
 package com.mutlak.metis.wordmem.features.detail
 
-import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.data.model.Pokemon
-import com.mutlak.metis.wordmem.data.model.Statistic
-import com.mutlak.metis.wordmem.features.base.BaseActivity
-import com.mutlak.metis.wordmem.features.common.ErrorView
-import com.mutlak.metis.wordmem.features.detail.widget.StatisticView
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,19 +7,22 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import butterknife.BindView
 import com.bumptech.glide.Glide
+import com.mutlak.metis.wordmem.R
+import com.mutlak.metis.wordmem.data.model.Pokemon
+import com.mutlak.metis.wordmem.data.model.Statistic
+import com.mutlak.metis.wordmem.features.base.BaseActivity
+import com.mutlak.metis.wordmem.features.common.ErrorView
+import com.mutlak.metis.wordmem.features.detail.widget.StatisticView
 import timber.log.Timber
 import javax.inject.Inject
 
 class DetailActivity : BaseActivity(), DetailMvpView, ErrorView.ErrorListener {
-
     @Inject lateinit var mDetailPresenter: DetailPresenter
 
     @BindView(R.id.view_error) @JvmField var mErrorView: ErrorView? = null
     @BindView(R.id.image_pokemon) @JvmField var mPokemonImage: ImageView? = null
-    @BindView(R.id.progress) @JvmField var mProgress: ProgressBar? = null
     @BindView(R.id.toolbar) @JvmField var mToolbar: Toolbar? = null
     @BindView(R.id.layout_stats) @JvmField var mStatLayout: LinearLayout? = null
     @BindView(R.id.layout_pokemon) @JvmField var mPokemonLayout: View? = null
@@ -70,11 +67,6 @@ class DetailActivity : BaseActivity(), DetailMvpView, ErrorView.ErrorListener {
         mStatLayout?.addView(statisticView)
     }
 
-    override fun showProgress(show: Boolean) {
-        mErrorView?.visibility = View.GONE
-        mProgress?.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
     override fun showError(error: Throwable) {
         mPokemonLayout?.visibility = View.GONE
         mErrorView?.visibility = View.VISIBLE
@@ -99,5 +91,9 @@ class DetailActivity : BaseActivity(), DetailMvpView, ErrorView.ErrorListener {
             intent.putExtra(EXTRA_POKEMON_NAME, pokemonName)
             return intent
         }
+    }
+
+    override fun getContext(): Context {
+        return this
     }
 }

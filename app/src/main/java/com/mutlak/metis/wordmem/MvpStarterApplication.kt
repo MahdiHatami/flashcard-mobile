@@ -3,11 +3,14 @@ package com.mutlak.metis.wordmem
 import android.content.Context
 import android.support.multidex.MultiDexApplication
 import com.facebook.stetho.Stetho
-import com.squareup.leakcanary.LeakCanary
 import com.mutlak.metis.wordmem.injection.component.ApplicationComponent
 import com.mutlak.metis.wordmem.injection.component.DaggerApplicationComponent
 import com.mutlak.metis.wordmem.injection.module.ApplicationModule
+import com.squareup.leakcanary.LeakCanary
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import timber.log.Timber
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
 class MvpStarterApplication : MultiDexApplication() {
 
@@ -21,6 +24,17 @@ class MvpStarterApplication : MultiDexApplication() {
             Stetho.initializeWithDefaults(this)
             LeakCanary.install(this)
         }
+        CalligraphyConfig.initDefault(
+                CalligraphyConfig.Builder().setDefaultFontPath("fonts/Ubuntu-Regular.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build())
+
+        Realm.init(this)
+        val realmConfiguration =
+                RealmConfiguration.Builder().name("wordmem.realm")
+                        .deleteRealmIfMigrationNeeded()
+                        .build()
+        Realm.setDefaultConfiguration(realmConfiguration)
     }
 
     // Needed to replace the component with a test specific one

@@ -1,10 +1,10 @@
 package com.mutlak.metis.wordmem.data.remote
 
-import com.mutlak.metis.wordmem.BuildConfig
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.mutlak.metis.wordmem.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,23 +13,23 @@ import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 
 /**
- * Provide "make" methods to create instances of [MvpStarterService]
+ * Provide "make" methods to create instances of [MutlakService]
  * and its related dependencies, such as OkHttpClient, Gson, etc.
  */
 object MvpStarterServiceFactory {
 
-    fun makeStarterService(): MvpStarterService {
+    fun makeStarterService(): MutlakService {
         return makeMvpStarterService(makeGson())
     }
 
-    private fun makeMvpStarterService(gson: Gson): MvpStarterService {
+    private fun makeMvpStarterService(gson: Gson): MutlakService {
         val retrofit = Retrofit.Builder()
                 .baseUrl(BuildConfig.POKEAPI_API_URL)
                 .client(makeOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
-        return retrofit.create(MvpStarterService::class.java)
+        return retrofit.create(MutlakService::class.java)
     }
 
     private fun makeOkHttpClient(): OkHttpClient {

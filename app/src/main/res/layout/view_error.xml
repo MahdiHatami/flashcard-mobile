@@ -7,8 +7,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
         android:gravity="center_horizontal"
-        android:text="@string/error_title"
-        android:textSize="@dimen/text_headline" />
+        android:text="Oops"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/text_error_message"
@@ -17,16 +17,15 @@
         android:layout_marginTop="12dp"
         android:gravity="center_horizontal"
         android:padding="16dp"
-        android:text="@string/error_message"
-        android:textSize="@dimen/text_body" />
+        android:text="there was a problem loading"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/button_reload"
-        style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
-        android:text="@string/error_reload" />
+        android:text="Reload" />
 
 </merge>

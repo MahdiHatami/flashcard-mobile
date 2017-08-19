@@ -1,7 +1,7 @@
 package com.mutlak.metis.wordmem.common.injection.module
 
 import com.mutlak.metis.wordmem.data.DataManager
-import com.mutlak.metis.wordmem.data.remote.MvpStarterService
+import com.mutlak.metis.wordmem.data.remote.MutlakService
 import com.mutlak.metis.wordmem.injection.ApplicationContext
 import android.app.Application
 import android.content.Context
@@ -41,8 +41,8 @@ class ApplicationTestModule(private val mApplication: Application) {
 
     @Provides
     @Singleton
-    internal fun provideMvpBoilerplateService(): MvpStarterService {
-        return mock(MvpStarterService::class.java)
+    internal fun provideMvpBoilerplateService(): MutlakService {
+        return mock(MutlakService::class.java)
     }
 
 }

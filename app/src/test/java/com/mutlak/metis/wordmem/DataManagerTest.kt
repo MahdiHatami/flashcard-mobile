@@ -3,7 +3,7 @@ package com.mutlak.metis.wordmem
 import com.mutlak.metis.wordmem.common.TestDataFactory
 import com.mutlak.metis.wordmem.data.DataManager
 import com.mutlak.metis.wordmem.data.model.PokemonListResponse
-import com.mutlak.metis.wordmem.data.remote.MvpStarterService
+import com.mutlak.metis.wordmem.data.remote.MutlakService
 import com.mutlak.metis.wordmem.util.RxSchedulersOverrideRule
 import io.reactivex.Single
 import org.junit.Before
@@ -20,7 +20,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class DataManagerTest {
 
     @Rule @JvmField val mOverrideSchedulersRule = RxSchedulersOverrideRule()
-    @Mock lateinit var mMockMvpStarterService: MvpStarterService
+    @Mock lateinit var mMockMvpStarterService: MutlakService
 
     private var mDataManager: DataManager? = null
 

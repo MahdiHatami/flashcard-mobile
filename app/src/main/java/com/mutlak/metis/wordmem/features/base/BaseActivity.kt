@@ -1,16 +1,20 @@
 package com.mutlak.metis.wordmem.features.base
 
+import android.os.Bundle
+import android.support.v4.util.LongSparseArray
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.view.MenuItem
+import butterknife.ButterKnife
+import com.afollestad.materialdialogs.MaterialDialog
 import com.mutlak.metis.wordmem.MvpStarterApplication
+import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.injection.component.ActivityComponent
 import com.mutlak.metis.wordmem.injection.component.ConfigPersistentComponent
 import com.mutlak.metis.wordmem.injection.component.DaggerConfigPersistentComponent
 import com.mutlak.metis.wordmem.injection.module.ActivityModule
-import android.os.Bundle
-import android.support.v4.util.LongSparseArray
-import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
-import butterknife.ButterKnife
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicLong
 
 /**
@@ -24,8 +28,10 @@ import java.util.concurrent.atomic.AtomicLong
  */
 abstract class BaseActivity : AppCompatActivity() {
 
+    private val TAG = BaseActivity.javaClass.simpleName
     private var mActivityComponent: ActivityComponent? = null
     private var mActivityId: Long = 0
+    var mProgress: MaterialDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +89,25 @@ abstract class BaseActivity : AppCompatActivity() {
         private val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         private val NEXT_ID = AtomicLong(0)
         private val sComponentsArray = LongSparseArray<ConfigPersistentComponent>()
+    }
+
+    fun showProgress() {
+        mProgress = MaterialDialog.Builder(this).progress(true, 0)
+                .widgetColorRes(R.color.primary)
+                .cancelable(false)
+                .show()
+    }
+
+    fun hideProgress() {
+        try {
+            Thread.sleep(TimeUnit.SECONDS.toMillis(1))
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+
+        mProgress?.dismiss()
+        Log.d(TAG, "hideProgress: ")
+
     }
 
 }

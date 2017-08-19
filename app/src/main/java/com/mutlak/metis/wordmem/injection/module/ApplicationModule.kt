@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 import dagger.Module
 import dagger.Provides
-import com.mutlak.metis.wordmem.data.remote.MvpStarterService
+import com.mutlak.metis.wordmem.data.remote.MutlakService
 import com.mutlak.metis.wordmem.data.remote.MvpStarterServiceFactory
 import com.mutlak.metis.wordmem.injection.ApplicationContext
 
@@ -27,7 +27,7 @@ class ApplicationModule(private val mApplication: Application) {
 
     @Provides
     @Singleton
-    internal fun provideMvpStarterService(): MvpStarterService {
+    internal fun provideMvpStarterService(): MutlakService {
         return MvpStarterServiceFactory.makeStarterService()
     }
 }

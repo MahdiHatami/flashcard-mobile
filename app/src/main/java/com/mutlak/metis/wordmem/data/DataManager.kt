@@ -1,17 +1,18 @@
 package com.mutlak.metis.wordmem.data
 
 import com.mutlak.metis.wordmem.data.model.Pokemon
-import com.mutlak.metis.wordmem.data.remote.MvpStarterService
+import com.mutlak.metis.wordmem.data.model.Word
+import com.mutlak.metis.wordmem.data.remote.MutlakService
 import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class DataManager @Inject
-constructor(private val mMvpStarterService: MvpStarterService) {
+constructor(private val mutlakService: MutlakService) {
 
     fun getPokemonList(limit: Int): Single<List<String>> {
-        return mMvpStarterService.getPokemonList(limit)
+        return mutlakService.getPokemonList(limit)
                 .toObservable()
                 .flatMapIterable { (results) -> results }
                 .map { (name) -> name }
@@ -19,7 +20,12 @@ constructor(private val mMvpStarterService: MvpStarterService) {
     }
 
     fun getPokemon(name: String): Single<Pokemon> {
-        return mMvpStarterService.getPokemon(name)
+        return mutlakService.getPokemon(name)
     }
+
+    fun getWords(fetchDate: String): Single<List<Word>> {
+        return mutlakService.getWords(fetchDate)
+    }
+
 
 }

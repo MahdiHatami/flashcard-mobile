@@ -1,7 +1,7 @@
 package com.mutlak.metis.wordmem.injection.component
 
 import com.mutlak.metis.wordmem.data.DataManager
-import com.mutlak.metis.wordmem.data.remote.MvpStarterService
+import com.mutlak.metis.wordmem.data.remote.MutlakService
 import com.mutlak.metis.wordmem.injection.ApplicationContext
 import com.mutlak.metis.wordmem.injection.module.ApplicationModule
 import android.app.Application
@@ -20,5 +20,5 @@ interface ApplicationComponent {
 
     fun dataManager(): DataManager
 
-    fun mvpBoilerplateService(): MvpStarterService
+    fun mvpBoilerplateService(): MutlakService
 }

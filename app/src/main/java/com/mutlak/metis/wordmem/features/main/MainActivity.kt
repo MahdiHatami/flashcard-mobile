@@ -1,17 +1,17 @@
 package com.mutlak.metis.wordmem.features.main
 
-import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.features.base.BaseActivity
-import com.mutlak.metis.wordmem.features.common.ErrorView
-import com.mutlak.metis.wordmem.features.detail.DetailActivity
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.View
-import android.widget.ProgressBar
 import butterknife.BindView
+import com.mutlak.metis.wordmem.R
+import com.mutlak.metis.wordmem.features.base.BaseActivity
+import com.mutlak.metis.wordmem.features.common.ErrorView
+import com.mutlak.metis.wordmem.features.detail.DetailActivity
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -21,7 +21,6 @@ class MainActivity : BaseActivity(), MainMvpView, PokemonAdapter.ClickListener, 
     @Inject lateinit var mMainPresenter: MainPresenter
 
     @BindView(R.id.view_error) @JvmField var mErrorView: ErrorView? = null
-    @BindView(R.id.progress) @JvmField var mProgress: ProgressBar? = null
     @BindView(R.id.recycler_pokemon) @JvmField var mPokemonRecycler: RecyclerView? = null
     @BindView(R.id.swipe_to_refresh) @JvmField var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     @BindView(R.id.toolbar) @JvmField var mToolbar: Toolbar? = null
@@ -62,23 +61,23 @@ class MainActivity : BaseActivity(), MainMvpView, PokemonAdapter.ClickListener, 
         mSwipeRefreshLayout?.visibility = View.VISIBLE
     }
 
-    override fun showProgress(show: Boolean) {
-        if (show) {
-            if (mPokemonRecycler?.visibility == View.VISIBLE && mPokemonAdapter.itemCount > 0) {
-                mSwipeRefreshLayout?.isRefreshing = true
-            } else {
-                mProgress?.visibility = View.VISIBLE
-
-                mPokemonRecycler?.visibility = View.GONE
-                mSwipeRefreshLayout?.visibility = View.GONE
-            }
-
-            mErrorView?.visibility = View.GONE
-        } else {
-            mSwipeRefreshLayout?.isRefreshing = false
-            mProgress?.visibility = View.GONE
-        }
-    }
+//    override fun showProgress(show: Boolean) {
+//        if (show) {
+//            if (mPokemonRecycler?.visibility == View.VISIBLE && mPokemonAdapter.itemCount > 0) {
+//                mSwipeRefreshLayout?.isRefreshing = true
+//            } else {
+//                mProgress?.visibility = View.VISIBLE
+//
+//                mPokemonRecycler?.visibility = View.GONE
+//                mSwipeRefreshLayout?.visibility = View.GONE
+//            }
+//
+//            mErrorView?.visibility = View.GONE
+//        } else {
+//            mSwipeRefreshLayout?.isRefreshing = false
+//            mProgress?.visibility = View.GONE
+//        }
+//    }
 
     override fun showError(error: Throwable) {
         mPokemonRecycler?.visibility = View.GONE
@@ -98,5 +97,9 @@ class MainActivity : BaseActivity(), MainMvpView, PokemonAdapter.ClickListener, 
     companion object {
 
         private val POKEMON_COUNT = 20
+    }
+
+    override fun getContext(): Context {
+        return this
     }
 }
