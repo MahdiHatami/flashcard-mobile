@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/dialog_new"
+        style="@style/landing_review_choose_linear_layout"
+        >
+
+        <TextView
+            android:id="@+id/review_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_random_blue"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/ic_random_blue"
+            android:gravity="center"
+            android:text="@string/review_new_words"
+            android:textColor="@color/menu_blue"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/review_new_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/word_count_badge"
+            android:padding="6dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            tools:text="120"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#d2d0d0"/>
+
+    <RelativeLayout
+        android:id="@+id/dialog_learnt"
+        style="@style/landing_review_choose_linear_layout"
+        >
+
+        <TextView
+            android:id="@+id/review_learnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_learnt_green"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/ic_learnt_green"
+            android:gravity="center"
+            android:text="@string/review_my_learnt_words"
+            android:textColor="@color/primary"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/review_learnt_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/word_count_badge"
+            android:padding="6dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            tools:text="120"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#d2d0d0"/>
+
+    <RelativeLayout
+        android:id="@+id/dialog_bookmark"
+        style="@style/landing_review_choose_linear_layout"
+        >
+
+        <TextView
+            android:id="@+id/review_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_favorit_red"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/ic_favorit_red"
+            android:gravity="center"
+            android:text="@string/review_my_favorite_words"
+            android:textColor="@color/accent"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/review_bookmark_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/word_count_badge"
+            android:padding="6dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            tools:text="120"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

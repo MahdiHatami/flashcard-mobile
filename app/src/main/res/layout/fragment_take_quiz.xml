@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.google.android.gms.ads.NativeExpressAdView
+        android:id="@+id/native_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-40dp"
+        android:layout_gravity="center_horizontal"
+        ads:adSize="FULL_WIDTHx300"
+        ads:adUnitId="ca-app-pub-3882496792252518/9939515587"/>
+
+
+    <LinearLayout
+        android:id="@+id/result_explore_linear"
+        style="@style/result_linear_layout_row">
+
+        <ImageView
+            style="@style/result_image_view"
+            app:srcCompat="@drawable/ic_random"/>
+
+        <LinearLayout style="@style/result_texts_row">
+
+            <TextView
+                style="@style/result_text_title"
+                android:text="@string/result_explore_new_words"/>
+
+            <TextView
+                android:id="@+id/result_explore_subtitle_textview"
+                style="@style/result_text_subtitle"
+                tools:text="15 words"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/result_horizontal_divider"/>
+
+    <LinearLayout
+        android:id="@+id/result_quiz_linear"
+        style="@style/result_linear_layout_row">
+
+        <ImageView
+            style="@style/result_image_view"
+            app:srcCompat="@drawable/ic_question_red"/>
+
+        <LinearLayout style="@style/result_texts_row">
+
+            <TextView
+                style="@style/result_text_title"
+                android:text="@string/review_result_quiz_title"/>
+
+            <TextView
+                android:id="@+id/result_quiz_subtitle_textview"
+                style="@style/result_text_subtitle"
+                tools:text="5 words"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/result_horizontal_divider"/>
+
+    <LinearLayout
+        android:id="@+id/result_home_linear"
+        style="@style/result_linear_layout_row"
+        android:gravity="center">
+
+        <ImageView
+            style="@style/result_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_home"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
