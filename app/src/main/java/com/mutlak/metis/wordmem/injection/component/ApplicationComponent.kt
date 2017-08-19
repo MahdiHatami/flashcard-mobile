@@ -1,11 +1,12 @@
 package com.mutlak.metis.wordmem.injection.component
 
+import android.app.Application
+import android.content.Context
 import com.mutlak.metis.wordmem.data.DataManager
+import com.mutlak.metis.wordmem.data.local.WordsRepositoryImpl
 import com.mutlak.metis.wordmem.data.remote.MutlakService
 import com.mutlak.metis.wordmem.injection.ApplicationContext
 import com.mutlak.metis.wordmem.injection.module.ApplicationModule
-import android.app.Application
-import android.content.Context
 import dagger.Component
 import javax.inject.Singleton
 
@@ -20,5 +21,7 @@ interface ApplicationComponent {
 
     fun dataManager(): DataManager
 
-    fun mvpBoilerplateService(): MutlakService
+    fun mutlakService(): MutlakService
+
+    fun wordRepository(): WordsRepositoryImpl
 }
