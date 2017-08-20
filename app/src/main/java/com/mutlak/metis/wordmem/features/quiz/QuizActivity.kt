@@ -11,13 +11,13 @@ import android.view.MenuItem
 import android.widget.TextView
 import butterknife.BindView
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.gson.Gson
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.data.model.Answer
 import com.mutlak.metis.wordmem.data.model.ExamSession
 import com.mutlak.metis.wordmem.data.model.Question
 import com.mutlak.metis.wordmem.features.base.BaseActivity
 import com.mutlak.metis.wordmem.features.landing.LandingActivity
-import com.mutlak.metis.wordmem.features.quiz.QuizPresenter.QuizView
 import com.mutlak.metis.wordmem.features.quiz.widgets.CustomViewPager
 import com.mutlak.metis.wordmem.features.quiz.widgets.CustomViewPager.SwipeDirection
 import com.mutlak.metis.wordmem.features.quiz.widgets.ExamPagerAdapter
@@ -31,7 +31,7 @@ class QuizActivity : BaseActivity(), QuizView {
   @Inject lateinit var mPresenter: QuizPresenter
 
   private var session: ExamSession? = null
-  val EXAM_SESSION = "exam_session"
+  private val EXAM_SESSION = "exam_session"
 
   @BindView(R.id.test_view_pager) lateinit var mViewPager: CustomViewPager
   @BindView(R.id.toolbar) lateinit var toolbar: Toolbar
@@ -51,6 +51,8 @@ class QuizActivity : BaseActivity(), QuizView {
     mPresenter.setupTest()
   }
 
+  override val layout: Int get() = R.layout.activity_quiz
+
   fun nextQuestion(preQuestion: Question, answer: Answer, userAnswer: Boolean) {
     session!!.questions!![mViewPager.currentItem].isUserAnswerWasCorrect = preQuestion.isUserAnswerWasCorrect
     session!!.questions!![mViewPager.currentItem].userResponse = answer.word
@@ -59,15 +61,17 @@ class QuizActivity : BaseActivity(), QuizView {
     } else {
       if (userAnswer) {
         Handler().postDelayed({
-          mToolbarCounter.text = (mViewPager.currentItem.plus(
-              2)).toString() + "/" + session!!.questions!!.size
+          val currentIndex = mViewPager.currentItem.plus(2)
+          val total = session!!.questions!!.size
+          mToolbarCounter.text = getString(R.string.toolbar_counter_title, currentIndex, total)
           mViewPager.currentItem = mViewPager.currentItem + 1
         }, 700)
       } else {
-
         Handler().postDelayed({
-          mToolbarCounter.text = (mViewPager.currentItem + 2).toString() + "/" + session!!.questions!!.size
-          mViewPager.currentItem = mViewPager.currentItem + 1
+          val currentIndex = mViewPager.currentItem.plus(2)
+          val total = session!!.questions!!.size
+          mToolbarCounter.text = getString(R.string.toolbar_counter_title, currentIndex, total)
+          mViewPager.currentItem = mViewPager.currentItem.plus(1)
         }, 1000)
       }
     }
@@ -75,7 +79,7 @@ class QuizActivity : BaseActivity(), QuizView {
 
   private fun showResultPage(session: ExamSession) {
     val intent = Intent(this, ResultActivity::class.java)
-//    intent.putExtra(EXAM_SESSION, session)
+    intent.putExtra(EXAM_SESSION, Gson().toJson(session))
     startActivity(intent)
   }
 
@@ -88,23 +92,22 @@ class QuizActivity : BaseActivity(), QuizView {
         .content(R.string.quiz_not_enough_word_content)
         .cancelable(false)
         .positiveText(R.string.ok)
-        .onPositive { dialog, which ->
+        .onPositive { dialog, _ ->
           dialog.dismiss()
           finish()
           redirectToLanding()
         }
-        .onNegative { dialog, which -> dialog.dismiss() }
+        .onNegative { dialog, _ -> dialog.dismiss() }
         .show()
   }
 
-  override fun initQuestionPager(examSession: ExamSession) {
-    session = examSession
-    val adapter = ExamPagerAdapter(session!!, supportFragmentManager)
+  override fun initQuestionPager(session: ExamSession) {
+    this.session = session
+    val adapter = ExamPagerAdapter(this.session!!, supportFragmentManager)
     mViewPager.adapter = adapter
     mViewPager.setAllowedSwipeDirection(SwipeDirection.none)
     mViewPager.setScrollDurationFactor(2.0)
-    mToolbarCounter.text = String.format(Locale.getDefault(), "1/%d",
-        session!!.questions!!.size)
+    mToolbarCounter.text = String.format(Locale.US, "1/%d", this.session!!.questions!!.size)
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -127,12 +130,12 @@ class QuizActivity : BaseActivity(), QuizView {
         .content(R.string.quiz_cancel_dialog_content)
         .positiveText(R.string.yes)
         .negativeText(R.string.cancel)
-        .onPositive { dialog, which ->
+        .onPositive { dialog, _ ->
           dialog.dismiss()
           finish()
           redirectToLanding()
         }
-        .onNegative { dialog, which -> dialog.dismiss() }
+        .onNegative { dialog, _ -> dialog.dismiss() }
         .show()
   }
 
@@ -149,8 +152,4 @@ class QuizActivity : BaseActivity(), QuizView {
       supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_clear)
     }
   }
-
-
-  override val layout: Int
-    get() = R.layout.activity_quiz
 }

@@ -7,9 +7,6 @@ import com.mutlak.metis.wordmem.data.model.Question
 import com.mutlak.metis.wordmem.data.model.Settings
 import com.mutlak.metis.wordmem.data.model.Word
 import com.mutlak.metis.wordmem.features.base.BasePresenter
-import com.mutlak.metis.wordmem.features.base.BaseView
-import com.mutlak.metis.wordmem.features.quiz.QuizPresenter.QuizView
-import com.mutlak.metis.wordmem.features.review.ReviewPresenter
 import com.mutlak.metis.wordmem.injection.ConfigPersistent
 import rx.Subscription
 import java.util.ArrayList
@@ -65,7 +62,7 @@ class QuizPresenter @Inject constructor(
     val answers = ArrayList<Answer>()
     answers.add(addCorrectAnswer(correctAnswer))
 
-    for (j in 0..settings.maxAnswers - 1 - 1) {
+    for (j in 0..settings.maxAnswers.minus(2)) {
       answers.add(getWrongAnswer(answers, allWords))
     }
     val seed = System.nanoTime()
@@ -76,15 +73,10 @@ class QuizPresenter @Inject constructor(
   private fun getWrongAnswer(answers: List<Answer>, allWords: List<Word>): Answer {
     val random = Random()
     val answer = Answer()
-    var a = true
 
     val i = random.nextInt(allWords.size)
 
-    for (answer1 in answers) {
-      if (answer1.word?.id === allWords[i].id) {
-        a = false
-      }
-    }
+    val a = answers.none { it.word?.id == allWords[i].id }
     if (a) {
       answer.word = allWords[i]
     } else {
@@ -97,23 +89,12 @@ class QuizPresenter @Inject constructor(
   private fun addCorrectAnswer(word: Word): Answer {
     val answer = Answer()
     for (j in wordList!!.indices) {
-      if (wordList!![j].id === word.id) {
+      if (wordList!![j].id == word.id) {
         answer.word = word
         answer.isCorrect = true
         break
       }
     }
     return answer
-  }
-
-  companion object {
-
-    internal val TAG = ReviewPresenter::class.java.simpleName
-  }
-
-  interface QuizView : BaseView {
-
-    fun initQuestionPager(session: ExamSession)
-    fun redirectBack()
   }
 }

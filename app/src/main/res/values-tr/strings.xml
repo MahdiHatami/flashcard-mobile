@@ -78,4 +78,5 @@
     <string name="intro_quiz_content">Görüntülediğiniz kartlardan, İngilizce-İngilizce veya İngilizce-Türkçe olarak ayarlayabileceğiniz sınavlar yardımı ile kendinizi deneyin. Kendinize güveniyorsanız seçenek sayısını artırabilirsiniz.</string>
     <string name="intro_settings_title">İNCE AYARLAR</string>
     <string name="intro_settings_content">Bir oturumda gösterilecek kelime kartı sayısını ayarlayıp, sınavı kendi tarzınıza göre özelleştirin. Hatırlatıcı sayesinde düzenli olarak kart egzersizi yapmanız mümkün.</string>
+  <string name="toolbar_counter_title">%d / %d</string>
 </resources>
