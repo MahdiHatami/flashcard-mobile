@@ -12,7 +12,7 @@ import io.realm.RealmConfiguration
 import timber.log.Timber
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
-class MvpStarterApplication : MultiDexApplication() {
+class MutlakApplication : MultiDexApplication() {
 
     internal var mApplicationComponent: ApplicationComponent? = null
 
@@ -53,8 +53,8 @@ class MvpStarterApplication : MultiDexApplication() {
 
     companion object {
 
-        operator fun get(context: Context): MvpStarterApplication {
-            return context.applicationContext as MvpStarterApplication
+        operator fun get(context: Context): MutlakApplication {
+            return context.applicationContext as MutlakApplication
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.mutlak.metis.wordmem.common
 
-import com.mutlak.metis.wordmem.MvpStarterApplication
+import com.mutlak.metis.wordmem.MutlakApplication
 import com.mutlak.metis.wordmem.common.injection.component.DaggerTestComponent
 import com.mutlak.metis.wordmem.common.injection.component.TestComponent
 import com.mutlak.metis.wordmem.common.injection.module.ApplicationTestModule
@@ -22,7 +22,7 @@ class TestComponentRule(val context: Context) : TestRule {
     val testComponent: TestComponent
 
     init {
-        val application = MvpStarterApplication.get(context)
+        val application = MutlakApplication.get(context)
         testComponent = DaggerTestComponent.builder()
                 .applicationTestModule(ApplicationTestModule(application))
                 .build()
@@ -35,7 +35,7 @@ class TestComponentRule(val context: Context) : TestRule {
         return object : Statement() {
             @Throws(Throwable::class)
             override fun evaluate() {
-                val application = MvpStarterApplication.get(context)
+                val application = MutlakApplication.get(context)
                 application.component = testComponent
                 base.evaluate()
             }

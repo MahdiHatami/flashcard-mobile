@@ -294,7 +294,6 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
 
   companion object {
 
-    private val TAG = ReviewFragment::class.java.simpleName
     private val thresholdOffset = 0.5f
 
     fun newInstance(): ReviewFragment {
