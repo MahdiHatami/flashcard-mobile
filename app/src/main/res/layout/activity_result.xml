@@ -24,7 +24,7 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
-                <com.mutlak.metis.wordmem.widget.CircleProgressView
+                <com.mutlak.metis.wordmem.features.result.widget.CircleProgressView
                     android:id="@+id/circle_progress_view"
                     android:layout_width="140dp"
                     android:layout_height="140dp"

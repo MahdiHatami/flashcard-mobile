@@ -27,11 +27,14 @@ import javax.inject.Inject
 
 class QuizActivity : BaseActivity(), QuizView {
 
+  companion object {
+    val EXAM_SESSION = "exam_session"
+  }
+
 
   @Inject lateinit var mPresenter: QuizPresenter
 
   private var session: ExamSession? = null
-  private val EXAM_SESSION = "exam_session"
 
   @BindView(R.id.test_view_pager) lateinit var mViewPager: CustomViewPager
   @BindView(R.id.toolbar) lateinit var toolbar: Toolbar

@@ -3,6 +3,7 @@ package com.mutlak.metis.wordmem.data.model
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import java.io.Serializable
 import java.util.Date
 
 open class Word(
@@ -25,7 +26,7 @@ open class Word(
     var totalWrongs: Int = 0,
     var totalCorrects: Int = 0,
     var lastSeen: Date? = null
-) : RealmObject() {
+) : Serializable, RealmObject() {
   val singleSentence: String
     get() {
       val s = ""
