@@ -155,4 +155,9 @@ class QuizActivity : BaseActivity(), QuizView {
       supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_clear)
     }
   }
+
+  override fun onDestroy() {
+    mPresenter.detachView()
+    super.onDestroy()
+  }
 }

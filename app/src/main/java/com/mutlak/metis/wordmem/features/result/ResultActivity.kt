@@ -178,4 +178,9 @@ class ResultActivity : BaseActivity(), ResultView {
     return this
   }
 
+  override fun onDestroy() {
+    mPresenter.detachView()
+    super.onDestroy()
+  }
+
 }

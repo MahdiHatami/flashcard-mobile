@@ -15,6 +15,7 @@ import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.RadioButton
@@ -23,6 +24,8 @@ import android.widget.TimePicker
 import android.widget.Toast
 import butterknife.BindView
 import com.mutlak.metis.wordmem.R
+import com.mutlak.metis.wordmem.R.id
+import com.mutlak.metis.wordmem.R.string
 import com.mutlak.metis.wordmem.data.model.Settings
 import com.mutlak.metis.wordmem.features.base.BaseActivity
 import com.mutlak.metis.wordmem.util.AlarmReciever
@@ -42,7 +45,7 @@ class SettingsActivity : BaseActivity() {
     val optionList = mutableListOf(4, 5, 6)
   }
 
-  private lateinit var settings: Settings
+  private var mSettings: Settings? = null
 
   @BindView(R.id.toolbar) lateinit var toolbar: Toolbar
   @BindView(R.id.review_number_sp) lateinit var mReviewSpinner: AppCompatSpinner
@@ -60,48 +63,49 @@ class SettingsActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     activityComponent().inject(this)
+
+    setupToolbar()
+  }
+
+  override fun onResume() {
     val realm = Realm.getDefaultInstance()
 
-    settings = realm.where(Settings::class.java).findFirst()
-    settings = realm.copyFromRealm(settings)
-
-    setSupportActionBar(toolbar)
-    if (supportActionBar != null) {
-      supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-      supportActionBar!!.setDisplayShowHomeEnabled(true)
-      supportActionBar!!.setTitle(R.string.action_settings)
+    mSettings = realm.where(Settings::class.java).findFirst()
+    mSettings = realm.copyFromRealm(mSettings)
+    if (mSettings == null) {
+      mSettings = Settings()
+      mSettings?.reviewLimit = reviewList.iterator().next()
+      mSettings?.quizLimit = quizList.iterator().next()
+      mSettings?.maxAnswers = optionList.iterator().next()
     }
 
     fillSpinner()
 
-    mReminderGear.setOnClickListener { _ -> showTimePickerDialog() }
+    setupQuizSettings(realm)
 
-    mReminderSwitch.isChecked = settings.isReminderActive
+    setupReminder(realm)
 
-    when (settings.quizType) {
-      R.id.radio_word -> wordRadio.isChecked = true
-      R.id.radio_sentence -> sentenceRadio.isChecked = true
+    setupReview(realm)
+
+    super.onResume()
+  }
+
+  private fun setupToolbar() {
+    setSupportActionBar(toolbar)
+    if (supportActionBar != null) {
+      supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+      supportActionBar!!.setDisplayShowHomeEnabled(true)
+      supportActionBar!!.setTitle(string.action_settings)
     }
+  }
 
-    mReminderSwitch.setOnCheckedChangeListener { _, isChecked ->
-      realm.executeTransaction { realm1 ->
-        settings.isReminderActive = isChecked
-        realm1.insertOrUpdate(settings)
-      }
-      if (!isChecked) {
-        cancelAlarm()
-      } else {
-//        if (settings.reminderDate != null)
-//          setupAlarm(settings.getReminderDate!!)
-      }
-    }
-
-    mReviewSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+  private fun setupReview(realm: Realm) {
+    mReviewSpinner.onItemSelectedListener = object : OnItemSelectedListener {
       override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         val selectedValue = reviewList[position]
         realm.executeTransaction { realm1 ->
-          settings.reviewLimit = selectedValue
-          realm1.insertOrUpdate(settings)
+          mSettings?.reviewLimit = selectedValue
+          realm1.insertOrUpdate(mSettings)
         }
       }
 
@@ -109,13 +113,31 @@ class SettingsActivity : BaseActivity() {
 
       }
     }
+  }
 
+  private fun setupQuizSettings(realm: Realm) {
+    when (mSettings?.quizType) {
+      id.radio_word -> wordRadio.isChecked = true
+      id.radio_sentence -> sentenceRadio.isChecked = true
+    }
+    quizTypeRadio.setOnCheckedChangeListener { group, checkedId ->
+      when (checkedId) {
+        id.radio_word -> {
+          mSettings?.quizType = QUIZ_TYPE_WORD
+          realm.executeTransaction { realm1 -> realm1.insertOrUpdate(mSettings) }
+        }
+        id.radio_sentence -> {
+          mSettings?.quizType = QUIZ_TYPE_SENTENCE
+          realm.executeTransaction { realm1 -> realm1.insertOrUpdate(mSettings) }
+        }
+      }
+    }
     mQuizSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         val selectedValue = quizList[position]
         realm.executeTransaction { realm1 ->
-          settings.reviewLimit = selectedValue
-          realm1.insertOrUpdate(settings)
+          mSettings?.quizLimit = selectedValue
+          realm1.insertOrUpdate(mSettings)
         }
       }
 
@@ -128,27 +150,35 @@ class SettingsActivity : BaseActivity() {
       override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         val selectedValue = optionList[position]
         realm.executeTransaction { realm1 ->
-          settings.maxAnswers = selectedValue
-          realm1.insertOrUpdate(settings)
+          mSettings?.maxAnswers = selectedValue
+          realm1.insertOrUpdate(mSettings)
         }
       }
 
       override fun onNothingSelected(parent: AdapterView<*>) {}
     }
 
-    quizTypeRadio.setOnCheckedChangeListener { group, checkedId ->
-      when (checkedId) {
-        R.id.radio_word -> {
-          settings.quizType = QUIZ_TYPE_WORD
-          realm.executeTransaction { realm1 -> realm1.insertOrUpdate(settings) }
-        }
-        R.id.radio_sentence -> {
-          settings.quizType = QUIZ_TYPE_SENTENCE
-          realm.executeTransaction { realm1 -> realm1.insertOrUpdate(settings) }
-        }
+  }
+
+  private fun setupReminder(realm: Realm) {
+    mReminderGear.setOnClickListener { _ -> showTimePickerDialog() }
+
+    mReminderSwitch.isChecked = mSettings?.isReminderActive!!
+
+    mReminderSwitch.setOnCheckedChangeListener { _, isChecked ->
+      realm.executeTransaction { realm1 ->
+        mSettings?.isReminderActive = isChecked
+        realm1.insertOrUpdate(mSettings)
+      }
+      if (!isChecked) {
+        cancelAlarm()
+      } else {
+        //        if (mSettings.reminderDate != null)
+        //          setupAlarm(mSettings.getReminderDate!!)
       }
     }
   }
+
 
   private fun fillSpinner() {
     val dataAdapter = ArrayAdapter(this, R.layout.custom_spinner_item, reviewList)
@@ -160,28 +190,21 @@ class SettingsActivity : BaseActivity() {
     val optionsAdapter = ArrayAdapter(this, R.layout.custom_spinner_item, optionList)
     mAnswersSpinner.adapter = optionsAdapter
 
-    if (settings.quizType == 0) settings.quizType = QUIZ_TYPE_WORD
+    if (mSettings?.quizType == 0) mSettings?.quizType = QUIZ_TYPE_WORD
 
-    if (settings == null) {
-      settings = Settings()
-      settings.reviewLimit = reviewList.iterator().next()
-      settings.quizLimit = quizList.iterator().next()
-      settings.maxAnswers = optionList.iterator().next()
-    } else {
-      reviewList
-          .filter { settings.reviewLimit == it }
-          .forEach { mReviewSpinner.setSelection(reviewList.indexOf(it)) }
-      quizList
-          .filter { settings.quizLimit == it }
-          .forEach { mQuizSpinner.setSelection(quizList.indexOf(it)) }
+    reviewList
+        .filter { mSettings?.reviewLimit == it }
+        .forEach { mReviewSpinner.setSelection(reviewList.indexOf(it)) }
+    quizList
+        .filter { mSettings?.quizLimit == it }
+        .forEach { mQuizSpinner.setSelection(quizList.indexOf(it)) }
 
-      optionList
-          .filter { settings.maxAnswers == it }
-          .forEach { mAnswersSpinner.setSelection(optionList.indexOf(it)) }
-    }
+    optionList
+        .filter { mSettings?.maxAnswers == it }
+        .forEach { mAnswersSpinner.setSelection(optionList.indexOf(it)) }
 
-    if (settings.quizType != 0) {
-      when (settings.quizType) {
+    if (mSettings?.quizType != 0) {
+      when (mSettings?.quizType) {
         QUIZ_TYPE_WORD -> wordRadio.isChecked = true
         QUIZ_TYPE_SENTENCE -> sentenceRadio.isChecked = true
       }
@@ -196,18 +219,18 @@ class SettingsActivity : BaseActivity() {
   class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
     internal var realm = Realm.getDefaultInstance()
-    internal var settings: Settings = realm.where(Settings::class.java).findFirst()
+    internal var mSettings: Settings = realm.where(Settings::class.java).findFirst()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
       val hour: Int
       val minute: Int
       val c = Calendar.getInstance()
-      if (settings.reminderDate == null) {
+      if (mSettings.reminderDate == null) {
         hour = c.get(Calendar.HOUR_OF_DAY)
         minute = c.get(Calendar.MINUTE)
       } else {
-        hour = settings.reminderDate.toInt()
-        minute = settings.reminderDate.toInt()
+        hour = mSettings.reminderDate.toInt()
+        minute = mSettings.reminderDate.toInt()
       }
       return TimePickerDialog(activity, this, hour, minute,
           DateFormat.is24HourFormat(activity))
@@ -226,7 +249,7 @@ class SettingsActivity : BaseActivity() {
       val time = Time(cal.timeInMillis)
 
       Log.i(TAG, "onTimeSet: " + time.toString())
-      realm.executeTransaction { _ -> settings.reminderDate = time.time }
+      realm.executeTransaction { _ -> mSettings.reminderDate = time.time }
 
       val pendingIntent: PendingIntent
       val manager: AlarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -255,6 +278,10 @@ class SettingsActivity : BaseActivity() {
     val intent = Intent(this, AlarmReciever::class.java)
     val sender = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE, intent, 0)
     am.cancel(sender)
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
   }
 
 }

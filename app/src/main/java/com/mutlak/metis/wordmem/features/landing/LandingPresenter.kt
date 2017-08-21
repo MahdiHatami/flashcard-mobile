@@ -17,6 +17,8 @@ import java.util.Locale
 import javax.inject.Inject
 
 
+
+
 @ConfigPersistent
 class LandingPresenter @Inject
 constructor(private val repo: WordsRepositoryImpl,
@@ -55,15 +57,19 @@ constructor(private val repo: WordsRepositoryImpl,
   }
 
   fun getSettings(): Settings {
-    val settings = repo.settings
+    var settings = repo.settings
     val userLanguage = Locale.getDefault().language
-    settings.reviewLimit = SettingsActivity.reviewList[TEN_WORD_PER_REVIEW]
-    settings.quizLimit = SettingsActivity.quizList[TEN_QUESTION]
-    setupQuizType(settings, userLanguage)
-    repo.updateSettings(settings)
+    if (settings == null) {
+      settings = Settings()
+      settings.reviewLimit = SettingsActivity.reviewList[TEN_WORD_PER_REVIEW]
+      settings.quizLimit = SettingsActivity.quizList[TEN_QUESTION]
+      setupQuizType(settings, userLanguage)
+      repo.updateSettings(settings)
+    }
     if (settings.quizType == 0) setupQuizType(settings, userLanguage)
     return settings
   }
+
 
   fun loadWords(lastFetchDate: String = "") {
     view?.showBookLoading()

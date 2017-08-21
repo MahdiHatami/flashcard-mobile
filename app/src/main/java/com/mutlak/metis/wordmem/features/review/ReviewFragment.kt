@@ -292,6 +292,11 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
     }
   }
 
+  override fun onDestroy() {
+    mPresenter.detachView()
+    super.onDestroy()
+  }
+
   companion object {
 
     private val thresholdOffset = 0.5f
