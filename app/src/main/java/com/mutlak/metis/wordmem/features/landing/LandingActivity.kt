@@ -205,6 +205,23 @@ class LandingActivity : BaseActivity(), LandingMvpView {
     }
   }
 
+  override fun onBackPressed() {
+    redirectBack()
+  }
+
+  private fun redirectBack() {
+    MaterialDialog.Builder(this@LandingActivity).title(R.string.logout_title)
+        .content(R.string.logout_content)
+        .positiveText(R.string.yes)
+        .negativeText(R.string.cancel)
+        .onPositive { dialog, _ ->
+          dialog.dismiss()
+          finishAffinity()
+        }
+        .onNegative { dialog, _ -> dialog.dismiss() }
+        .show()
+  }
+
   override fun getContext(): Context {
     return this
   }
