@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Interpolator
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -49,6 +50,8 @@ class ResultActivity : BaseActivity(), ResultView {
   private lateinit var examSession: ExamSession
   private var mSettings: Settings? = null
 
+  lateinit var mInterstitial: InterstitialAd
+
   @Inject lateinit var mPresenter: ResultPresenter
 
 
@@ -78,14 +81,11 @@ class ResultActivity : BaseActivity(), ResultView {
 
     mSettings = mPresenter.getSetting()
 
-
-    val mInterstitial: InterstitialAd = InterstitialAd(this)
-
-    mInterstitial.adUnitId = AD_INTERSTITIAL
     val request = AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build()
 
+    mInterstitial = InterstitialAd(this)
+    mInterstitial.adUnitId = AD_INTERSTITIAL
     mInterstitial.loadAd(request)
-
     mInterstitial.adListener = object : AdListener() {
       override fun onAdLoaded() {
         mInterstitial.show()
@@ -113,7 +113,7 @@ class ResultActivity : BaseActivity(), ResultView {
         getString(R.string.words))
 
     mCircleProgressView.isTextEnabled = true
-    mCircleProgressView.interpolator = AccelerateDecelerateInterpolator()
+    mCircleProgressView.interpolator = AccelerateDecelerateInterpolator() as Interpolator?
     mCircleProgressView.setProgressWithAnimation(rate.toFloat(), 1000)
 
     mBottomSheetBehavior = BottomSheetBehavior.from<View>(mBottomSheet)
@@ -180,6 +180,7 @@ class ResultActivity : BaseActivity(), ResultView {
 
   override fun onDestroy() {
     mPresenter.detachView()
+    mInterstitial.adListener = null
     super.onDestroy()
   }
 
