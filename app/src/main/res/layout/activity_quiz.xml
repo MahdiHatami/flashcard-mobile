@@ -45,11 +45,11 @@
       android:layout_marginTop="?actionBarSize"
       >
 
-    <com.mutlak.metis.wordmem.component.CustomViewPager
+    <com.mutlak.metis.wordmem.features.quiz.widgets.CustomViewPager
         android:id="@+id/test_view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-    </com.mutlak.metis.wordmem.component.CustomViewPager>
+    </com.mutlak.metis.wordmem.features.quiz.widgets.CustomViewPager>
   </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -38,8 +38,7 @@ class QuizPresenter @Inject constructor(
     val questions = ArrayList<Question>()
 
     for (word in wordList!!) {
-      val question: Question? = null
-      question!!.question = word
+      val question = Question(word)
       question.answers = generateAnswers(word, settings, allWords)
 
       questions.add(question)

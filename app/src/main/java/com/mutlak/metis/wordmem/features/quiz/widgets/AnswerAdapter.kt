@@ -1,11 +1,11 @@
 package com.mutlak.metis.wordmem.features.quiz.widgets
 
 import android.content.Context
-import android.os.Vibrator
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.ViewHolder
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,7 +61,7 @@ constructor(val context: Context, private val question: Question,
             holder.title.setTextColor(
                 ContextCompat.getColor(context, R.color.white))
             if (answer.isCorrect) {
-              question.isUserAnswerWasCorrect= true
+              question.isUserAnswerWasCorrect = true
               holder.cardView.background = ContextCompat.getDrawable(context,
                   R.drawable.answer_card_correct_fill)
               (context as QuizActivity).nextQuestion(question, answer, true)
@@ -69,7 +69,7 @@ constructor(val context: Context, private val question: Question,
               question.isUserAnswerWasCorrect = false
               holder.cardView.background = ContextCompat.getDrawable(context,
                   R.drawable.answer_card_wrong_fill)
-              vibrate()
+              holder.cardView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
               val shake = AnimationUtils.loadAnimation(context, R.anim.shake)
               holder.cardView.animation = shake
               (context as QuizActivity).nextQuestion(question, answer, false)
@@ -103,8 +103,7 @@ constructor(val context: Context, private val question: Question,
               holder.option.setTextColor(
                   ContextCompat.getColor(context, R.color.red))
               holder.divider.background = ContextCompat.getDrawable(context, R.color.red)
-
-              vibrate()
+              holder.cardView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
               val shake = AnimationUtils.loadAnimation(context, R.anim.shake)
               holder.cardView.animation = shake
               (context as QuizActivity).nextQuestion(question, answer, false)
@@ -114,11 +113,6 @@ constructor(val context: Context, private val question: Question,
         }
       }
     }
-  }
-
-  private fun vibrate() {
-    val vibe = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-    vibe.vibrate(60)
   }
 
   override fun getItemCount(): Int {
