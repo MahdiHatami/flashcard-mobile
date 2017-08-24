@@ -1,167 +1,174 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
-        <item name="android:textColorPrimary">@color/primary_text</item>
-        <item name="android:textColorSecondary">@color/secondary_text</item>
-        <item name="android:icon">@color/icons</item>
-        <item name="android:divider">@color/divider</item>
-        <item name="android:textAppearance">@style/TextAppearance.FontPath</item>
-    </style>
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primary_dark</item>
+    <item name="colorAccent">@color/accent</item>
+    <item name="android:textColorPrimary">@color/primary_text</item>
+    <item name="android:textColorSecondary">@color/secondary_text</item>
+    <item name="android:icon">@color/icons</item>
+    <item name="android:divider">@color/divider</item>
+    <item name="android:textAppearance">@style/TextAppearance.FontPath</item>
+  </style>
 
-    <style name="TextAppearance.FontPath" parent="android:TextAppearance">
-        <item name="fontPath">fonts/Ubuntu-Regular.ttf</item>
-    </style>
+  <style name="TextAppearance.FontPath" parent="android:TextAppearance">
+    <item name="fontPath">fonts/Ubuntu-Regular.ttf</item>
+  </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+  <style name="AppTheme.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="AppThemeMaterial.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+  <style name="AppThemeMaterial.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="AppThemeMaterial.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+  <style name="AppThemeMaterial.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="menu_card_view">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:layout_marginBottom">10dp</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
-        <item name="android:layout_marginTop">10dp</item>
-        <item name="android:clickable">true</item>
-        <item name="cardCornerRadius">6dp</item>
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
-    </style>
+  <style name="menu_card_view">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:layout_marginBottom">10dp</item>
+    <item name="android:layout_marginLeft">10dp</item>
+    <item name="android:layout_marginRight">10dp</item>
+    <item name="android:layout_marginTop">10dp</item>
+    <item name="android:clickable">true</item>
+    <item name="cardCornerRadius">6dp</item>
+    <item name="android:foreground">?android:attr/selectableItemBackground</item>
+  </style>
 
-    <style name="answer_card">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:layout_marginBottom">16dp</item>
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginRight">16dp</item>
-        <item name="android:layout_marginTop">16dp</item>
-        <item name="android:clickable">true</item>
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
-    </style>
+  <style name="answer_card">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:layout_marginBottom">16dp</item>
+    <item name="android:layout_marginLeft">16dp</item>
+    <item name="android:layout_marginRight">16dp</item>
+    <item name="android:layout_marginTop">16dp</item>
+    <item name="android:clickable">true</item>
+    <item name="android:foreground">?android:attr/selectableItemBackground</item>
+  </style>
 
-    <style name="menu_card_linearlayout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:paddingTop">15dp</item>
-        <item name="android:paddingBottom">15dp</item>
-        <item name="android:paddingLeft">27dp</item>
-        <item name="android:paddingRight">27dp</item>
-    </style>
+  <style name="menu_card_linearlayout">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:orientation">horizontal</item>
+    <item name="android:paddingTop">15dp</item>
+    <item name="android:paddingBottom">15dp</item>
+    <item name="android:paddingLeft">27dp</item>
+    <item name="android:paddingRight">27dp</item>
+  </style>
 
-    <style name="landing_review_choose_linear_layout">
-        <item name="android:paddingTop">30dp</item>
-        <item name="android:paddingBottom">30dp</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
+  <style name="landing_review_choose_linear_layout">
+    <item name="android:paddingTop">30dp</item>
+    <item name="android:paddingBottom">30dp</item>
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:paddingRight">10dp</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:orientation">horizontal</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
 
-    <style name="landing_card_text">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">10dp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:layout_gravity">center</item>
-    </style>
+  <style name="landing_card_text">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginTop">10dp</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="android:layout_gravity">center</item>
+  </style>
 
-    <style name="landing_menu_image">
-        <item name="android:layout_width">50dp</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:layout_marginBottom">16dp</item>
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:padding">7dp</item>
-        <item name="android:layout_marginTop">16dp</item>
-    </style>
+  <style name="landing_menu_image">
+    <item name="android:layout_width">50dp</item>
+    <item name="android:layout_height">50dp</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:layout_marginBottom">16dp</item>
+    <item name="android:layout_marginLeft">16dp</item>
+    <item name="android:padding">7dp</item>
+    <item name="android:layout_marginTop">16dp</item>
+  </style>
 
-    <style name="landing_card_title" parent="landing_card_text">
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginTop">0dp</item>
-        <item name="android:textSize">28sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
+  <style name="landing_card_title" parent="landing_card_text">
+    <item name="android:layout_marginLeft">16dp</item>
+    <item name="android:layout_marginTop">0dp</item>
+    <item name="android:textSize">28sp</item>
+    <item name="android:textStyle">bold</item>
+  </style>
 
-    <style name="landing_card_subtitle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:textColor">#ececec</item>
-    </style>
+  <style name="landing_card_subtitle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginBottom">8dp</item>
+    <item name="android:layout_marginLeft">16dp</item>
+    <item name="android:layout_marginTop">8dp</item>
+    <item name="android:textColor">#ececec</item>
+  </style>
 
-    <style name="result_text_title">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:textColor">@color/primary_text</item>
-        <item name="android:textStyle">bold</item>
-    </style>
+  <style name="result_text_title">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_gravity">center_vertical</item>
+    <item name="android:textColor">@color/primary_text</item>
+    <item name="android:textStyle">bold</item>
+  </style>
 
-    <style name="result_text_subtitle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical</item>
-    </style>
+  <style name="result_text_subtitle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_gravity">center_vertical</item>
+  </style>
 
-    <style name="result_linear_layout_row">
-        <item name="android:clickable">true</item>
-        <item name="android:background">@drawable/card_action_ripple</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:padding">20dp</item>
-    </style>
+  <style name="result_linear_layout_row">
+    <item name="android:clickable">true</item>
+    <item name="android:background">@drawable/card_action_ripple</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:orientation">horizontal</item>
+    <item name="android:padding">20dp</item>
+  </style>
 
-    <style name="result_image_view">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical</item>
-    </style>
+  <style name="result_image_view">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_gravity">center_vertical</item>
+  </style>
 
-    <style name="result_texts_row">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:orientation">vertical</item>
-    </style>
+  <style name="result_texts_row">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginLeft">8dp</item>
+    <item name="android:orientation">vertical</item>
+  </style>
 
-    <style name="CustomTitle" parent="TextAppearance.ShowcaseView.Title.Light">
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
-    </style>
+  <style name="CustomTitle" parent="TextAppearance.ShowcaseView.Title.Light">
+    <item name="android:textColor">#ffffff</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+  </style>
 
-    <style name="CustomText" parent="TextAppearance.ShowcaseView.Detail.Light">
-        <item name="android:textColor">#e1ffffff</item>
-    </style>
+  <style name="CustomText" parent="TextAppearance.ShowcaseView.Detail.Light">
+    <item name="android:textColor">#e1ffffff</item>
+  </style>
 
-    <style name="CustomShowcaseTheme" parent="ShowcaseView">
-        <item name="sv_backgroundColor">#d4000000</item>
-        <item name="sv_showcaseColor">#ee000000</item>
-        <item name="sv_buttonText">Close</item>
-        <item name="sv_titleTextAppearance">@style/CustomTitle</item>
-        <item name="sv_detailTextAppearance">@style/CustomText</item>
-    </style>
+  <style name="CustomShowcaseTheme" parent="ShowcaseView">
+    <item name="sv_backgroundColor">#d4000000</item>
+    <item name="sv_showcaseColor">#ee000000</item>
+    <item name="sv_buttonText">Close</item>
+    <item name="sv_titleTextAppearance">@style/CustomTitle</item>
+    <item name="sv_detailTextAppearance">@style/CustomText</item>
+  </style>
+
+  <style name="landing_review_text_count">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">@color/landing_header_start</item>
+    <item name="android:textSize">16sp</item>
+  </style>
 
 
 </resources>

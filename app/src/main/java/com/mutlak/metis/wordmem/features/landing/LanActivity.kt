@@ -6,7 +6,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Interpolator
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.mutlak.metis.wordmem.R
@@ -28,8 +27,9 @@ class LanActivity : AppCompatActivity() {
       window.statusBarColor = ContextCompat.getColor(this, R.color.landing_header_center)
     }
 
-    mCircleProgressView.isTextEnabled = true
-    mCircleProgressView.interpolator = AccelerateDecelerateInterpolator() as Interpolator?
+    mCircleProgressView.isTextEnabled = false
+    mCircleProgressView.interpolator = AccelerateDecelerateInterpolator()
+    mCircleProgressView.text = 233.toString()
     mCircleProgressView.setProgressWithAnimation(60F, 1000)
   }
 

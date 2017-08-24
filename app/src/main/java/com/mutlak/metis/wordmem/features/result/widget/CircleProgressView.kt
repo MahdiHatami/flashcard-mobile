@@ -18,8 +18,7 @@ import com.mutlak.metis.wordmem.R
 
 class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, attrs) {
   private var mProgress: Float = 0.toFloat()
-  var circleWidth: Float = 0.toFloat()
-    private set
+  private var circleWidth: Float = 0.toFloat()
   private var backgroundStrokeWidth: Float = 0.toFloat()
 
   private var mCircleColor: Int = 0
@@ -35,12 +34,12 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
   private var mIsTextEnabled: Boolean = false
 
   private var mTextPrefix = ""
-  var startAngle: Float = 0.toFloat()
+  private var startAngle: Float = 0.toFloat()
 
   private var mTextView: TextView? = null
 
   private var mTextSize: Int = 0
-  internal lateinit var mLayout: LinearLayout
+  private lateinit var mLayout: LinearLayout
 
   var progressAnimationListener: ProgressAnimationListener? = null
     private set
@@ -77,21 +76,22 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
 
     // Init Background
     mBackgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    mBackgroundPaint!!.color = mBackgroundColor
-    mBackgroundPaint!!.style = Paint.Style.STROKE
-    mBackgroundPaint!!.strokeWidth = backgroundStrokeWidth
+    mBackgroundPaint?.color = mBackgroundColor
+    mBackgroundPaint?.style = Paint.Style.STROKE
+    mBackgroundPaint?.strokeWidth = backgroundStrokeWidth
 
     // Init Circle
     mCirclePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    mCirclePaint!!.color = mCircleColor
-    mCirclePaint!!.style = Paint.Style.STROKE
-    mCirclePaint!!.strokeWidth = circleWidth
+    mCirclePaint?.color = mCircleColor
+    mCirclePaint?.style = Paint.Style.STROKE
+    mCirclePaint?.strokeCap = Paint.Cap.ROUND
+    mCirclePaint?.strokeWidth = circleWidth
 
     // Init TextView
     mTextView = TextView(context)
-    mTextView!!.visibility = View.VISIBLE
-    mTextView!!.textSize = mTextSize.toFloat()
-    mTextView!!.setTextColor(mTextColor)
+    mTextView?.visibility = View.VISIBLE
+    mTextView?.textSize = mTextSize.toFloat()
+    mTextView?.setTextColor(mTextColor)
 
     // Init Layout
     mLayout = LinearLayout(context)
@@ -100,8 +100,9 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
   }
 
   private fun showTextView(mIsTextEnabled: Boolean) {
-    mTextView!!.text = textPrefix + Math.round(mProgress).toString()
-    mTextView!!.visibility = if (mIsTextEnabled) View.VISIBLE else View.GONE
+    mTextView?.text = textPrefix + Math.round(mProgress).toString()
+    mTextView?.visibility = if (mIsTextEnabled) View.VISIBLE else View.GONE
+    mTextView?.visibility = if (mTextView?.text!!.isNotEmpty()) View.VISIBLE else View.GONE
     invalidate()
   }
 
@@ -121,17 +122,17 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
   override fun onDraw(canvas: Canvas) {
     super.onDraw(canvas)
     // Draw Background Circle
-    canvas.drawOval(mRectF!!, mBackgroundPaint!!)
+    canvas.drawOval(mRectF, mBackgroundPaint)
 
     // Draw Circle
     val angle = 360 * mProgress / 100
-    canvas.drawArc(mRectF!!, startAngle, angle, false, mCirclePaint!!)
+    canvas.drawArc(mRectF, startAngle, angle, false, mCirclePaint)
 
     // Draw TextView
     mLayout.measure(canvas.width, canvas.height)
     mLayout.layout(0, 0, canvas.width, canvas.height)
-    canvas.translate((canvas.width / 2 - mTextView!!.width / 2).toFloat(),
-        (canvas.height / 2 - mTextView!!.height / 2).toFloat())
+    canvas.translate((canvas.width / 2 - mTextView?.width!! / 2).toFloat(),
+        (canvas.height / 2 - mTextView?.height!! / 2).toFloat())
     mLayout.draw(canvas)
   }
 
@@ -141,12 +142,12 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
     val min = Math.min(width, height)
     setMeasuredDimension(min, min)
     val stroke = if (circleWidth > backgroundStrokeWidth) circleWidth else backgroundStrokeWidth
-    mRectF!!.set(0 + stroke / 2, 0 + stroke / 2, min - stroke / 2, min - stroke / 2)
+    mRectF?.set(0 + stroke / 2, 0 + stroke / 2, min - stroke / 2, min - stroke / 2)
   }
 
   fun setCirclerWidth(circleWidth: Float) {
     this.circleWidth = circleWidth
-    mCirclePaint!!.strokeWidth = circleWidth
+    mCirclePaint?.strokeWidth = circleWidth
     requestLayout()
     invalidate()
   }
@@ -155,7 +156,7 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
     get() = mCircleColor
     set(circleColor) {
       this.mCircleColor = circleColor
-      mCirclePaint!!.color = circleColor
+      mCirclePaint?.color = circleColor
       invalidate()
     }
 
@@ -170,12 +171,12 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
     get() = mProgress
     set(progress) {
       this.mProgress = if (progress <= 100) progress else 100F
-      mTextView!!.text = mTextPrefix + Math.round(mProgress).toString()
+      mTextView?.text = mTextPrefix + Math.round(mProgress).toString()
       showTextView(mIsTextEnabled)
       invalidate()
 
       if (progressAnimationListener != null) {
-        progressAnimationListener!!.onValueChanged(progress)
+        progressAnimationListener?.onValueChanged(progress)
       }
     }
 
@@ -183,7 +184,15 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
     get() = mTextSize
     set(textSize) {
       this.mTextSize = textSize
-      mTextView!!.textSize = textSize.toFloat()
+      mTextView?.textSize = textSize.toFloat()
+      invalidate()
+    }
+
+  var text: String
+    get() = mTextView.toString()
+    set(value) {
+      this.mTextView?.text = text
+      this.mTextView?.visibility = VISIBLE
       invalidate()
     }
 
@@ -198,7 +207,7 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
     get() = mTextColor
     set(textColor) {
       this.mTextColor = textColor
-      mTextView!!.setTextColor(textColor)
+      mTextView?.setTextColor(textColor)
       invalidate()
     }
 
@@ -214,7 +223,7 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
       override fun onAnimationEnd(animation: Animator) {
         mProgress = if (progress <= 100) progress else 100F
         if (progressAnimationListener != null) {
-          progressAnimationListener!!.onAnimationEnd()
+          progressAnimationListener?.onAnimationEnd()
         }
       }
 
@@ -227,12 +236,12 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
       }
     })
     objectAnimator.addUpdateListener { animation ->
-      mTextView!!.text = mTextPrefix + Math.round(animation.animatedValue as Float).toString()
+      mTextView?.text = mTextPrefix + Math.round(animation.animatedValue as Float).toString()
     }
     objectAnimator.start()
 
     if (progressAnimationListener != null) {
-      progressAnimationListener!!.onValueChanged(progress)
+      progressAnimationListener?.onValueChanged(progress)
     }
   }
 

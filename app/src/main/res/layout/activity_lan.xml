@@ -9,9 +9,8 @@
     tools:context=".features.landing.LanActivity"
     >
 
-
   <LinearLayout
-      android:id="@+id/linearLayout"
+      android:id="@+id/linear_content"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@drawable/landing_middle_bg"
@@ -60,23 +59,21 @@
               android:id="@+id/img_review"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              app:layout_constraintEnd_toStartOf="@+id/textView"
+              app:layout_constraintEnd_toStartOf="@+id/text_review"
               app:layout_constraintHorizontal_bias="0.5"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               app:srcCompat="@drawable/ic_blackboard"
               />
           <TextView
-              android:id="@+id/textView"
-              android:layout_width="wrap_content"
-              android:layout_height="19dp"
+              android:id="@+id/text_review"
               android:text="20"
-              android:textColor="@color/landing_header_start"
               app:layout_constraintBottom_toBottomOf="@+id/img_review"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias="0.5"
               app:layout_constraintStart_toEndOf="@+id/img_review"
               app:layout_constraintTop_toTopOf="@+id/img_review"
+              style="@style/landing_review_text_count"
               />
           <TextView
               android:layout_width="wrap_content"
@@ -85,7 +82,7 @@
               android:layout_marginStart="8dp"
               android:layout_marginTop="8dp"
               android:text="@string/landing_reviews_title"
-              app:layout_constraintEnd_toEndOf="@+id/textView"
+              app:layout_constraintEnd_toEndOf="@+id/text_review"
               app:layout_constraintStart_toStartOf="@+id/img_review"
               app:layout_constraintTop_toBottomOf="@+id/img_review"
               />
@@ -124,30 +121,28 @@
               android:id="@+id/img_learnt"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              app:layout_constraintEnd_toStartOf="@+id/textView2"
+              app:layout_constraintEnd_toStartOf="@+id/text_learnt"
               app:layout_constraintHorizontal_bias="0.5"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               app:srcCompat="@drawable/ic_learnt_black"
               />
           <TextView
-              android:id="@+id/textView2"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
+              android:id="@+id/text_learnt"
               android:text="20"
-              android:textColor="@color/landing_header_start"
               app:layout_constraintBottom_toBottomOf="@+id/img_learnt"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias="0.5"
               app:layout_constraintStart_toEndOf="@+id/img_learnt"
               app:layout_constraintTop_toTopOf="@+id/img_learnt"
+              style="@style/landing_review_text_count"
               />
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginTop="8dp"
               android:text="@string/landing_learnt_title"
-              app:layout_constraintEnd_toEndOf="@+id/textView2"
+              app:layout_constraintEnd_toEndOf="@+id/text_learnt"
               app:layout_constraintStart_toStartOf="@+id/img_learnt"
               app:layout_constraintTop_toBottomOf="@+id/img_learnt"
               />
@@ -187,7 +182,7 @@
               android:id="@+id/img_bookmark"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              app:layout_constraintEnd_toStartOf="@+id/textView3"
+              app:layout_constraintEnd_toStartOf="@+id/text_bookmark"
               app:layout_constraintHorizontal_bias="0.5"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
@@ -196,23 +191,21 @@
               tools:layout_editor_absoluteY="48dp"
               />
           <TextView
-              android:id="@+id/textView3"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
+              android:id="@+id/text_bookmark"
               android:text="20"
-              android:textColor="@color/landing_header_start"
               app:layout_constraintBottom_toBottomOf="@+id/img_bookmark"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias="0.5"
               app:layout_constraintStart_toEndOf="@+id/img_bookmark"
               app:layout_constraintTop_toTopOf="@+id/img_bookmark"
+              style="@style/landing_review_text_count"
               />
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginTop="8dp"
               android:text="@string/landing_bookmarked_title"
-              app:layout_constraintEnd_toEndOf="@+id/textView3"
+              app:layout_constraintEnd_toEndOf="@+id/text_bookmark"
               app:layout_constraintStart_toStartOf="@+id/img_bookmark"
               app:layout_constraintTop_toBottomOf="@+id/img_bookmark"
               />
@@ -226,9 +219,8 @@
     </LinearLayout>
   </LinearLayout>
 
-
   <View
-      android:id="@+id/view"
+      android:id="@+id/view_bottom_navigation"
       android:layout_width="match_parent"
       android:layout_height="60dp"
       android:background="@color/landing_background_light"
@@ -238,6 +230,7 @@
       >
   </View>
   <LinearLayout
+      android:id="@+id/linear_plus"
       android:layout_width="70dp"
       android:layout_height="70dp"
       android:layout_gravity="center"
@@ -260,6 +253,7 @@
   </LinearLayout>
 
   <ImageView
+      android:id="@+id/img_settings"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="32dp"
@@ -269,8 +263,8 @@
       android:focusable="true"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/view"
-      app:srcCompat="@drawable/ic_administrator"
+      app:layout_constraintTop_toTopOf="@+id/view_bottom_navigation"
+      app:srcCompat="@drawable/ic_landing_settings"
       />
 
   <com.mutlak.metis.wordmem.features.result.widget.CircleProgressView
@@ -284,7 +278,7 @@
       android:layout_marginStart="8dp"
       android:layout_marginTop="32dp"
       android:layout_weight="1"
-      app:cpv_background_circle_color="@color/landing_header_start"
+      app:cpv_background_circle_color="#f19696"
       app:cpv_background_circle_width="1dp"
       app:cpv_circle_color="@color/white"
       app:cpv_circle_width="4dp"
@@ -306,5 +300,40 @@
       app:layout_constraintRight_toRightOf="@id/circle_progress_view"
       app:layout_constraintTop_toBottomOf="@id/circle_progress_view"
       />
+
+  <LinearLayout
+      android:id="@+id/linear_take_quiz"
+      android:layout_width="0dp"
+      android:layout_height="70dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginEnd="36dp"
+      android:layout_marginStart="36dp"
+      android:layout_marginTop="16dp"
+      android:background="@drawable/landing_quiz_btn_bg"
+      android:gravity="center"
+      android:orientation="horizontal"
+      app:layout_constraintBottom_toTopOf="@+id/linear_plus"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/linear_content"
+      >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_quiz"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/landing_menu_take_quize_title"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        />
+
+  </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
