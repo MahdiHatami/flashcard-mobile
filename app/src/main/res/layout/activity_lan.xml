@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/landing_background"
+    tools:context=".features.landing.LanActivity"
+    >
+
+
+  <LinearLayout
+      android:id="@+id/linearLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/landing_middle_bg"
+      android:orientation="vertical"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      >
+
+    <LinearLayout
+        android:id="@+id/linear_header"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/landing_header_bg"
+        android:orientation="vertical"
+        >
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear_header"
+        >
+      <RelativeLayout
+          android:id="@+id/rel_review"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_weight="33"
+          android:gravity="center"
+          app:layout_constraintEnd_toStartOf="@+id/rel_learnt"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintStart_toStartOf="parent"
+          >
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+          <ImageView
+              android:id="@+id/img_review"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintEnd_toStartOf="@+id/textView"
+              app:layout_constraintHorizontal_bias="0.5"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:srcCompat="@drawable/ic_blackboard"
+              />
+          <TextView
+              android:id="@+id/textView"
+              android:layout_width="wrap_content"
+              android:layout_height="19dp"
+              android:text="20"
+              android:textColor="@color/landing_header_start"
+              app:layout_constraintBottom_toBottomOf="@+id/img_review"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.5"
+              app:layout_constraintStart_toEndOf="@+id/img_review"
+              app:layout_constraintTop_toTopOf="@+id/img_review"
+              />
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="8dp"
+              android:layout_marginStart="8dp"
+              android:layout_marginTop="8dp"
+              android:text="@string/landing_reviews_title"
+              app:layout_constraintEnd_toEndOf="@+id/textView"
+              app:layout_constraintStart_toStartOf="@+id/img_review"
+              app:layout_constraintTop_toBottomOf="@+id/img_review"
+              />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+      </RelativeLayout>
+
+      <View
+          android:layout_width="1dp"
+          android:layout_height="wrap_content"
+          android:background="#d9d9d9"
+          app:layout_constraintLeft_toLeftOf="@id/rel_review"
+          app:layout_constraintLeft_toRightOf="@id/rel_review"
+          app:layout_constraintRight_toRightOf="@id/rel_learnt"
+          app:layout_constraintTop_toTopOf="parent"
+          />
+      <RelativeLayout
+          android:id="@+id/rel_learnt"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_weight="33"
+          android:gravity="center"
+          app:layout_constraintEnd_toStartOf="@+id/rel_bookmark"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintStart_toEndOf="@+id/rel_review"
+          >
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+          <ImageView
+              android:id="@+id/img_learnt"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintEnd_toStartOf="@+id/textView2"
+              app:layout_constraintHorizontal_bias="0.5"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:srcCompat="@drawable/ic_learnt_black"
+              />
+          <TextView
+              android:id="@+id/textView2"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="20"
+              android:textColor="@color/landing_header_start"
+              app:layout_constraintBottom_toBottomOf="@+id/img_learnt"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.5"
+              app:layout_constraintStart_toEndOf="@+id/img_learnt"
+              app:layout_constraintTop_toTopOf="@+id/img_learnt"
+              />
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              android:text="@string/landing_learnt_title"
+              app:layout_constraintEnd_toEndOf="@+id/textView2"
+              app:layout_constraintStart_toStartOf="@+id/img_learnt"
+              app:layout_constraintTop_toBottomOf="@+id/img_learnt"
+              />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+      </RelativeLayout>
+
+      <View
+          android:layout_width="1dp"
+          android:layout_height="wrap_content"
+          android:background="#d9d9d9"
+          app:layout_constraintEnd_toStartOf="@+id/rel_bookmark"
+          app:layout_constraintLeft_toRightOf="@id/rel_learnt"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:layout_editor_absoluteY="0dp"
+          />
+
+      <RelativeLayout
+          android:id="@+id/rel_bookmark"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_weight="33"
+          android:gravity="center"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintStart_toEndOf="@+id/rel_learnt"
+          >
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+          <ImageView
+              android:id="@+id/img_bookmark"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintEnd_toStartOf="@+id/textView3"
+              app:layout_constraintHorizontal_bias="0.5"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:srcCompat="@drawable/ic_favorite_black"
+              tools:layout_editor_absoluteX="48dp"
+              tools:layout_editor_absoluteY="48dp"
+              />
+          <TextView
+              android:id="@+id/textView3"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="20"
+              android:textColor="@color/landing_header_start"
+              app:layout_constraintBottom_toBottomOf="@+id/img_bookmark"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.5"
+              app:layout_constraintStart_toEndOf="@+id/img_bookmark"
+              app:layout_constraintTop_toTopOf="@+id/img_bookmark"
+              />
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              android:text="@string/landing_bookmarked_title"
+              app:layout_constraintEnd_toEndOf="@+id/textView3"
+              app:layout_constraintStart_toStartOf="@+id/img_bookmark"
+              app:layout_constraintTop_toBottomOf="@+id/img_bookmark"
+              />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+      </RelativeLayout>
+
+
+    </LinearLayout>
+  </LinearLayout>
+
+
+  <View
+      android:id="@+id/view"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:background="@color/landing_background_light"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      >
+  </View>
+  <LinearLayout
+      android:layout_width="70dp"
+      android:layout_height="70dp"
+      android:layout_gravity="center"
+      android:background="@drawable/landing_plus_btn_bg"
+      android:clickable="true"
+      android:focusable="true"
+      android:gravity="center"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      >
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/ic_plus"
+        />
+
+  </LinearLayout>
+
+  <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="32dp"
+      android:layout_marginRight="32dp"
+      android:background="?attr/selectableItemBackgroundBorderless"
+      android:clickable="true"
+      android:focusable="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/view"
+      app:srcCompat="@drawable/ic_administrator"
+      />
+
+  <com.mutlak.metis.wordmem.features.result.widget.CircleProgressView
+      android:id="@+id/circle_progress_view"
+      android:layout_width="170dp"
+      android:layout_height="170dp"
+      android:layout_gravity="center"
+      android:layout_marginEnd="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="32dp"
+      android:layout_weight="1"
+      app:cpv_background_circle_color="@color/landing_header_start"
+      app:cpv_background_circle_width="1dp"
+      app:cpv_circle_color="@color/white"
+      app:cpv_circle_width="4dp"
+      app:cpv_text_color="@color/white"
+      app:cpv_text_prefix="%"
+      app:cpv_text_size="40"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="Toplam Kelime : 338"
+      android:textColor="@color/white"
+      app:layout_constraintLeft_toLeftOf="@id/circle_progress_view"
+      app:layout_constraintRight_toRightOf="@id/circle_progress_view"
+      app:layout_constraintTop_toBottomOf="@id/circle_progress_view"
+      />
+
+</android.support.constraint.ConstraintLayout>

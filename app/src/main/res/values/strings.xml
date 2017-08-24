@@ -81,4 +81,7 @@
   <string name="dialog_action_cancel">Cancel</string>
   <string name="dialog_error_title">Sorry</string>
   <string name="toolbar_counter_title">%d / %d</string>
+  <string name="landing_reviews_title">REVIEWS</string>
+  <string name="landing_learnt_title">LEARNT</string>
+  <string name="landing_bookmarked_title">FAVORITES</string>
 </resources>
