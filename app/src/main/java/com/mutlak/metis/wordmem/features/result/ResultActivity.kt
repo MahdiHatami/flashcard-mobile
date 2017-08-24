@@ -8,6 +8,7 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.RecyclerView.LayoutManager
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Interpolator
@@ -99,7 +100,7 @@ class ResultActivity : BaseActivity(), ResultView {
 
     val totalQuestions = examSession.questions!!.size
 
-    val correct = examSession.questions!!.filterNot { it.isUserAnswerWasCorrect }.count()
+    val correct = examSession.questions!!.filter { it.isUserAnswerWasCorrect }.count()
     val wrong = totalQuestions - correct
     val rate = correct * 100 / totalQuestions
 
@@ -134,23 +135,26 @@ class ResultActivity : BaseActivity(), ResultView {
 
   }
 
-  @OnClick(R.id.result_quiz_linear) fun quizOnclick() {
+  @OnClick(R.id.result_quiz_linear)
+  fun quizOnclick() {
     val i = Intent(this@ResultActivity, QuizActivity::class.java)
     startActivity(i)
   }
 
-  @OnClick(R.id.result_explore_linear) fun exploreOnclick() {
+  @OnClick(R.id.result_explore_linear)
+  fun exploreOnclick() {
     val intent = Intent(this@ResultActivity, ReviewActivity::class.java)
     intent.putExtra(LandingActivity.REVIEW_TYPE, LandingActivity.REVIEW_TYPE_NEW)
     startActivity(intent)
   }
 
-  @OnClick(R.id.result_examine_linear) fun examineOnclick() {
+  @OnClick(R.id.result_examine_linear)
+  fun examineOnclick() {
 
-    val list = examSession.questions?.filter { it.isUserAnswerWasCorrect }
+    val list = examSession.questions?.filterNot { it.isUserAnswerWasCorrect }
     if (list!!.isNotEmpty()) {
       val adapter = ResultWrongWordAdapter(this, mSettings!!, list)
-      val mLayoutManager = GridLayoutManager(this@ResultActivity, 1)
+      val mLayoutManager: LayoutManager = GridLayoutManager(this@ResultActivity, 1)
       recyclerView.layoutManager = mLayoutManager
       recyclerView.itemAnimator = DefaultItemAnimator()
       recyclerView.adapter = adapter
@@ -160,7 +164,8 @@ class ResultActivity : BaseActivity(), ResultView {
     }
   }
 
-  @OnClick(R.id.result_home_linear) fun homeOnClick() {
+  @OnClick(R.id.result_home_linear)
+  fun homeOnClick() {
     finish()
     startActivity(Intent(this@ResultActivity, LandingActivity::class.java))
   }
