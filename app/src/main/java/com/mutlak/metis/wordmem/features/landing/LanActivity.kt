@@ -30,7 +30,6 @@ import butterknife.OnClick
 import com.afollestad.materialdialogs.MaterialDialog
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.R.color
-import com.mutlak.metis.wordmem.extension.hide
 import com.mutlak.metis.wordmem.extension.show
 import com.mutlak.metis.wordmem.features.base.BaseActivity
 import com.mutlak.metis.wordmem.features.insertWord.NewWordActivity
@@ -94,13 +93,13 @@ class LanActivity : BaseActivity(), LandingMvpView {
     mPresenter.getNewWordsCount()
     mPresenter.getLearntWordsCount()
     mPresenter.getBookmarkWordsCount()
-    mPresenter.circleProgress();
+    mPresenter.circleProgress()
   }
 
   override fun onResume() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && launchedActivity) {
-      startRippleTransitionUnreveal();
-      launchedActivity = false;
+      startRippleTransitionUnreveal()
+      launchedActivity = false
     }
     super.onResume()
   }
@@ -234,19 +233,19 @@ class LanActivity : BaseActivity(), LandingMvpView {
         (mPlusView.x + mPlusView.width / 2).toInt(),
         mPlusView.y.toInt(),
         ViewUtil.getViewRadius(mRippleView) * 2,
-        (mPlusView.width / 2).toFloat());
+        (mPlusView.width / 2).toFloat())
     mRippleView.show()
-    animator.interpolator = DecelerateInterpolator();
-    animator.duration = 400;
-    animator.addPauseListener(object : AnimatorListenerAdapter() {
+    animator.interpolator = DecelerateInterpolator()
+    animator.duration = 400
+    animator.addListener(object : AnimatorListenerAdapter() {
       override fun onAnimationStart(animation: Animator?) {
         mContentLayout.animate().alpha(1f)
       }
 
-      override fun onAnimationEnd(animation: Animator?, isReverse: Boolean) {
-        super.onAnimationEnd(animation, isReverse)
-        mPlusView.visibility = View.VISIBLE;
-        mRippleView.visibility = View.INVISIBLE;
+      override fun onAnimationEnd(animation: Animator?) {
+        super.onAnimationEnd(animation)
+        mPlusView.visibility = View.VISIBLE
+        mRippleView.visibility = View.INVISIBLE
       }
     })
     animator.start()
@@ -254,21 +253,22 @@ class LanActivity : BaseActivity(), LandingMvpView {
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   private fun startRippleTransitionReveal() {
-    mPlusView.hide()
+    mPlusView.visibility = View.INVISIBLE
     val animator: Animator = ViewAnimationUtils.createCircularReveal(mRippleView,
         (mPlusView.x + mPlusView.width / 2).toInt(), mPlusView.y.toInt(),
         (mPlusView.width / 2).toFloat(), ViewUtil.getViewRadius(mRippleView) * 2)
     mRippleView.show()
-    animator.interpolator = AccelerateInterpolator();
-    animator.duration = 500;
-    animator.addPauseListener(object : AnimatorListenerAdapter() {
+    animator.interpolator = AccelerateInterpolator()
+    animator.duration = 500
+    animator.addListener(object : AnimatorListenerAdapter() {
+
       override fun onAnimationStart(animation: Animator?) {
         mContentLayout.animate().alpha(0f)
       }
 
-      override fun onAnimationEnd(animation: Animator?, isReverse: Boolean) {
-        super.onAnimationEnd(animation, isReverse)
-        startActivity();
+      override fun onAnimationEnd(animation: Animator?) {
+        super.onAnimationEnd(animation)
+        startActivity()
       }
     })
     animator.start()
@@ -277,16 +277,16 @@ class LanActivity : BaseActivity(), LandingMvpView {
   fun startActivity() {
     val intent = Intent(this, NewWordActivity::class.java)
     ActivityCompat.startActivity(this, intent,
-        ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
-    launchedActivity = true;
+        ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle())
+    launchedActivity = true
   }
 
   @OnClick(R.id.linear_plus)
-  fun plusOnClick(view: View) {
+  fun plusOnClick() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      startRippleTransitionReveal();
+      startRippleTransitionReveal()
     } else {
-      startActivity();
+      startActivity()
     }
   }
 }
