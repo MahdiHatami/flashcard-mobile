@@ -80,6 +80,8 @@ class ResultActivity : BaseActivity(), ResultView {
     activityComponent().inject(this)
     mPresenter.attachView(this)
 
+    changeStatusBarColor(R.color.landing_header_start)
+
     mSettings = mPresenter.getSetting()
 
     val request = AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build()

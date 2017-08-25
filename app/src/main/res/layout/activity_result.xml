@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight=".5"
-            android:background="@drawable/review_bg">
+            android:background="@drawable/result_header_bg">
 
 
             <android.support.constraint.ConstraintLayout
@@ -26,8 +26,8 @@
 
                 <com.mutlak.metis.wordmem.features.result.widget.CircleProgressView
                     android:id="@+id/circle_progress_view"
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
                     android:layout_gravity="center"
                     android:layout_marginEnd="8dp"
                     android:layout_marginLeft="8dp"
@@ -35,10 +35,10 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="32dp"
                     android:layout_weight="1"
-                    app:cpv_background_circle_color="@color/primary"
+                    app:cpv_background_circle_color="#f19696"
                     app:cpv_background_circle_width="1dp"
                     app:cpv_circle_color="@color/white"
-                    app:cpv_circle_width="6dp"
+                    app:cpv_circle_width="4dp"
                     app:cpv_text_color="@color/white"
                     app:cpv_text_prefix="%"
                     app:cpv_text_size="40"
