@@ -2,7 +2,7 @@ package com.mutlak.metis.wordmem.data.local
 
 import com.mutlak.metis.wordmem.data.model.Settings
 import com.mutlak.metis.wordmem.data.model.Word
-import com.mutlak.metis.wordmem.features.landing.LandingActivity
+import com.mutlak.metis.wordmem.features.landing.LanActivity
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
@@ -24,22 +24,22 @@ constructor() : WordsRepository, Closeable {
     var result: RealmResults<Word>? = null
 
     when (reviewType) {
-      LandingActivity.REVIEW_TYPE_NEW -> result = realm.where(Word::class.java)
+      LanActivity.REVIEW_TYPE_NEW -> result = realm.where(Word::class.java)
           .equalTo(IGNORE, false)
           .notEqualTo(BOOKMARK, true)
           .notEqualTo(LEARNT, true)
           .findAllSorted(LAST_SEEN, Sort.ASCENDING)
-      LandingActivity.REVIEW_TYPE_BOOKMARK -> result = realm.where(Word::class.java)
+      LanActivity.REVIEW_TYPE_BOOKMARK -> result = realm.where(Word::class.java)
           .equalTo(IGNORE, false)
           .equalTo(BOOKMARK, true)
           .findAllSorted(LAST_SEEN, Sort.ASCENDING)
-      LandingActivity.REVIEW_TYPE_LEARNT -> result = realm.where(Word::class.java)
+      LanActivity.REVIEW_TYPE_LEARNT -> result = realm.where(Word::class.java)
           .equalTo(IGNORE, false)
           .equalTo(LEARNT, true)
           .findAllSorted(LAST_SEEN, Sort.ASCENDING)
     }
     val list = realm.copyFromRealm(result)
-    if (reviewType != LandingActivity.REVIEW_TYPE_NEW) {
+    if (reviewType != LanActivity.REVIEW_TYPE_NEW) {
       limit = list.size
     }
     val temp = randomize(limit, list)

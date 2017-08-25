@@ -2,7 +2,7 @@ package com.mutlak.metis.wordmem.injection.component
 
 import com.mutlak.metis.wordmem.features.base.BaseActivity
 import com.mutlak.metis.wordmem.features.detail.DetailActivity
-import com.mutlak.metis.wordmem.features.landing.LandingActivity
+import com.mutlak.metis.wordmem.features.landing.LanActivity
 import com.mutlak.metis.wordmem.features.main.MainActivity
 import com.mutlak.metis.wordmem.features.quiz.QuizActivity
 import com.mutlak.metis.wordmem.features.result.ResultActivity
@@ -21,8 +21,6 @@ interface ActivityComponent {
 
   fun inject(detailActivity: DetailActivity)
 
-  fun inject(landingActivity: LandingActivity)
-
   fun inject(settingsActivity: SettingsActivity)
 
   fun inject(reviewActivity: ReviewActivity)
@@ -30,4 +28,6 @@ interface ActivityComponent {
   fun inject(quizActivity: QuizActivity)
 
   fun inject(resultActivity: ResultActivity)
+
+  fun inject(lanActivity: LanActivity)
 }

@@ -26,7 +26,7 @@ import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.data.model.ExamSession
 import com.mutlak.metis.wordmem.data.model.Settings
 import com.mutlak.metis.wordmem.features.base.BaseActivity
-import com.mutlak.metis.wordmem.features.landing.LandingActivity
+import com.mutlak.metis.wordmem.features.landing.LanActivity
 import com.mutlak.metis.wordmem.features.quiz.QuizActivity
 import com.mutlak.metis.wordmem.features.result.widget.CircleProgressView
 import com.mutlak.metis.wordmem.features.result.widget.ResultWrongWordAdapter
@@ -144,7 +144,7 @@ class ResultActivity : BaseActivity(), ResultView {
   @OnClick(R.id.result_explore_linear)
   fun exploreOnclick() {
     val intent = Intent(this@ResultActivity, ReviewActivity::class.java)
-    intent.putExtra(LandingActivity.REVIEW_TYPE, LandingActivity.REVIEW_TYPE_NEW)
+    intent.putExtra(LanActivity.REVIEW_TYPE, LanActivity.REVIEW_TYPE_NEW)
     startActivity(intent)
   }
 
@@ -167,12 +167,12 @@ class ResultActivity : BaseActivity(), ResultView {
   @OnClick(R.id.result_home_linear)
   fun homeOnClick() {
     finish()
-    startActivity(Intent(this@ResultActivity, LandingActivity::class.java))
+    startActivity(Intent(this@ResultActivity, LanActivity::class.java))
   }
 
   override fun onBackPressed() {
     finish()
-    startActivity(Intent(this@ResultActivity, LandingActivity::class.java))
+    startActivity(Intent(this@ResultActivity, LanActivity::class.java))
   }
 
   override fun attachBaseContext(newBase: Context?) {

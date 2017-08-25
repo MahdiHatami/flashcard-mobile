@@ -8,7 +8,7 @@ import com.github.paolorotolo.appintro.AppIntro
 import com.github.paolorotolo.appintro.AppIntroFragment
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.data.local.PreferencesHelper
-import com.mutlak.metis.wordmem.features.landing.LandingActivity
+import com.mutlak.metis.wordmem.features.landing.LanActivity
 
 class IntroActivity : AppIntro() {
 
@@ -62,6 +62,6 @@ class IntroActivity : AppIntro() {
   private fun redirectToLanding() {
     mPref.putBoolean(SHOW_APP_INTRO, true)
     finish()
-    startActivity(Intent(this@IntroActivity, LandingActivity::class.java))
+    startActivity(Intent(this@IntroActivity, LanActivity::class.java))
   }
 }

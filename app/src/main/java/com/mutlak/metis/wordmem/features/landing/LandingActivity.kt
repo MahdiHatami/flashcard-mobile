@@ -2,7 +2,6 @@ package com.mutlak.metis.wordmem.features.landing
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.CoordinatorLayout
@@ -25,6 +24,10 @@ import com.victor.loading.book.BookLoading
 import javax.inject.Inject
 
 class LandingActivity : BaseActivity(), LandingMvpView {
+  override fun showCircleProgress(rate: Float) {
+    TODO(
+        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
 
   private lateinit var mRelativeBookmark: RelativeLayout
   private lateinit var mRelativeLearnt: RelativeLayout
@@ -197,12 +200,6 @@ class LandingActivity : BaseActivity(), LandingMvpView {
       mContentLayout.visibility = View.VISIBLE
       changeStatusBarColor(R.color.primary_dark)
     }, DELAY_MILLIS)
-  }
-
-  private fun changeStatusBarColor(color: Int) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      window.statusBarColor = ContextCompat.getColor(this, color)
-    }
   }
 
   override fun onBackPressed() {

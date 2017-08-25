@@ -9,7 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.features.base.BaseActivity
-import com.mutlak.metis.wordmem.features.landing.LandingActivity
+import com.mutlak.metis.wordmem.features.landing.LanActivity
 import com.mutlak.metis.wordmem.util.AlarmReciever
 import com.mutlak.metis.wordmem.util.NotificationUtils
 
@@ -29,7 +29,7 @@ class ReviewActivity : BaseActivity() {
       mNotificationManager.cancel(AlarmReciever.REVIEW_NOTIFICAION_ID)
     }
 
-    if (intent.hasExtra(LandingActivity.REVIEW_TYPE)) {
+    if (intent.hasExtra(LanActivity.REVIEW_TYPE)) {
       val ft = supportFragmentManager.beginTransaction()
       ft.replace(R.id.review_placeholder, ReviewFragment.newInstance())
       ft.commit()
@@ -50,7 +50,7 @@ class ReviewActivity : BaseActivity() {
     get() = R.layout.activity_review
 
   private fun redirectToLanding() {
-    startActivity(Intent(this@ReviewActivity, LandingActivity::class.java))
+    startActivity(Intent(this@ReviewActivity, LanActivity::class.java))
   }
 
   override fun onBackPressed() {

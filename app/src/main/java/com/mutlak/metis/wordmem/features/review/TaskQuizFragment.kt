@@ -10,7 +10,7 @@ import com.google.android.gms.ads.NativeExpressAdView
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.data.model.Settings
 import com.mutlak.metis.wordmem.features.base.BaseFragment
-import com.mutlak.metis.wordmem.features.landing.LandingActivity
+import com.mutlak.metis.wordmem.features.landing.LanActivity
 import com.mutlak.metis.wordmem.features.quiz.QuizActivity
 import com.mutlak.metis.wordmem.features.settings.SettingsActivity
 import io.realm.Realm
@@ -55,7 +55,7 @@ class TakeQuizFragment : BaseFragment() {
   @OnClick(R.id.result_home_linear)
   fun homeOnClick() {
     activity.finish()
-    startActivity(Intent(activity, LandingActivity::class.java))
+    startActivity(Intent(activity, LanActivity::class.java))
   }
 
   @OnClick(R.id.result_quiz_linear)
@@ -67,7 +67,7 @@ class TakeQuizFragment : BaseFragment() {
   @OnClick(R.id.result_explore_linear)
   fun exploreOnclick() {
     val intent = Intent(activity, ReviewActivity::class.java)
-    intent.putExtra(LandingActivity.REVIEW_TYPE, LandingActivity.REVIEW_TYPE_NEW)
+    intent.putExtra(LanActivity.REVIEW_TYPE, LanActivity.REVIEW_TYPE_NEW)
     startActivity(intent)
   }
 

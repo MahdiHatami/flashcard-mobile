@@ -20,7 +20,7 @@ import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.data.local.PreferencesHelper
 import com.mutlak.metis.wordmem.data.model.Word
 import com.mutlak.metis.wordmem.features.base.BaseFragment
-import com.mutlak.metis.wordmem.features.landing.LandingActivity
+import com.mutlak.metis.wordmem.features.landing.LanActivity
 import java.util.Date
 import javax.inject.Inject
 
@@ -69,7 +69,7 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
     super.onCreate(savedInstanceState)
     fragmentComponent().inject(this)
     mPresenter.attachView(this)
-    reviewType = activity.intent.extras.getInt(LandingActivity.REVIEW_TYPE)
+    reviewType = activity.intent.extras.getInt(LanActivity.REVIEW_TYPE)
 
     isShowViewPresented = mPref.getBoolean(ShowView.REVIEW, false)
   }

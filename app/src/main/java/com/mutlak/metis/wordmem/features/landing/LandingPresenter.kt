@@ -17,8 +17,6 @@ import java.util.Locale
 import javax.inject.Inject
 
 
-
-
 @ConfigPersistent
 class LandingPresenter @Inject
 constructor(private val repo: WordsRepositoryImpl,
@@ -119,6 +117,13 @@ constructor(private val repo: WordsRepositoryImpl,
 
   fun getLearntWordsCount() {
     view?.showLearntCount(repo.learntWordsCount)
+  }
+
+  fun circleProgress() {
+    val words = repo.allWords
+    val learned = words.filter { it.learnt }.count()
+    val rate = learned * 100 / words.size
+    view?.showCircleProgress(rate.toFloat())
   }
 }
 

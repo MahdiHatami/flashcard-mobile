@@ -17,7 +17,7 @@ import com.mutlak.metis.wordmem.data.model.Answer
 import com.mutlak.metis.wordmem.data.model.ExamSession
 import com.mutlak.metis.wordmem.data.model.Question
 import com.mutlak.metis.wordmem.features.base.BaseActivity
-import com.mutlak.metis.wordmem.features.landing.LandingActivity
+import com.mutlak.metis.wordmem.features.landing.LanActivity
 import com.mutlak.metis.wordmem.features.quiz.widgets.CustomViewPager
 import com.mutlak.metis.wordmem.features.quiz.widgets.CustomViewPager.SwipeDirection
 import com.mutlak.metis.wordmem.features.quiz.widgets.ExamPagerAdapter
@@ -143,7 +143,7 @@ class QuizActivity : BaseActivity(), QuizView {
   }
 
   private fun redirectToLanding() {
-    startActivity(Intent(this@QuizActivity, LandingActivity::class.java))
+    startActivity(Intent(this@QuizActivity, LanActivity::class.java))
   }
 
   private fun setupToolbar() {
