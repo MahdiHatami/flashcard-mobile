@@ -75,9 +75,9 @@ constructor(private val repo: WordsRepositoryImpl,
         .compose<List<Word>>(SchedulerUtils.ioToMain<List<Word>>())
         .subscribe({ words ->
           view?.hideBookLoading()
+          updateWordsFetchedDate()
           if (words.isNotEmpty()) {
             repo.saveWords(words)
-            updateWordsFetchedDate()
           }
         }) { throwable ->
           view?.hideBookLoading()
@@ -122,8 +122,10 @@ constructor(private val repo: WordsRepositoryImpl,
   fun circleProgress() {
     val words = repo.allWords
     val learned = words.filter { it.learnt }.count()
-    val rate = learned * 100 / words.size
-    view?.showCircleProgress(rate.toFloat())
+    var rate = 0F
+    if (learned > 0)
+      rate = (learned * 100 / words.size).toFloat()
+    view?.showCircleProgress(rate, learned)
   }
 }
 

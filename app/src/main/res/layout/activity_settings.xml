@@ -5,190 +5,209 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_light"
-    tools:context="com.mutlak.metis.wordmem.ui.SettingsActivity">
+    tools:context=".features.settings.SettingsActivity"
+    >
 
-    <include layout="@layout/toolbar"/>
+  <include layout="@layout/toolbar"/>
 
-    <android.support.v7.widget.CardView
+  <android.support.v7.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="?actionBarSize"
+      >
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="?actionBarSize"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         >
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="10dp"
+          >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/settings_learning_title"
+            android:textColor="@color/accent"
+            android:textStyle="bold"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="1"
+            >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+          <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight=".7"
+              android:text="@string/settings_words_per_learning_session"
+              />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="@string/settings_learning_title"
-                    android:textColor="@color/accent"
-                    android:textStyle="bold"/>
+          <android.support.v7.widget.AppCompatSpinner
+              android:id="@+id/review_number_sp"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight=".3"
+              >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="10dp"
-                    android:weightSum="1">
+          </android.support.v7.widget.AppCompatSpinner>
+        </LinearLayout>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".7"
-                        android:text="@string/settings_words_per_learning_session"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="1"
+            >
 
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/review_number_sp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".3"
-                        >
+          <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight=".7"
+              android:text="@string/daily_reminder"
+              />
 
-                    </android.support.v7.widget.AppCompatSpinner>
-                </LinearLayout>
+          <android.support.v7.widget.SwitchCompat
+              android:id="@+id/reminder_switch"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight=".3"
+              />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="10dp"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".7"
-                        android:text="@string/daily_reminder"/>
-
-                    <android.support.v7.widget.SwitchCompat
-                        android:id="@+id/reminder_switch"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".3"/>
-
-                    <ImageView
-                        android:id="@+id/reminder_gear_image"
-                        android:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginStart="16dp"
-                        android:contentDescription="@string/daily_reminder"
-                        app:srcCompat="@drawable/ic_gear"/>
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"
-                android:background="#d2d0d0"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="@string/settings_quiz_title"
-                    android:textColor="@color/accent"
-                    android:textStyle="bold"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="10dp"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".7"
-                        android:text="@string/settings_words_per_quiz_session"/>
-
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/quiz_number_sp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".3"
-                        >
-
-                    </android.support.v7.widget.AppCompatSpinner>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="10dp"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".7"
-                        android:text="@string/settings_answer_per_quiz"/>
-
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/max_answer_sp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".3"
-                        >
-
-                    </android.support.v7.widget.AppCompatSpinner>
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="@string/quiz_type"/>
-
-                <RadioGroup
-                    android:id="@+id/radio_group"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RadioButton
-                        android:id="@+id/radio_word"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/word_to_word"/>
-
-                    <RadioButton
-                        android:id="@+id/radio_sentence"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/word_to_defination"/>
-
-                </RadioGroup>
-
-
-            </LinearLayout>
+          <ImageView
+              android:id="@+id/reminder_gear_image"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="16dp"
+              android:layout_marginStart="16dp"
+              android:clickable="true"
+              android:contentDescription="@string/daily_reminder"
+              app:srcCompat="@drawable/ic_gear"
+              />
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="fill_parent"
+          android:layout_height="1dip"
+          android:background="#d2d0d0"
+          />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="10dp"
+          >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/settings_quiz_title"
+            android:textColor="@color/accent"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="1"
+            >
+
+          <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight=".7"
+              android:text="@string/settings_words_per_quiz_session"
+              />
+
+          <android.support.v7.widget.AppCompatSpinner
+              android:id="@+id/quiz_number_sp"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight=".3"
+              >
+
+          </android.support.v7.widget.AppCompatSpinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="1"
+            >
+
+          <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight=".7"
+              android:text="@string/settings_answer_per_quiz"
+              />
+
+          <android.support.v7.widget.AppCompatSpinner
+              android:id="@+id/max_answer_sp"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight=".3"
+              >
+
+          </android.support.v7.widget.AppCompatSpinner>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/quiz_type"
+            />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+          <RadioButton
+              android:id="@+id/radio_word"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/word_to_word"
+              />
+
+          <RadioButton
+              android:id="@+id/radio_sentence"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/word_to_defination"
+              />
+
+        </RadioGroup>
+
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </android.support.v7.widget.CardView>
 
 
 </android.support.design.widget.CoordinatorLayout>

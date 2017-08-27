@@ -9,7 +9,7 @@
       android:type="linear"/>
 
   <corners
-      android:radius="@dimen/landing_bottom_radius"
+      android:radius="100dp"
       />
 
 </shape>

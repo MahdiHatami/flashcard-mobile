@@ -18,7 +18,7 @@ interface LandingMvpView : BaseView {
 
   fun hideBookLoading()
 
-  fun showCircleProgress(rate: Float)
+  fun showCircleProgress(rate: Float, totalLearnt: Int)
 
 }
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="@color/landing_background"
+    tools:targetApi="lollipop"> <!-- The ripple will be red -->
+
+  <!-- the normal bg color will be light grey -->
+  <item>
+    <layer-list>
+      <item android:drawable="@drawable/landing_quiz_btn_bg"/>
+    </layer-list>
+  </item>
+
+</ripple>

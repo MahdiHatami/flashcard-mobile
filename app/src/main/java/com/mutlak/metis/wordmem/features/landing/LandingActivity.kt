@@ -24,7 +24,7 @@ import com.victor.loading.book.BookLoading
 import javax.inject.Inject
 
 class LandingActivity : BaseActivity(), LandingMvpView {
-  override fun showCircleProgress(rate: Float) {
+  override fun showCircleProgress(rate: Float, totalLearnt: Int) {
     TODO(
         "not implemented") //To change body of created functions use File | Settings | File Templates.
   }

@@ -5,13 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/landing_background"
     android:theme="@style/AppThemeMaterial.AppBarOverlay"
-    tools:showIn="@layout/activity_quiz">
+    tools:showIn="@layout/activity_quiz"
+    >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      />
 
 </android.support.design.widget.AppBarLayout>
 

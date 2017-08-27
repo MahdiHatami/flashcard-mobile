@@ -13,7 +13,7 @@ class NewWordActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_new_word)
 
-    changeStatusBarColor(R.color.landing_plus)
+    changeStatusBarColor(R.color.landing_plus_darker)
 
   }
 }

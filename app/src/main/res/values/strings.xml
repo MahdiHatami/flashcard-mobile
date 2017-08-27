@@ -77,11 +77,10 @@
   <string name="intro_quiz_content">Try yourself with the help of the exams you can set from English to English or English to English from the cards you see. If you trust yourself, you can increase the number of options</string>
   <string name="intro_settings_title">SETTINGS</string>
   <string name="intro_settings_content">Set the number of word cards to show in a session and customize the exam according to your own style. With the reminder, it is possible to do card exercises on a regular basis</string>
-  <string name="dialog_action_ok">OK</string>
-  <string name="dialog_action_cancel">Cancel</string>
-  <string name="dialog_error_title">Sorry</string>
   <string name="toolbar_counter_title">%d / %d</string>
   <string name="landing_reviews_title">REVIEWS</string>
   <string name="landing_learnt_title">LEARNT</string>
   <string name="landing_bookmarked_title">FAVORITES</string>
+  <string name="landing_all_learned_words_count_title">Learnt Words</string>
+  <string name="landing_header_learnt_words">%d Kelime</string>
 </resources>

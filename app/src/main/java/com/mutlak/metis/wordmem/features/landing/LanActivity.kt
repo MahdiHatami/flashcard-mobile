@@ -23,6 +23,7 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import butterknife.BindView
@@ -60,6 +61,7 @@ class LanActivity : BaseActivity(), LandingMvpView {
   private var launchedActivity: Boolean = false
 
   @BindView(R.id.circle_progress_view) lateinit var mCircleProgressView: CircleProgressView
+  @BindView(R.id.progress_horizontal) lateinit var mHorizontalProgressView: ProgressBar
   @BindView(R.id.book_loading) lateinit var mBookLoading: BookLoading
   @BindView(R.id.loading_layout) lateinit var mLoadingLayout: LinearLayout
   @BindView(R.id.linear_content) lateinit var mContentLayout: LinearLayout
@@ -73,6 +75,7 @@ class LanActivity : BaseActivity(), LandingMvpView {
   @BindView(R.id.text_review) lateinit var mTotalReviewView: TextView
   @BindView(R.id.text_learnt) lateinit var mTotalLearntView: TextView
   @BindView(R.id.text_bookmark) lateinit var mTotalBookmarkedView: TextView
+  @BindView(R.id.text_total_learnt_words) lateinit var mTotalLearntWordsView: TextView
 
   @BindView(R.id.parent_view) lateinit var mParentView: ConstraintLayout
 
@@ -114,8 +117,13 @@ class LanActivity : BaseActivity(), LandingMvpView {
 
 
   private fun setupView() {
-    mTakeQuizView.setOnClickListener { startActivity(Intent(this, QuizActivity::class.java)) }
-    mSettings.setOnClickListener { startActivity(Intent(this, SettingsActivity::class.java)) }
+    mTakeQuizView.setOnClickListener {
+      startActivity(Intent(this, QuizActivity::class.java))
+    }
+    mSettings.setOnClickListener {
+
+      startActivity(Intent(this, SettingsActivity::class.java))
+    }
     val intent = Intent(this, ReviewActivity::class.java)
 
     mReviewView.setOnClickListener { _ ->
@@ -187,14 +195,14 @@ class LanActivity : BaseActivity(), LandingMvpView {
   override fun showBookLoading() {
     mLoadingLayout.visibility = View.VISIBLE
     changeStatusBarColor(R.color.primary_dark)
-    mContentLayout.visibility = View.GONE
+    mParentView.visibility = View.GONE
     mBookLoading.start()
   }
 
   override fun hideBookLoading() {
     Handler().postDelayed({
       mLoadingLayout.visibility = View.GONE
-      mContentLayout.visibility = View.VISIBLE
+      mParentView.visibility = View.VISIBLE
       changeStatusBarColor(R.color.primary_dark)
     }, DELAY_MILLIS)
   }
@@ -220,10 +228,13 @@ class LanActivity : BaseActivity(), LandingMvpView {
     return this
   }
 
-  override fun showCircleProgress(rate: Float) {
+  override fun showCircleProgress(rate: Float, totalLearnt: Int) {
     mCircleProgressView.isTextEnabled = true
     mCircleProgressView.interpolator = AccelerateDecelerateInterpolator()
     mCircleProgressView.setProgressWithAnimation(rate, 1000)
+
+    mHorizontalProgressView.progress = rate.toInt()
+    mTotalLearntWordsView.text = getString(R.string.landing_header_learnt_words, totalLearnt)
   }
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
