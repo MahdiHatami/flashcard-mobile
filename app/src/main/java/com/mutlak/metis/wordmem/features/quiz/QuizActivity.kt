@@ -1,29 +1,22 @@
 package com.mutlak.metis.wordmem.features.quiz
 
-import android.content.Context
-import android.content.Intent
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.support.v4.content.ContextCompat
+import android.content.*
+import android.os.*
 import android.support.v7.widget.Toolbar
-import android.view.MenuItem
-import android.widget.TextView
-import butterknife.BindView
-import com.afollestad.materialdialogs.MaterialDialog
-import com.google.gson.Gson
+import android.view.*
+import android.widget.*
+import butterknife.*
+import com.afollestad.materialdialogs.*
+import com.google.gson.*
 import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.data.model.Answer
-import com.mutlak.metis.wordmem.data.model.ExamSession
-import com.mutlak.metis.wordmem.data.model.Question
-import com.mutlak.metis.wordmem.features.base.BaseActivity
-import com.mutlak.metis.wordmem.features.landing.LanActivity
-import com.mutlak.metis.wordmem.features.quiz.widgets.CustomViewPager
+import com.mutlak.metis.wordmem.data.model.*
+import com.mutlak.metis.wordmem.features.base.*
+import com.mutlak.metis.wordmem.features.landing.*
+import com.mutlak.metis.wordmem.features.quiz.widgets.*
 import com.mutlak.metis.wordmem.features.quiz.widgets.CustomViewPager.SwipeDirection
-import com.mutlak.metis.wordmem.features.quiz.widgets.ExamPagerAdapter
-import com.mutlak.metis.wordmem.features.result.ResultActivity
-import java.util.Locale
-import javax.inject.Inject
+import com.mutlak.metis.wordmem.features.result.*
+import java.util.*
+import javax.inject.*
 
 class QuizActivity : BaseActivity(), QuizView {
 
@@ -45,11 +38,9 @@ class QuizActivity : BaseActivity(), QuizView {
     activityComponent().inject(this)
     mPresenter.attachView(this)
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      window.statusBarColor = ContextCompat.getColor(this, R.color.red_dark)
-    }
-
     setupToolbar()
+
+    changeStatusBarColor(R.color.landing_header_center)
 
     mPresenter.setupTest()
   }
@@ -143,7 +134,7 @@ class QuizActivity : BaseActivity(), QuizView {
   }
 
   private fun redirectToLanding() {
-    startActivity(Intent(this@QuizActivity, LanActivity::class.java))
+    startActivity(Intent(this@QuizActivity, LandingActivity::class.java))
   }
 
   private fun setupToolbar() {

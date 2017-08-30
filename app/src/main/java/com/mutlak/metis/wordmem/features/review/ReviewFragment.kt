@@ -1,28 +1,25 @@
 package com.mutlak.metis.wordmem.features.review
 
-import android.os.Build
-import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import android.os.*
+import android.support.v4.content.*
+import android.support.v4.view.*
+import android.support.v7.app.*
 import android.support.v7.widget.Toolbar
-import android.view.View
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.TextView
-import butterknife.BindView
-import com.afollestad.materialdialogs.MaterialDialog
-import com.github.amlcurran.showcaseview.ShowcaseView
-import com.github.amlcurran.showcaseview.targets.ViewTarget
-import com.github.florent37.tutoshowcase.TutoShowcase
-import com.github.zagum.switchicon.SwitchIconView
+import android.view.*
+import android.widget.*
+import butterknife.*
+import com.afollestad.materialdialogs.*
+import com.github.amlcurran.showcaseview.*
+import com.github.amlcurran.showcaseview.targets.*
+import com.github.florent37.tutoshowcase.*
+import com.github.zagum.switchicon.*
 import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.data.local.PreferencesHelper
-import com.mutlak.metis.wordmem.data.model.Word
-import com.mutlak.metis.wordmem.features.base.BaseFragment
-import com.mutlak.metis.wordmem.features.landing.LanActivity
-import java.util.Date
-import javax.inject.Inject
+import com.mutlak.metis.wordmem.data.local.*
+import com.mutlak.metis.wordmem.data.model.*
+import com.mutlak.metis.wordmem.features.base.*
+import com.mutlak.metis.wordmem.features.landing.*
+import java.util.*
+import javax.inject.*
 
 
 class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
@@ -69,7 +66,7 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
     super.onCreate(savedInstanceState)
     fragmentComponent().inject(this)
     mPresenter.attachView(this)
-    reviewType = activity.intent.extras.getInt(LanActivity.REVIEW_TYPE)
+    reviewType = activity.intent.extras.getInt(LandingActivity.REVIEW_TYPE)
 
     isShowViewPresented = mPref.getBoolean(ShowView.REVIEW, false)
   }
@@ -79,7 +76,6 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
     mPresenter.startCards(reviewType)
 
     setupToolbar()
-    changeStatusBarColor()
     setupViewPager()
     setupActionButtons()
   }
@@ -213,12 +209,6 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
 
   private fun redirectBack() {
     activity.finish()
-  }
-
-  private fun changeStatusBarColor() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      activity.window.statusBarColor = ContextCompat.getColor(context, R.color.primary_dark)
-    }
   }
 
   override fun showAlert(title: Int, content: Int) {

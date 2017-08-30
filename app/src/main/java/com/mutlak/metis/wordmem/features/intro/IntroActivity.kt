@@ -1,14 +1,13 @@
 package com.mutlak.metis.wordmem.features.intro
 
-import android.content.Intent
-import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import com.github.paolorotolo.appintro.AppIntro
-import com.github.paolorotolo.appintro.AppIntroFragment
+import android.content.*
+import android.os.*
+import android.support.v4.app.*
+import android.support.v4.content.*
+import com.github.paolorotolo.appintro.*
 import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.data.local.PreferencesHelper
-import com.mutlak.metis.wordmem.features.landing.LanActivity
+import com.mutlak.metis.wordmem.data.local.*
+import com.mutlak.metis.wordmem.features.landing.*
 
 class IntroActivity : AppIntro() {
 
@@ -33,15 +32,15 @@ class IntroActivity : AppIntro() {
 
       addSlide(AppIntroFragment.newInstance(getString(R.string.intro_review_title),
           getString(R.string.intro_review_content), R.drawable.ic_review_intro,
-          ContextCompat.getColor(this, R.color.primary_dark)))
+          ContextCompat.getColor(this, R.color.landing_background)))
 
       addSlide(AppIntroFragment.newInstance(getString(R.string.intro_quiz_title),
           getString(R.string.intro_quiz_content), R.drawable.ic_quiz_intro,
-          ContextCompat.getColor(this, R.color.primary_dark)))
+          ContextCompat.getColor(this, R.color.landing_background)))
 
       addSlide(AppIntroFragment.newInstance(getString(R.string.intro_settings_title),
           getString(R.string.intro_settings_content), R.drawable.ic_settings_intro,
-          ContextCompat.getColor(this, R.color.primary_dark)))
+          ContextCompat.getColor(this, R.color.landing_background)))
     } else {
       redirectToLanding()
     }
@@ -62,6 +61,6 @@ class IntroActivity : AppIntro() {
   private fun redirectToLanding() {
     mPref.putBoolean(SHOW_APP_INTRO, true)
     finish()
-    startActivity(Intent(this@IntroActivity, LanActivity::class.java))
+    startActivity(Intent(this@IntroActivity, LandingActivity::class.java))
   }
 }

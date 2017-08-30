@@ -5,13 +5,6 @@
 
   <uses-permission android:name="android.permission.INTERNET"/>
 
-  <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
-    -->
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
   <application
       android:name=".MutlakApplication"
       android:allowBackup="true"
@@ -23,6 +16,9 @@
     <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="@string/google_maps_key"/>
+    <meta-data
+        android:name="io.fabric.ApiKey"
+        android:value="493c45a79f584085d4b92e79f6a68431a441191a"/>
 
     <receiver android:name=".util.AlarmReciever"/>
 
@@ -40,19 +36,32 @@
         android:name=".features.detail.DetailActivity"
         android:theme="@style/AppTheme.NoActionBar"/>
     <activity
-        android:name=".features.detail.MapsSampleActivity"
-        android:label="Maps Activity"/>
-    <activity android:name=".features.landing.LandingActivity"/>
-    <activity android:name=".features.settings.SettingsActivity"/>
-    <activity android:name=".features.review.ReviewActivity"/>
-    <activity android:name=".features.quiz.QuizActivity"/>
-    <activity android:name=".features.result.ResultActivity"/>
-    <activity android:name=".features.intro.IntroActivity">
-    </activity>
-    <activity android:name=".features.landing.LanActivity">
-    </activity>
-    <activity android:name=".features.insertWord.NewWordActivity">
-    </activity>
+        android:name=".features.settings.SettingsActivity"
+        android:screenOrientation="portrait"/>
+    <activity
+        android:name=".features.review.ReviewActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity
+        android:name=".features.quiz.QuizActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity
+        android:name=".features.result.ResultActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity
+        android:name=".features.intro.IntroActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity
+        android:name=".features.landing.LandingActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity
+        android:name=".features.insertWord.NewWordActivity"
+        android:screenOrientation="portrait"
+        />
   </application>
 
 </manifest>

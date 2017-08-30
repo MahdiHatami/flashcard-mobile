@@ -1,17 +1,13 @@
 package com.mutlak.metis.wordmem.features.review
 
-import android.app.NotificationManager
-import android.content.Context
-import android.content.Intent
-import android.os.Build
-import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.features.base.BaseActivity
-import com.mutlak.metis.wordmem.features.landing.LanActivity
-import com.mutlak.metis.wordmem.util.AlarmReciever
-import com.mutlak.metis.wordmem.util.NotificationUtils
+import android.app.*
+import android.content.*
+import android.os.*
+import android.view.*
+import com.mutlak.metis.wordmem.*
+import com.mutlak.metis.wordmem.features.base.*
+import com.mutlak.metis.wordmem.features.landing.*
+import com.mutlak.metis.wordmem.util.*
 
 class ReviewActivity : BaseActivity() {
 
@@ -29,7 +25,9 @@ class ReviewActivity : BaseActivity() {
       mNotificationManager.cancel(AlarmReciever.REVIEW_NOTIFICAION_ID)
     }
 
-    if (intent.hasExtra(LanActivity.REVIEW_TYPE)) {
+    changeStatusBarColor(R.color.landing_background_darker)
+
+    if (intent.hasExtra(LandingActivity.REVIEW_TYPE)) {
       val ft = supportFragmentManager.beginTransaction()
       ft.replace(R.id.review_placeholder, ReviewFragment.newInstance())
       ft.commit()
@@ -50,7 +48,7 @@ class ReviewActivity : BaseActivity() {
     get() = R.layout.activity_review
 
   private fun redirectToLanding() {
-    startActivity(Intent(this@ReviewActivity, LanActivity::class.java))
+    startActivity(Intent(this@ReviewActivity, LandingActivity::class.java))
   }
 
   override fun onBackPressed() {

@@ -1,68 +1,35 @@
 package com.mutlak.metis.wordmem.features.landing
 
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
-import android.os.Handler
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.CardView
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
-import butterknife.BindView
-import com.afollestad.materialdialogs.MaterialDialog
+import android.animation.*
+import android.content.*
+import android.os.*
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
+import android.support.annotation.*
+import android.support.constraint.*
+import android.support.design.widget.*
+import android.support.v4.app.*
+import android.support.v4.content.*
+import android.view.*
+import android.view.WindowManager.LayoutParams
+import android.view.animation.*
+import android.widget.*
+import butterknife.*
+import com.afollestad.materialdialogs.*
 import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.features.base.BaseActivity
-import com.mutlak.metis.wordmem.features.quiz.QuizActivity
-import com.mutlak.metis.wordmem.features.review.ReviewActivity
-import com.mutlak.metis.wordmem.features.settings.SettingsActivity
-import com.mutlak.metis.wordmem.util.NetworkUtil
-import com.victor.loading.book.BookLoading
-import javax.inject.Inject
+import com.mutlak.metis.wordmem.extension.*
+import com.mutlak.metis.wordmem.features.base.*
+import com.mutlak.metis.wordmem.features.insertWord.*
+import com.mutlak.metis.wordmem.features.quiz.*
+import com.mutlak.metis.wordmem.features.result.widget.*
+import com.mutlak.metis.wordmem.features.review.*
+import com.mutlak.metis.wordmem.features.settings.*
+import com.mutlak.metis.wordmem.util.*
+import com.victor.loading.book.*
+import javax.inject.*
+
 
 class LandingActivity : BaseActivity(), LandingMvpView {
-  override fun showCircleProgress(rate: Float, totalLearnt: Int) {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
-
-  private lateinit var mRelativeBookmark: RelativeLayout
-  private lateinit var mRelativeLearnt: RelativeLayout
-  private lateinit var mRelativeNew: RelativeLayout
-  private lateinit var mTextNewCount: TextView
-  private lateinit var mTextBookmarkCount: TextView
-  private lateinit var mTextLearntCount: TextView
-
-  private lateinit var mDialog: MaterialDialog
-  private var mAlertDialog: MaterialDialog? = null
-
-  @Inject lateinit var mPresenter: LandingPresenter
-
-  @BindView(R.id.review_card) lateinit var mReviewCard: CardView
-  @BindView(R.id.word_card_test) lateinit var mQuizCard: CardView
-  @BindView(R.id.settings_card) lateinit var mSettingsCard: CardView
-  @BindView(R.id.content_layout) lateinit var mContentLayout: LinearLayout
-  @BindView(R.id.loading_layout) lateinit var mLoadingLayout: LinearLayout
-  @BindView(R.id.book_loading) lateinit var mBookLoading: BookLoading
-  @BindView(R.id.container) lateinit var parentView: CoordinatorLayout
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    activityComponent().inject(this)
-    mPresenter.attachView(this)
-
-    mPresenter.checkIfNewWordsAvailable()
-
-    setupReviewDialog()
-
-    setupMenu()
-  }
-
-  override val layout: Int
-    get() = R.layout.activity_landing
 
   companion object {
     const val REVIEW_TYPE = "review_type"
@@ -72,56 +39,91 @@ class LandingActivity : BaseActivity(), LandingMvpView {
     const val REVIEW_TYPE_NEW = 3
   }
 
-  private fun setupMenu() {
-    mReviewCard.background = ContextCompat.getDrawable(this, R.drawable.answer_card_correct_fill)
-    mQuizCard.background = ContextCompat.getDrawable(this, R.drawable.answer_card_wrong_fill)
-    mSettingsCard.background = ContextCompat.getDrawable(this,
-        R.drawable.landing_settings_card_fill)
+  @Inject lateinit var mPresenter: LandingPresenter
 
-    mQuizCard.setOnClickListener { _ ->
-      val i = Intent(this@LandingActivity, QuizActivity::class.java)
-      startActivity(i)
+  private lateinit var mDialog: MaterialDialog
+  private var mAlertDialog: MaterialDialog? = null
+  private var launchedActivity: Boolean = false
+
+  @BindView(R.id.circle_progress_view) lateinit var mCircleProgressView: CircleProgressView
+  @BindView(R.id.progress_horizontal) lateinit var mHorizontalProgressView: ProgressBar
+  @BindView(R.id.book_loading) lateinit var mBookLoading: BookLoading
+  @BindView(R.id.loading_layout) lateinit var mLoadingLayout: LinearLayout
+  @BindView(R.id.linear_content) lateinit var mContentLayout: LinearLayout
+  @BindView(R.id.rel_review) lateinit var mReviewView: RelativeLayout
+  @BindView(R.id.rel_learnt) lateinit var mLearntView: RelativeLayout
+  @BindView(R.id.rel_bookmark) lateinit var mBookmarkedView: RelativeLayout
+  @BindView(R.id.linear_take_quiz) lateinit var mTakeQuizView: LinearLayout
+  @BindView(R.id.linear_plus) lateinit var mPlusView: LinearLayout
+  @BindView(R.id.img_settings) lateinit var mSettings: ImageView
+
+  @BindView(R.id.text_review) lateinit var mTotalReviewView: TextView
+  @BindView(R.id.text_learnt) lateinit var mTotalLearntView: TextView
+  @BindView(R.id.text_bookmark) lateinit var mTotalBookmarkedView: TextView
+  @BindView(R.id.text_total_learnt_words) lateinit var mTotalLearntWordsView: TextView
+
+  @BindView(R.id.parent_view) lateinit var mParentView: ConstraintLayout
+
+  @BindView(R.id.ripple_view) lateinit var mRippleView: View
+
+  override val layout: Int
+    get() = R.layout.activity_lan
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    activityComponent().inject(this)
+    mPresenter.attachView(this)
+
+    setupStatusBar()
+    setupView()
+
+    mPresenter.checkIfNewWordsAvailable()
+    mPresenter.getNewWordsCount()
+    mPresenter.getLearntWordsCount()
+    mPresenter.getBookmarkWordsCount()
+    mPresenter.circleProgress()
+  }
+
+  override fun onResume() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && launchedActivity) {
+      startRippleTransitionUnreveal()
+      launchedActivity = false
     }
-    mSettingsCard.setOnClickListener { _ ->
-      val i = Intent(this@LandingActivity, SettingsActivity::class.java)
-      startActivity(i)
+    super.onResume()
+  }
+
+  private fun setupStatusBar() {
+    if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+      val window = window
+      window.addFlags(LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+      changeStatusBarColor(R.color.landing_header_center)
     }
   }
 
-  private fun setupReviewDialog() {
-    mReviewCard.setOnClickListener { _ ->
-      mDialog = MaterialDialog.Builder(this).customView(R.layout.landing_menu_custom_view, false)
-          .show()
 
-      mRelativeBookmark = mDialog.findViewById(R.id.dialog_bookmark) as RelativeLayout
-      mRelativeLearnt = mDialog.findViewById(R.id.dialog_learnt) as RelativeLayout
-      mRelativeNew = mDialog.findViewById(R.id.dialog_new) as RelativeLayout
+  private fun setupView() {
+    mTakeQuizView.setOnClickListener {
+      startActivity(Intent(this, QuizActivity::class.java))
+    }
+    mSettings.setOnClickListener {
 
-      mTextNewCount = mDialog.findViewById(R.id.review_new_count) as TextView
-      mTextBookmarkCount = mDialog.findViewById(R.id.review_bookmark_count) as TextView
-      mTextLearntCount = mDialog.findViewById(R.id.review_learnt_count) as TextView
+      startActivity(Intent(this, SettingsActivity::class.java))
+    }
+    val intent = Intent(this, ReviewActivity::class.java)
 
-      mPresenter.getNewWordsCount()
-      mPresenter.getLearntWordsCount()
-      mPresenter.getBookmarkWordsCount()
+    mReviewView.setOnClickListener { _ ->
+      intent.putExtra(REVIEW_TYPE, REVIEW_TYPE_NEW)
+      startActivity(intent)
+    }
 
+    mLearntView.setOnClickListener {
+      intent.putExtra(REVIEW_TYPE, REVIEW_TYPE_LEARNT)
+      startActivity(intent)
+    }
 
-      val intent = Intent(this@LandingActivity, ReviewActivity::class.java)
-      mRelativeBookmark.setOnClickListener {
-        intent.putExtra(REVIEW_TYPE, REVIEW_TYPE_BOOKMARK)
-        startActivity(intent)
-        mDialog.dismiss()
-      }
-      mRelativeLearnt.setOnClickListener {
-        mDialog.dismiss()
-        intent.putExtra(REVIEW_TYPE, REVIEW_TYPE_LEARNT)
-        startActivity(intent)
-      }
-      mRelativeNew.setOnClickListener {
-        mDialog.dismiss()
-        intent.putExtra(REVIEW_TYPE, REVIEW_TYPE_NEW)
-        startActivity(intent)
-      }
+    mBookmarkedView.setOnClickListener {
+      intent.putExtra(REVIEW_TYPE, REVIEW_TYPE_BOOKMARK)
+      startActivity(intent)
     }
   }
 
@@ -149,55 +151,43 @@ class LandingActivity : BaseActivity(), LandingMvpView {
   }
 
   override fun showOfflineMessage() {
-    val snackbar = Snackbar.make(parentView, R.string.internet_not_available,
+    val snackbar = Snackbar.make(mParentView, R.string.internet_not_available,
         Snackbar.LENGTH_INDEFINITE)
-    snackbar.setActionTextColor(ContextCompat.getColor(this@LandingActivity, R.color.yellow))
+    snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.yellow))
     snackbar.setAction(R.string.action_settings) { _ ->
       val intent = Intent(android.provider.Settings.ACTION_SETTINGS)
       startActivity(intent)
     }
     val view = snackbar.view
     val tv = view.findViewById<View>(android.support.design.R.id.snackbar_text) as TextView
-    tv.setTextColor(ContextCompat.getColor(this@LandingActivity, R.color.accent))
+    tv.setTextColor(ContextCompat.getColor(this, R.color.accent))
     snackbar.show()
   }
 
   override fun showNewCount(count: Int) {
-    if (count > 0) {
-      mTextNewCount.text = count.toString()
-    } else {
-      mTextNewCount.visibility = View.GONE
-    }
+    mTotalReviewView.text = count.toString()
   }
 
   override fun showBookmarkCount(count: Int) {
-    if (count > 0) {
-      mTextBookmarkCount.text = count.toString()
-    } else {
-      mTextBookmarkCount.visibility = View.GONE
-    }
+    mTotalBookmarkedView.text = count.toString()
   }
 
   override fun showLearntCount(count: Int) {
-    if (count > 0) {
-      mTextLearntCount.text = count.toString()
-    } else {
-      mTextLearntCount.visibility = View.GONE
-    }
+    mTotalLearntView.text = count.toString()
   }
 
 
   override fun showBookLoading() {
     mLoadingLayout.visibility = View.VISIBLE
     changeStatusBarColor(R.color.primary_dark)
-    mContentLayout.visibility = View.GONE
+    mParentView.visibility = View.GONE
     mBookLoading.start()
   }
 
   override fun hideBookLoading() {
     Handler().postDelayed({
       mLoadingLayout.visibility = View.GONE
-      mContentLayout.visibility = View.VISIBLE
+      mParentView.visibility = View.VISIBLE
       changeStatusBarColor(R.color.primary_dark)
     }, DELAY_MILLIS)
   }
@@ -207,7 +197,7 @@ class LandingActivity : BaseActivity(), LandingMvpView {
   }
 
   private fun redirectBack() {
-    MaterialDialog.Builder(this@LandingActivity).title(R.string.logout_title)
+    MaterialDialog.Builder(this).title(R.string.logout_title)
         .content(R.string.logout_content)
         .positiveText(R.string.yes)
         .negativeText(R.string.cancel)
@@ -221,5 +211,78 @@ class LandingActivity : BaseActivity(), LandingMvpView {
 
   override fun getContext(): Context {
     return this
+  }
+
+  override fun showCircleProgress(rate: Float, totalLearnt: Int) {
+    mCircleProgressView.isTextEnabled = true
+    mCircleProgressView.interpolator = AccelerateDecelerateInterpolator()
+    mCircleProgressView.setProgressWithAnimation(rate, 1000)
+
+    mHorizontalProgressView.progress = rate.toInt()
+    mTotalLearntWordsView.text = getString(R.string.landing_header_learnt_words, totalLearnt)
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+  private fun startRippleTransitionUnreveal() {
+    val animator: Animator = ViewAnimationUtils.createCircularReveal(
+        mRippleView,
+        (mPlusView.x + mPlusView.width / 2).toInt(),
+        mPlusView.y.toInt(),
+        ViewUtil.getViewRadius(mRippleView) * 2,
+        (mPlusView.width / 2).toFloat())
+    mRippleView.show()
+    animator.interpolator = DecelerateInterpolator()
+    animator.duration = 400
+    animator.addListener(object : AnimatorListenerAdapter() {
+      override fun onAnimationStart(animation: Animator?) {
+        mContentLayout.animate().alpha(1f)
+      }
+
+      override fun onAnimationEnd(animation: Animator?) {
+        super.onAnimationEnd(animation)
+        mPlusView.visibility = View.VISIBLE
+        mRippleView.visibility = View.INVISIBLE
+      }
+    })
+    animator.start()
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+  private fun startRippleTransitionReveal() {
+    mPlusView.visibility = View.INVISIBLE
+    val animator: Animator = ViewAnimationUtils.createCircularReveal(mRippleView,
+        (mPlusView.x + mPlusView.width / 2).toInt(), mPlusView.y.toInt(),
+        (mPlusView.width / 2).toFloat(), ViewUtil.getViewRadius(mRippleView) * 2)
+    mRippleView.show()
+    animator.interpolator = AccelerateInterpolator()
+    animator.duration = 500
+    animator.addListener(object : AnimatorListenerAdapter() {
+
+      override fun onAnimationStart(animation: Animator?) {
+        mContentLayout.animate().alpha(0f)
+      }
+
+      override fun onAnimationEnd(animation: Animator?) {
+        super.onAnimationEnd(animation)
+        startActivity()
+      }
+    })
+    animator.start()
+  }
+
+  fun startActivity() {
+    val intent = Intent(this, NewWordActivity::class.java)
+    ActivityCompat.startActivity(this, intent,
+        ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle())
+    launchedActivity = true
+  }
+
+  @OnClick(R.id.linear_plus)
+  fun plusOnClick() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      startRippleTransitionReveal()
+    } else {
+      startActivity()
+    }
   }
 }

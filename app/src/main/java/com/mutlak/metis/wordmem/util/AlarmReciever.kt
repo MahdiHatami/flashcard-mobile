@@ -9,7 +9,7 @@ import android.content.Intent
 import android.support.v4.app.TaskStackBuilder
 import android.support.v7.app.NotificationCompat
 import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.features.landing.LanActivity
+import com.mutlak.metis.wordmem.features.landing.LandingActivity
 import com.mutlak.metis.wordmem.features.result.ResultActivity
 import com.mutlak.metis.wordmem.features.review.ReviewActivity
 
@@ -23,7 +23,7 @@ class AlarmReciever : BroadcastReceiver() {
           context.getString(R.string.notification_review_title),
           context.getString(R.string.notification_review_content))
       val resultIntent = Intent(context, ReviewActivity::class.java)
-      resultIntent.putExtra(LanActivity.REVIEW_TYPE, LanActivity.REVIEW_TYPE_NEW)
+      resultIntent.putExtra(LandingActivity.REVIEW_TYPE, LandingActivity.REVIEW_TYPE_NEW)
 
       val stackBuilder = TaskStackBuilder.create(context)
       stackBuilder.addParentStack(ResultActivity::class.java)
@@ -39,7 +39,7 @@ class AlarmReciever : BroadcastReceiver() {
               context.getString(R.string.notification_review_content)) as NotificationCompat.Builder
 
       val resultIntent = Intent(context, ReviewActivity::class.java)
-      resultIntent.putExtra(LanActivity.REVIEW_TYPE, LanActivity.REVIEW_TYPE_NEW)
+      resultIntent.putExtra(LandingActivity.REVIEW_TYPE, LandingActivity.REVIEW_TYPE_NEW)
 
       val stackBuilder = TaskStackBuilder.create(context)
       stackBuilder.addParentStack(ResultActivity::class.java)

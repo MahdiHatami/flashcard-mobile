@@ -134,7 +134,7 @@ class ResultActivity : BaseActivity(), ResultView {
   @OnClick(R.id.result_explore_linear)
   fun exploreOnclick() {
     val intent = Intent(this@ResultActivity, ReviewActivity::class.java)
-    intent.putExtra(LanActivity.REVIEW_TYPE, LanActivity.REVIEW_TYPE_NEW)
+    intent.putExtra(LandingActivity.REVIEW_TYPE, LandingActivity.REVIEW_TYPE_NEW)
     startActivity(intent)
   }
 
@@ -157,12 +157,12 @@ class ResultActivity : BaseActivity(), ResultView {
   @OnClick(R.id.result_home_linear)
   fun homeOnClick() {
     finish()
-    startActivity(Intent(this@ResultActivity, LanActivity::class.java))
+    startActivity(Intent(this@ResultActivity, LandingActivity::class.java))
   }
 
   override fun onBackPressed() {
     finish()
-    startActivity(Intent(this@ResultActivity, LanActivity::class.java))
+    startActivity(Intent(this@ResultActivity, LandingActivity::class.java))
   }
 
   override fun attachBaseContext(newBase: Context?) {

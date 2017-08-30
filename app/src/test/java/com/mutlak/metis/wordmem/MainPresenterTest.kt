@@ -2,8 +2,6 @@ package com.mutlak.metis.wordmem
 
 import com.mutlak.metis.wordmem.common.TestDataFactory
 import com.mutlak.metis.wordmem.data.DataManager
-import com.mutlak.metis.wordmem.features.main.MainMvpView
-import com.mutlak.metis.wordmem.features.main.MainPresenter
 import com.mutlak.metis.wordmem.util.RxSchedulersOverrideRule
 import io.reactivex.Single
 import org.junit.After

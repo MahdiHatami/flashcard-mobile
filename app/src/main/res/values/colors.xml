@@ -10,8 +10,6 @@
   <color name="divider">#BDBDBD</color>
 
   <color name="red">#F44336</color>
-  <color name="red_dark">#D32F2F</color>
-  <color name="red_light">#FFCDD2</color>
 
 
   <color name="menu_red">#E91E63</color>
@@ -22,22 +20,10 @@
   <color name="status_finish">#1abc9c</color>
   <color name="yellow">#ffff00</color>
 
-  <!--book loading style-->
+  <!--book loading colors-->
   <color name="book_loading_background">#00796B</color>
   <color name="book_loading_book">#fff</color>
   <color name="book_loading_page">#00594f</color>
-
-
-  <color name="cardview_weather_start_color">#fab527</color>
-  <color name="cardview_weather_center_color">#f9e388</color>
-  <color name="cardview_weather_end_color">#efc74f</color>
-
-  <color name="background_weather_start">#f9dd69</color>
-  <color name="background_schedule_start">#5fbdc6</color>
-  <color name="background_next_trip_start">#3ab781</color>
-  <color name="background_weather_end">#faefc5</color>
-  <color name="background_schedule_end">#bcebef</color>
-  <color name="background_next_trip_end">#b5fcbc</color>
   <color name="transparent">#00000000</color>
 
   <color name="landing_header_start">#FF3866</color>
