@@ -40,7 +40,7 @@
       <android.support.constraint.ConstraintLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="32dp"
+          android:layout_marginTop="@dimen/new_word_row_margin_top"
           >
 
         <ImageView
@@ -67,7 +67,7 @@
       <android.support.constraint.ConstraintLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="32dp"
+          android:layout_marginTop="@dimen/new_word_row_margin_top"
           >
 
         <ImageView
@@ -80,6 +80,7 @@
             />
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_meaning"
+            app:errorEnabled="true"
             style="@style/new_word_input_layout"
             >
           <EditText
@@ -93,7 +94,7 @@
       <android.support.constraint.ConstraintLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="32dp"
+          android:layout_marginTop="@dimen/new_word_row_margin_top"
           >
 
         <ImageView
@@ -106,6 +107,7 @@
             />
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_sentence"
+            app:errorEnabled="true"
             style="@style/new_word_input_layout"
             >
           <EditText
@@ -119,7 +121,7 @@
       <android.support.constraint.ConstraintLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="32dp"
+          android:layout_marginTop="@dimen/new_word_row_margin_top"
           >
 
         <ImageView
@@ -132,6 +134,7 @@
             />
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_type"
+            app:errorEnabled="true"
             style="@style/new_word_input_layout"
             >
           <EditText
@@ -188,6 +191,7 @@
           android:layout_marginLeft="32dp"
           android:layout_marginRight="32dp"
           android:layout_marginTop="32dp"
+          android:visibility="gone"
           android:scaleType="fitXY"
           />
 

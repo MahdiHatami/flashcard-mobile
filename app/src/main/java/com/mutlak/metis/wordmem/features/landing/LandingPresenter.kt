@@ -76,11 +76,13 @@ constructor(private val repo: WordsRepositoryImpl,
     dataManager.getWords(lastFetchDate)
         .compose<List<Word>>(SchedulerUtils.ioToMain<List<Word>>())
         .subscribe({ words ->
+
           view?.hideBookLoading()
           updateWordsFetchedDate()
           if (words.isNotEmpty()) {
             repo.saveWords(words)
           }
+          view?.showNewCount(repo.newWordsCount)
         }) { throwable ->
           view?.hideBookLoading()
           Timber.e(throwable)

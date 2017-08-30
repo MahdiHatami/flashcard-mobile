@@ -172,6 +172,7 @@ class NewWordActivity : BaseActivity(), NewWordView {
       RxImageConverters.uriToBitmap(applicationContext, it)
     }.subscribe({
       mFrameUpload.hide()
+      mImageSelected.show()
       mImageSelected.setImageBitmap(it)
     })
   }

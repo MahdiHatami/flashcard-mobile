@@ -21,9 +21,9 @@
   <color name="yellow">#ffff00</color>
 
   <!--book loading colors-->
-  <color name="book_loading_background">#00796B</color>
+  <color name="book_loading_background">#FF5C67</color>
   <color name="book_loading_book">#fff</color>
-  <color name="book_loading_page">#00594f</color>
+  <color name="book_loading_page">#FF3866</color>
   <color name="transparent">#00000000</color>
 
   <color name="landing_header_start">#FF3866</color>

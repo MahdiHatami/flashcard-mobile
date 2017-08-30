@@ -41,7 +41,6 @@ class LandingActivity : BaseActivity(), LandingMvpView {
 
   @Inject lateinit var mPresenter: LandingPresenter
 
-  private lateinit var mDialog: MaterialDialog
   private var mAlertDialog: MaterialDialog? = null
   private var launchedActivity: Boolean = false
 
@@ -67,7 +66,7 @@ class LandingActivity : BaseActivity(), LandingMvpView {
   @BindView(R.id.ripple_view) lateinit var mRippleView: View
 
   override val layout: Int
-    get() = R.layout.activity_lan
+    get() = R.layout.activity_landing
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -96,7 +95,7 @@ class LandingActivity : BaseActivity(), LandingMvpView {
     if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
       val window = window
       window.addFlags(LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-      changeStatusBarColor(R.color.landing_header_center)
+      changeStatusBarColor(R.color.landing_header_end)
     }
   }
 
@@ -179,7 +178,7 @@ class LandingActivity : BaseActivity(), LandingMvpView {
 
   override fun showBookLoading() {
     mLoadingLayout.visibility = View.VISIBLE
-    changeStatusBarColor(R.color.primary_dark)
+    changeStatusBarColor(R.color.landing_header_start)
     mParentView.visibility = View.GONE
     mBookLoading.start()
   }
@@ -188,7 +187,7 @@ class LandingActivity : BaseActivity(), LandingMvpView {
     Handler().postDelayed({
       mLoadingLayout.visibility = View.GONE
       mParentView.visibility = View.VISIBLE
-      changeStatusBarColor(R.color.primary_dark)
+      changeStatusBarColor(R.color.landing_header_start)
     }, DELAY_MILLIS)
   }
 

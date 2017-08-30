@@ -11,4 +11,5 @@
     <dimen name="wave_height">60dp</dimen>
     <dimen name="footer_height">170dp</dimen>
   <dimen name="landing_bottom_radius">30dp</dimen>
+  <dimen name="new_word_row_margin_top">16dp</dimen>
 </resources>
