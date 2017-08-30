@@ -1,20 +1,17 @@
 package com.mutlak.metis.wordmem.features.landing
 
-import com.mutlak.metis.wordmem.data.DataManager
-import com.mutlak.metis.wordmem.data.local.WordsRepositoryImpl
-import com.mutlak.metis.wordmem.data.model.Settings
-import com.mutlak.metis.wordmem.data.model.Word
-import com.mutlak.metis.wordmem.features.base.BasePresenter
-import com.mutlak.metis.wordmem.features.settings.SettingsActivity
-import com.mutlak.metis.wordmem.injection.ConfigPersistent
-import com.mutlak.metis.wordmem.util.NetworkUtil
-import com.mutlak.metis.wordmem.util.TimeUtil
-import com.mutlak.metis.wordmem.util.rx.scheduler.SchedulerUtils
-import timber.log.Timber
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
-import javax.inject.Inject
+import com.mutlak.metis.wordmem.data.*
+import com.mutlak.metis.wordmem.data.local.*
+import com.mutlak.metis.wordmem.data.model.*
+import com.mutlak.metis.wordmem.features.base.*
+import com.mutlak.metis.wordmem.features.settings.*
+import com.mutlak.metis.wordmem.injection.*
+import com.mutlak.metis.wordmem.util.*
+import com.mutlak.metis.wordmem.util.rx.scheduler.*
+import timber.log.*
+import java.text.*
+import java.util.*
+import javax.inject.*
 
 
 @ConfigPersistent
@@ -57,12 +54,17 @@ constructor(private val repo: WordsRepositoryImpl,
   fun getSettings(): Settings {
     var settings = repo.settings
     val userLanguage = Locale.getDefault().language
-    if (settings == null) {
+    if (settings == null || settings.quizLimit == 0 || settings.reviewLimit == 0) {
       settings = Settings()
       settings.reviewLimit = SettingsActivity.reviewList[TEN_WORD_PER_REVIEW]
       settings.quizLimit = SettingsActivity.quizList[TEN_QUESTION]
       setupQuizType(settings, userLanguage)
       repo.updateSettings(settings)
+    } else {
+      if (settings.quizLimit == 0 || settings.reviewLimit == 0) {
+        settings.reviewLimit = SettingsActivity.reviewList[TEN_WORD_PER_REVIEW]
+        settings.quizLimit = SettingsActivity.quizList[TEN_QUESTION]
+      }
     }
     if (settings.quizType == 0) setupQuizType(settings, userLanguage)
     return settings
