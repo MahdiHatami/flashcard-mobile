@@ -1,40 +1,28 @@
 package com.mutlak.metis.wordmem.features.result
 
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
-import android.support.annotation.NonNull
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.content.*
+import android.os.*
+import android.support.annotation.*
+import android.support.design.widget.*
+import android.support.v7.widget.*
 import android.support.v7.widget.RecyclerView.LayoutManager
-import android.view.View
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Interpolator
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
-import android.widget.Toast
-import butterknife.BindView
-import butterknife.OnClick
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
-import com.google.gson.Gson
+import android.view.*
+import android.view.animation.*
+import android.widget.*
+import butterknife.*
+import com.google.android.gms.ads.*
+import com.google.gson.*
 import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.data.model.ExamSession
-import com.mutlak.metis.wordmem.data.model.Settings
-import com.mutlak.metis.wordmem.features.base.BaseActivity
-import com.mutlak.metis.wordmem.features.landing.LanActivity
-import com.mutlak.metis.wordmem.features.quiz.QuizActivity
-import com.mutlak.metis.wordmem.features.result.widget.CircleProgressView
-import com.mutlak.metis.wordmem.features.result.widget.ResultWrongWordAdapter
-import com.mutlak.metis.wordmem.features.review.ReviewActivity
-import timber.log.Timber
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import java.util.Locale
-import javax.inject.Inject
+import com.mutlak.metis.wordmem.data.model.*
+import com.mutlak.metis.wordmem.features.base.*
+import com.mutlak.metis.wordmem.features.landing.*
+import com.mutlak.metis.wordmem.features.quiz.*
+import com.mutlak.metis.wordmem.features.result.widget.*
+import com.mutlak.metis.wordmem.features.review.*
+import timber.log.*
+import uk.co.chrisjenx.calligraphy.*
+import java.util.*
+import javax.inject.*
 
 
 class ResultActivity : BaseActivity(), ResultView {
@@ -160,7 +148,7 @@ class ResultActivity : BaseActivity(), ResultView {
       recyclerView.layoutManager = mLayoutManager
       recyclerView.itemAnimator = DefaultItemAnimator()
       recyclerView.adapter = adapter
-      mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
+      mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
     } else {
       Toast.makeText(this, R.string.result_examine_no_wrong_message, Toast.LENGTH_SHORT).show()
     }

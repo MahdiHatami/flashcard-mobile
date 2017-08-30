@@ -84,4 +84,12 @@
   <string name="landing_bookmarked_title">FAVOLERİM</string>
   <string name="landing_all_learned_words_count_title">Öğrendiğim Kelimeler</string>
   <string name="landing_header_learnt_words">%d Word</string>
+  <string name="new_word">Kelime</string>
+  <string name="new_meaning">Anlam</string>
+  <string name="new_sentence">Cümle</string>
+  <string name="new_type">Tip (noun, verb, etc.)</string>
+  <string name="insert_word_title">Yeni Kelime Ekle</string>
+  <string name="word_is_required">Kelime Alani Gereklidir</string>
+  <string name="select_from_camera">Kamera Aç</string>
+  <string name="select_from_gallery">Galeriden Seç</string>
 </resources>

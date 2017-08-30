@@ -1,24 +1,16 @@
 package com.mutlak.metis.wordmem.features.quiz
 
-import com.mutlak.metis.wordmem.data.local.WordsRepositoryImpl
-import com.mutlak.metis.wordmem.data.model.Answer
-import com.mutlak.metis.wordmem.data.model.ExamSession
-import com.mutlak.metis.wordmem.data.model.Question
-import com.mutlak.metis.wordmem.data.model.Settings
-import com.mutlak.metis.wordmem.data.model.Word
-import com.mutlak.metis.wordmem.features.base.BasePresenter
-import com.mutlak.metis.wordmem.injection.ConfigPersistent
-import rx.Subscription
-import java.util.ArrayList
-import java.util.Collections
-import java.util.Random
-import javax.inject.Inject
+import com.mutlak.metis.wordmem.data.local.*
+import com.mutlak.metis.wordmem.data.model.*
+import com.mutlak.metis.wordmem.features.base.*
+import com.mutlak.metis.wordmem.injection.*
+import java.util.*
+import javax.inject.*
 
 
 @ConfigPersistent
 class QuizPresenter @Inject constructor(
     private val repo: WordsRepositoryImpl) : BasePresenter<QuizView>() {
-  private val subscription: Subscription? = null
   private var wordList: List<Word>? = null
 
   override fun attachView(view: QuizView) {
@@ -27,7 +19,6 @@ class QuizPresenter @Inject constructor(
 
   override fun detachView() {
     super.detachView()
-    subscription?.unsubscribe()
   }
 
   fun setupTest() {

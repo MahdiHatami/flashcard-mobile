@@ -1,13 +1,12 @@
 package com.mutlak.metis.wordmem.extension
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.os.Build
-import android.view.View
-import android.view.ViewAnimationUtils
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import timber.log.Timber
+import android.animation.*
+import android.os.*
+import android.text.*
+import android.view.*
+import android.webkit.*
+import android.widget.*
+import timber.log.*
 
 fun View.showIf(show: Boolean) {
   if (show) {
@@ -62,4 +61,18 @@ fun View.circularReveal(backgroundColor: Int) {
   } else {
     showAndSetBackgroundColorFunction.invoke()
   }
+}
+
+fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+  this.addTextChangedListener(object : TextWatcher {
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    }
+
+    override fun afterTextChanged(editable: Editable?) {
+      afterTextChanged.invoke(editable.toString())
+    }
+  })
 }
