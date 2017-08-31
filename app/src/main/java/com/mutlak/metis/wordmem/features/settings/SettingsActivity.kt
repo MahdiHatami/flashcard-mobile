@@ -1,37 +1,26 @@
 package com.mutlak.metis.wordmem.features.settings
 
-import android.app.AlarmManager
-import android.app.Dialog
-import android.app.PendingIntent
-import android.app.TimePickerDialog
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
+import android.app.*
+import android.content.*
+import android.os.*
 import android.support.v4.app.DialogFragment
-import android.support.v7.widget.AppCompatSpinner
-import android.support.v7.widget.SwitchCompat
+import android.support.v7.widget.*
 import android.support.v7.widget.Toolbar
-import android.text.format.DateFormat
-import android.util.Log
-import android.view.View
-import android.widget.AdapterView
+import android.text.format.*
+import android.util.*
+import android.view.*
+import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TimePicker
-import android.widget.Toast
-import butterknife.BindView
+import butterknife.*
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.R.id
 import com.mutlak.metis.wordmem.R.string
-import com.mutlak.metis.wordmem.data.model.Settings
-import com.mutlak.metis.wordmem.features.base.BaseActivity
-import com.mutlak.metis.wordmem.util.AlarmReciever
-import io.realm.Realm
+import com.mutlak.metis.wordmem.data.model.*
+import com.mutlak.metis.wordmem.features.base.*
+import com.mutlak.metis.wordmem.util.*
+import io.realm.*
 import java.sql.Time
-import java.util.Calendar
+import java.util.*
 
 class SettingsActivity : BaseActivity() {
 
@@ -161,7 +150,7 @@ class SettingsActivity : BaseActivity() {
   }
 
   private fun setupReminder(realm: Realm) {
-    mReminderGear.setOnClickListener { _ -> showTimePickerDialog() }
+    mReminderGear.setOnClickListener { showTimePickerDialog() }
 
     mReminderSwitch.isChecked = mSettings?.isReminderActive!!
 
