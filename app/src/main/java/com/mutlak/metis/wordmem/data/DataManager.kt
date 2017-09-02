@@ -27,7 +27,7 @@ constructor(private val mutlakService: MutlakService) {
     return mutlakService.getWords(fetchDate)
   }
 
-  fun sendWord(body:  MultipartBody.Part, word: Word): Single<ResponseBody> {
+  fun sendWord(body: MultipartBody.Part, word: Word): Single<ResponseBody> {
     return mutlakService.sendWord(body, word)
   }
 

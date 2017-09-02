@@ -6,7 +6,7 @@ package com.mutlak.metis.wordmem.features.base
  */
 interface Presenter<in V : BaseView> {
 
-    fun attachView(mvpView: V)
+  fun attachView(mvpView: V)
 
-    fun detachView()
+  fun detachView()
 }

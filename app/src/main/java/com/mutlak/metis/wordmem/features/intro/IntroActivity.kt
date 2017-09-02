@@ -11,7 +11,7 @@ import com.mutlak.metis.wordmem.features.landing.*
 
 class IntroActivity : AppIntro() {
 
-  lateinit var mPref : PreferencesHelper
+  lateinit var mPref: PreferencesHelper
 
   companion object {
     const val SHOW_APP_INTRO = "show_app_intro"

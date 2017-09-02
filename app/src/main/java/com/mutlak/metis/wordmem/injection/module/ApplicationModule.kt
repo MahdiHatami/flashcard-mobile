@@ -14,20 +14,20 @@ import com.mutlak.metis.wordmem.injection.ApplicationContext
 @Module
 class ApplicationModule(private val mApplication: Application) {
 
-    @Provides
-    internal fun provideApplication(): Application {
-        return mApplication
-    }
+  @Provides
+  internal fun provideApplication(): Application {
+    return mApplication
+  }
 
-    @Provides
-    @ApplicationContext
-    internal fun provideContext(): Context {
-        return mApplication
-    }
+  @Provides
+  @ApplicationContext
+  internal fun provideContext(): Context {
+    return mApplication
+  }
 
-    @Provides
-    @Singleton
-    internal fun provideMvpStarterService(): MutlakService {
-        return MvpStarterServiceFactory.makeStarterService()
-    }
+  @Provides
+  @Singleton
+  internal fun provideMvpStarterService(): MutlakService {
+    return MvpStarterServiceFactory.makeStarterService()
+  }
 }

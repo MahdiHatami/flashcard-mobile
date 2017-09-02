@@ -7,4 +7,5 @@ import javax.inject.Scope
  * conform to the life of the Activity to be memorised in the
  * correct component.
  */
-@Scope @Retention annotation class PerActivity
+@Scope
+@Retention annotation class PerActivity

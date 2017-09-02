@@ -7,4 +7,5 @@ import io.reactivex.schedulers.Schedulers
  * Created by lam on 2/6/17.
  */
 
-class TrampolineMainScheduler<T> protected constructor() : BaseScheduler<T>(Schedulers.trampoline(), AndroidSchedulers.mainThread())
+class TrampolineMainScheduler<T> protected constructor() : BaseScheduler<T>(Schedulers.trampoline(),
+    AndroidSchedulers.mainThread())

@@ -6,7 +6,7 @@ package com.mutlak.metis.wordmem.util.rx.scheduler
 
 object SchedulerUtils {
 
-    fun <T> ioToMain(): IoMainScheduler<T> {
-        return IoMainScheduler()
-    }
+  fun <T> ioToMain(): IoMainScheduler<T> {
+    return IoMainScheduler()
+  }
 }

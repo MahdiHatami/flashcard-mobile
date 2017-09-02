@@ -6,10 +6,10 @@ import com.mutlak.metis.wordmem.features.base.BaseView
 
 interface DetailMvpView : BaseView {
 
-    fun showPokemon(pokemon: Pokemon)
+  fun showPokemon(pokemon: Pokemon)
 
-    fun showStat(statistic: Statistic)
+  fun showStat(statistic: Statistic)
 
-    fun showError(error: Throwable)
+  fun showError(error: Throwable)
 
 }

@@ -9,7 +9,7 @@ import android.content.Context
  * that then usually will be implemented by an Activity or Fragment.
  */
 interface BaseView {
-    fun showProgress()
-    fun hideProgress()
-    fun getContext() : Context
+  fun showProgress()
+  fun hideProgress()
+  fun getContext(): Context
 }

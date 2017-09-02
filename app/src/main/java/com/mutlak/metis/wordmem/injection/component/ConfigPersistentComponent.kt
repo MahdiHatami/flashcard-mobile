@@ -18,8 +18,8 @@ import dagger.Component
 @Component(dependencies = arrayOf(ApplicationComponent::class))
 interface ConfigPersistentComponent {
 
-    fun activityComponent(activityModule: ActivityModule): ActivityComponent
+  fun activityComponent(activityModule: ActivityModule): ActivityComponent
 
-    fun fragmentComponent(fragmentModule: FragmentModule): FragmentComponent
+  fun fragmentComponent(fragmentModule: FragmentModule): FragmentComponent
 
 }

@@ -7,4 +7,5 @@ import io.reactivex.schedulers.Schedulers
  * Created by lam on 2/6/17.
  */
 
-class NewThreadMainScheduler<T> protected constructor() : BaseScheduler<T>(Schedulers.newThread(), AndroidSchedulers.mainThread())
+class NewThreadMainScheduler<T> protected constructor() : BaseScheduler<T>(Schedulers.newThread(),
+    AndroidSchedulers.mainThread())

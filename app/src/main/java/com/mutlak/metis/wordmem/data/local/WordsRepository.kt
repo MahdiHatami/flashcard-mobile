@@ -5,21 +5,21 @@ import com.mutlak.metis.wordmem.data.model.Word
 
 
 interface WordsRepository {
-    fun getReviewWords(reviewType: Int, limit: Int): List<Word>
+  fun getReviewWords(reviewType: Int, limit: Int): List<Word>
 
-    fun saveWords(wordList: List<Word>)
+  fun saveWords(wordList: List<Word>)
 
-    fun updateWord(word: Word)
+  fun updateWord(word: Word)
 
-    val settings: Settings
+  val settings: Settings
 
-    fun updateSettings(settings: Settings)
+  fun updateSettings(settings: Settings)
 
-    val allWords: List<Word>
+  val allWords: List<Word>
 
-    val newWordsCount: Int
+  val newWordsCount: Int
 
-    val bookMarkWordsCount: Int
+  val bookMarkWordsCount: Int
 
-    val learntWordsCount: Int
+  val learntWordsCount: Int
 }

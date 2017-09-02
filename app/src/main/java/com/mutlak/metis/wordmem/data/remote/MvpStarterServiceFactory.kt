@@ -18,38 +18,38 @@ import timber.log.Timber
  */
 object MvpStarterServiceFactory {
 
-    fun makeStarterService(): MutlakService {
-        return makeMvpStarterService(makeGson())
+  fun makeStarterService(): MutlakService {
+    return makeMvpStarterService(makeGson())
+  }
+
+  private fun makeMvpStarterService(gson: Gson): MutlakService {
+    val retrofit = Retrofit.Builder()
+        .baseUrl(BuildConfig.POKEAPI_API_URL)
+        .client(makeOkHttpClient())
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .build()
+    return retrofit.create(MutlakService::class.java)
+  }
+
+  private fun makeOkHttpClient(): OkHttpClient {
+
+    val httpClientBuilder = OkHttpClient.Builder()
+
+    if (BuildConfig.DEBUG) {
+      val loggingInterceptor = HttpLoggingInterceptor { message -> Timber.d(message) }
+      loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+      httpClientBuilder.addInterceptor(loggingInterceptor)
+      httpClientBuilder.addNetworkInterceptor(StethoInterceptor())
     }
 
-    private fun makeMvpStarterService(gson: Gson): MutlakService {
-        val retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.POKEAPI_API_URL)
-                .client(makeOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
-        return retrofit.create(MutlakService::class.java)
-    }
+    return httpClientBuilder.build()
+  }
 
-    private fun makeOkHttpClient(): OkHttpClient {
-
-        val httpClientBuilder = OkHttpClient.Builder()
-
-        if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor { message -> Timber.d(message) }
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-            httpClientBuilder.addInterceptor(loggingInterceptor)
-            httpClientBuilder.addNetworkInterceptor(StethoInterceptor())
-        }
-
-        return httpClientBuilder.build()
-    }
-
-    private fun makeGson(): Gson {
-        return GsonBuilder()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .create()
-    }
+  private fun makeGson(): Gson {
+    return GsonBuilder()
+        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        .create()
+  }
 }

@@ -6,23 +6,23 @@ import com.mutlak.metis.wordmem.features.base.BaseView
 
 interface ReviewView : BaseView {
 
-    fun initWordsPager(list: List<Word>)
+  fun initWordsPager(list: List<Word>)
 
-    fun changeIconTextColor()
+  fun changeIconTextColor()
 
-    fun changeCounterTitle(s: String)
+  fun changeCounterTitle(s: String)
 
-    fun changeCurrentWord(word: Word)
+  fun changeCurrentWord(word: Word)
 
-    fun changeSwitchesState()
+  fun changeSwitchesState()
 
-    fun hideLoading()
+  fun hideLoading()
 
-    fun showAlert(title: Int, content: Int)
+  fun showAlert(title: Int, content: Int)
 
-    fun showLastPageView()
+  fun showLastPageView()
 
-    fun hideToolbar()
+  fun hideToolbar()
 
-    fun showToolbar()
+  fun showToolbar()
 }

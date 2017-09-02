@@ -7,7 +7,8 @@ import com.mutlak.metis.wordmem.injection.ConfigPersistent
 import javax.inject.Inject
 
 
-@ConfigPersistent class ResultPresenter @Inject constructor(
+@ConfigPersistent
+class ResultPresenter @Inject constructor(
     internal var repository: WordsRepositoryImpl) : BasePresenter<ResultView>() {
 
 
