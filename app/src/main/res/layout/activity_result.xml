@@ -3,237 +3,285 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:weightSum="1"
+      >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:layout_height="0dp"
+        android:layout_weight=".5"
+        android:background="@drawable/result_header_bg"
+        >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+
+      <android.support.constraint.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_gravity="center"
+          android:orientation="vertical"
+          >
+
+        <com.mutlak.metis.wordmem.features.result.widget.CircleProgressView
+            android:id="@+id/circle_progress_view"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight=".5"
-            android:background="@drawable/result_header_bg">
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"
+            app:cpv_background_circle_color="#f19696"
+            app:cpv_background_circle_width="1dp"
+            app:cpv_circle_color="@color/white"
+            app:cpv_circle_width="4dp"
+            app:cpv_text_color="@color/white"
+            app:cpv_text_prefix="%"
+            app:cpv_text_size="40"
+            app:layout_constraintBottom_toTopOf="@+id/cardView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
+        <!-- result wrong-correct-->
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            >
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <com.mutlak.metis.wordmem.features.result.widget.CircleProgressView
-                    android:id="@+id/circle_progress_view"
-                    android:layout_width="170dp"
-                    android:layout_height="170dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_weight="1"
-                    app:cpv_background_circle_color="#f19696"
-                    app:cpv_background_circle_width="1dp"
-                    app:cpv_circle_color="@color/white"
-                    app:cpv_circle_width="4dp"
-                    app:cpv_text_color="@color/white"
-                    app:cpv_text_prefix="%"
-                    app:cpv_text_size="40"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="0.502"
-                    android:layout_marginBottom="24dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:divider="@drawable/vertical_divider"
-                        android:orientation="horizontal"
-                        android:padding="15dp"
-                        android:showDividers="middle">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/right_answer"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textColor="@color/primary"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                tools:text="4"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/correct"
-                                android:textColor="@color/primary"/>
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:background="#d4d4d4"/>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/wrong_answer"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textColor="@color/red"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                tools:text="3"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/wrong"
-                                android:textColor="@color/red"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-            </android.support.constraint.ConstraintLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".5"
-            android:orientation="vertical">
+          <android.support.constraint.ConstraintLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:divider="@drawable/vertical_divider"
+              android:orientation="horizontal"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+              android:showDividers="middle"
+              >
 
             <LinearLayout
-                android:id="@+id/result_examine_linear"
-                style="@style/result_linear_layout_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/answers_diver"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/answers_diver"
+                app:layout_constraintTop_toTopOf="parent"
                 >
 
-                <ImageView
-                    style="@style/result_image_view"
-                    app:srcCompat="@drawable/ic_magnify"/>
+              <TextView
+                  android:id="@+id/right_answer"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:textColor="@color/primary"
+                  android:textSize="20sp"
+                  android:textStyle="bold"
+                  tools:text="4"
+                  />
 
-                <LinearLayout style="@style/result_texts_row">
-
-                    <TextView
-                        style="@style/result_text_title"
-                        android:text="@string/result_examine_your_wrong_answers"/>
-
-                    <TextView
-                        android:id="@+id/result_examine_subtitle_textview"
-                        style="@style/result_text_subtitle"
-                        tools:text="5 wrong"
-                        />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <include layout="@layout/result_horizontal_divider"/>
-
-            <LinearLayout
-                android:id="@+id/result_explore_linear"
-                style="@style/result_linear_layout_row">
-
-                <ImageView
-                    style="@style/result_image_view"
-                    app:srcCompat="@drawable/ic_random"/>
-
-                <LinearLayout style="@style/result_texts_row">
-
-                    <TextView
-                        style="@style/result_text_title"
-                        android:text="@string/result_explore_new_words"/>
-
-                    <TextView
-                        android:id="@+id/result_explore_subtitle_textview"
-                        style="@style/result_text_subtitle"
-                        tools:text="15 words"
-                        />
-
-                </LinearLayout>
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:text="@string/correct"
+                  android:textColor="@color/primary"
+                  />
 
             </LinearLayout>
 
-            <include layout="@layout/result_horizontal_divider"/>
+            <View
+                android:id="@+id/answers_diver"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="#d4d4d4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="50.0"
+                />
 
             <LinearLayout
-                android:id="@+id/result_quiz_linear"
-                style="@style/result_linear_layout_row">
-
-                <ImageView
-                    style="@style/result_image_view"
-                    app:srcCompat="@drawable/ic_question_red"/>
-
-                <LinearLayout style="@style/result_texts_row">
-
-                    <TextView
-                        style="@style/result_text_title"
-                        android:text="@string/resutl_quiz_again_title"/>
-
-                    <TextView
-                        android:id="@+id/result_quiz_subtitle_textview"
-                        style="@style/result_text_subtitle"
-                        tools:text="5 words"/>
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-            <include layout="@layout/result_horizontal_divider"/>
-
-            <LinearLayout
-                android:id="@+id/result_home_linear"
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:gravity="center"
-                style="@style/result_linear_layout_row">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/answers_diver"
+                app:layout_constraintTop_toTopOf="parent"
+                >
 
-                <ImageView
-                    app:srcCompat="@drawable/ic_home"
-                    style="@style/result_image_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+              <TextView
+                  android:id="@+id/wrong_answer"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:textColor="@color/red"
+                  android:textSize="20sp"
+                  android:textStyle="bold"
+                  tools:text="3"
+                  />
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:text="@string/wrong"
+                  android:textColor="@color/red"
+                  />
 
             </LinearLayout>
 
+          </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
 
-
-
-        </LinearLayout>
+      </android.support.constraint.ConstraintLayout>
 
     </LinearLayout>
 
-    <include layout="@layout/result_bottom_sheet"/>
+    <LinearLayout
+        android:id="@+id/content_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".5"
+        android:orientation="vertical"
+        >
+
+      <LinearLayout
+          android:id="@+id/result_examine_linear"
+          style="@style/result_linear_layout_row"
+          >
+
+        <ImageView
+            app:srcCompat="@drawable/ic_magnify"
+            style="@style/result_image_view"
+            />
+
+        <LinearLayout style="@style/result_texts_row">
+
+          <TextView
+              android:text="@string/result_examine_your_wrong_answers"
+              style="@style/result_text_title"
+              />
+
+          <TextView
+              android:id="@+id/result_examine_subtitle_textview"
+              tools:text="5 wrong"
+              style="@style/result_text_subtitle"
+              />
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <include layout="@layout/result_horizontal_divider"/>
+
+      <LinearLayout
+          android:id="@+id/result_explore_linear"
+          style="@style/result_linear_layout_row"
+          >
+
+        <ImageView
+            app:srcCompat="@drawable/ic_random"
+            style="@style/result_image_view"
+            />
+
+        <LinearLayout style="@style/result_texts_row">
+
+          <TextView
+              android:text="@string/result_explore_new_words"
+              style="@style/result_text_title"
+              />
+
+          <TextView
+              android:id="@+id/result_explore_subtitle_textview"
+              tools:text="15 words"
+              style="@style/result_text_subtitle"
+              />
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <include layout="@layout/result_horizontal_divider"/>
+
+      <LinearLayout
+          android:id="@+id/result_quiz_linear"
+          style="@style/result_linear_layout_row"
+          >
+
+        <ImageView
+            app:srcCompat="@drawable/ic_question_red"
+            style="@style/result_image_view"
+            />
+
+        <LinearLayout style="@style/result_texts_row">
+
+          <TextView
+              android:text="@string/resutl_quiz_again_title"
+              style="@style/result_text_title"
+              />
+
+          <TextView
+              android:id="@+id/result_quiz_subtitle_textview"
+              tools:text="5 words"
+              style="@style/result_text_subtitle"
+              />
+
+        </LinearLayout>
+
+
+      </LinearLayout>
+
+      <include layout="@layout/result_horizontal_divider"/>
+
+      <LinearLayout
+          android:id="@+id/result_home_linear"
+          android:gravity="center"
+          style="@style/result_linear_layout_row"
+          >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_home"
+            style="@style/result_image_view"
+            />
+
+      </LinearLayout>
+
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <include layout="@layout/result_bottom_sheet"/>
 
 </android.support.design.widget.CoordinatorLayout>

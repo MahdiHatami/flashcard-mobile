@@ -109,6 +109,7 @@ class SettingsActivity : BaseActivity() {
       id.radio_word -> wordRadio.isChecked = true
       id.radio_sentence -> sentenceRadio.isChecked = true
     }
+
     quizTypeRadio.setOnCheckedChangeListener { group, checkedId ->
       when (checkedId) {
         id.radio_word -> {
@@ -155,15 +156,17 @@ class SettingsActivity : BaseActivity() {
     mReminderSwitch.isChecked = mSettings?.isReminderActive!!
 
     mReminderSwitch.setOnCheckedChangeListener { _, isChecked ->
-      realm.executeTransaction { realm1 ->
+      realm.executeTransaction {
         mSettings?.isReminderActive = isChecked
-        realm1.insertOrUpdate(mSettings)
+        it.insertOrUpdate(mSettings)
       }
       if (!isChecked) {
         cancelAlarm()
       } else {
-        //        if (mSettings.reminderDate != null)
-        //          setupAlarm(mSettings.getReminderDate!!)
+        if (mSettings?.reminderDate != null) {
+          val time = mSettings?.reminderDate!!
+          setupAlarm(Time(time))
+        }
       }
     }
   }
@@ -200,26 +203,29 @@ class SettingsActivity : BaseActivity() {
     }
   }
 
-  fun showTimePickerDialog() {
+  private fun showTimePickerDialog() {
     val newFragment = TimePickerFragment()
     newFragment.show(supportFragmentManager, "timePicker")
   }
 
   class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
-    internal var realm = Realm.getDefaultInstance()
-    internal var mSettings: Settings = realm.where(Settings::class.java).findFirst()
+    val realm: Realm = Realm.getDefaultInstance()
+    private var result: Settings = realm.where(Settings::class.java).findFirst()
+    val settings: Settings = realm.copyFromRealm(result)
+
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
       val hour: Int
       val minute: Int
       val c = Calendar.getInstance()
-      if (mSettings.reminderDate == null) {
+      if (settings.reminderDate == 0L) {
         hour = c.get(Calendar.HOUR_OF_DAY)
         minute = c.get(Calendar.MINUTE)
       } else {
-        hour = mSettings.reminderDate.toInt()
-        minute = mSettings.reminderDate.toInt()
+        val time = Time(settings.reminderDate)
+        hour = time.hours
+        minute = time.minutes
       }
       return TimePickerDialog(activity, this, hour, minute,
           DateFormat.is24HourFormat(activity))
@@ -237,8 +243,8 @@ class SettingsActivity : BaseActivity() {
 
       val time = Time(cal.timeInMillis)
 
-      Log.i(TAG, "onTimeSet: " + time.toString())
-      realm.executeTransaction { _ -> mSettings.reminderDate = time.time }
+      settings.reminderDate = time.time
+      realm.executeTransaction { it.insertOrUpdate(settings) }
 
       val pendingIntent: PendingIntent
       val manager: AlarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -247,11 +253,11 @@ class SettingsActivity : BaseActivity() {
 
       manager.setRepeating(AlarmManager.RTC_WAKEUP, time.time, AlarmManager.INTERVAL_DAY,
           pendingIntent)
-      Toast.makeText(activity, "Alarm Set", Toast.LENGTH_SHORT).show()
+
     }
   }
 
-  private fun setupAlarm(time: Time) {
+  fun setupAlarm(time: Time) {
     Log.i(TAG, "setupAlarm: " + time.toString())
     val pendingIntent: PendingIntent
     val manager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager

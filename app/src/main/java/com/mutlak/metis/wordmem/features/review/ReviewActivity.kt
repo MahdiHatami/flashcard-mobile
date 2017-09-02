@@ -11,12 +11,11 @@ import com.mutlak.metis.wordmem.util.*
 
 class ReviewActivity : BaseActivity() {
 
-  private val mNotificationUtils: NotificationUtils = NotificationUtils(this)
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     activityComponent().inject(this)
 
+    val mNotificationUtils = NotificationUtils(this)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       mNotificationUtils.manager.cancel(AlarmReciever.REVIEW_NOTIFICAION_ID)
     } else {

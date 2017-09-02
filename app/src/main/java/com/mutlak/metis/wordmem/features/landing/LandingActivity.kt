@@ -16,6 +16,7 @@ import android.view.animation.*
 import android.widget.*
 import butterknife.*
 import com.afollestad.materialdialogs.*
+import com.jakewharton.rxbinding2.view.*
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.extension.*
 import com.mutlak.metis.wordmem.features.base.*
@@ -26,6 +27,8 @@ import com.mutlak.metis.wordmem.features.review.*
 import com.mutlak.metis.wordmem.features.settings.*
 import com.mutlak.metis.wordmem.util.*
 import com.victor.loading.book.*
+import io.reactivex.android.schedulers.*
+import java.util.concurrent.TimeUnit.MILLISECONDS
 import javax.inject.*
 
 
@@ -101,29 +104,50 @@ class LandingActivity : BaseActivity(), LandingMvpView {
 
 
   private fun setupView() {
-    mTakeQuizView.setOnClickListener {
-      startActivity(Intent(this, QuizActivity::class.java))
-    }
-    mSettings.setOnClickListener {
+    RxView.clicks(mPlusView).debounce(500, MILLISECONDS, AndroidSchedulers.mainThread())
+        .subscribe {
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startRippleTransitionReveal()
+          } else {
+            startActivity()
+          }
+        }
 
-      startActivity(Intent(this, SettingsActivity::class.java))
-    }
+    RxView.clicks(mTakeQuizView)
+        .debounce(500, MILLISECONDS, AndroidSchedulers.mainThread())
+        .subscribe {
+          startActivity(Intent(this, QuizActivity::class.java))
+        }
+
+
+    RxView.clicks(mSettings)
+        .debounce(500, MILLISECONDS, AndroidSchedulers.mainThread())
+        .subscribe {
+          startActivity(Intent(this, SettingsActivity::class.java))
+        }
+
     val intent = Intent(this, ReviewActivity::class.java)
 
-    mReviewView.setOnClickListener { _ ->
-      intent.putExtra(REVIEW_TYPE, REVIEW_TYPE_NEW)
-      startActivity(intent)
-    }
+    RxView.clicks(mReviewView)
+        .debounce(500, MILLISECONDS, AndroidSchedulers.mainThread())
+        .subscribe {
+          intent.putExtra(REVIEW_TYPE, REVIEW_TYPE_NEW)
+          startActivity(intent)
+        }
 
-    mLearntView.setOnClickListener {
-      intent.putExtra(REVIEW_TYPE, REVIEW_TYPE_LEARNT)
-      startActivity(intent)
-    }
+    RxView.clicks(mLearntView)
+        .debounce(500, MILLISECONDS, AndroidSchedulers.mainThread())
+        .subscribe {
+          intent.putExtra(REVIEW_TYPE, REVIEW_TYPE_LEARNT)
+          startActivity(intent)
+        }
 
-    mBookmarkedView.setOnClickListener {
-      intent.putExtra(REVIEW_TYPE, REVIEW_TYPE_BOOKMARK)
-      startActivity(intent)
-    }
+    RxView.clicks(mBookmarkedView)
+        .debounce(500, MILLISECONDS, AndroidSchedulers.mainThread())
+        .subscribe {
+          intent.putExtra(REVIEW_TYPE, REVIEW_TYPE_BOOKMARK)
+          startActivity(intent)
+        }
   }
 
   private fun showAlert(title: Int, content: Int) {
@@ -274,14 +298,5 @@ class LandingActivity : BaseActivity(), LandingMvpView {
     ActivityCompat.startActivity(this, intent,
         ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle())
     launchedActivity = true
-  }
-
-  @OnClick(R.id.linear_plus)
-  fun plusOnClick() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      startRippleTransitionReveal()
-    } else {
-      startActivity()
-    }
   }
 }

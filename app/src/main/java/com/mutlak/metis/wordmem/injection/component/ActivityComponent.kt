@@ -27,7 +27,7 @@ interface ActivityComponent {
 
   fun inject(resultActivity: ResultActivity)
 
-  fun inject(lanActivity: LandingActivity)
+  fun inject(landingActivity: LandingActivity)
 
   fun inject(newWordActivity: NewWordActivity)
 }
