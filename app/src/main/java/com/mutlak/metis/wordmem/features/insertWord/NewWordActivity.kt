@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.*
 import butterknife.*
+import com.bumptech.glide.*
 import com.mlsdev.rximagepicker.*
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.R.string
@@ -18,6 +19,7 @@ import com.mutlak.metis.wordmem.features.base.*
 import io.realm.*
 import pl.bclogic.pulsator4droid.library.*
 import timber.log.*
+import java.io.*
 import javax.inject.*
 
 
@@ -168,12 +170,15 @@ class NewWordActivity : BaseActivity(), NewWordView {
 
   private fun pickImage(source: Sources) {
     mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-    RxImagePicker.with(this).requestImage(source).flatMap {
-      RxImageConverters.uriToBitmap(applicationContext, it)
+    RxImagePicker.with(this).requestImage(source).flatMap { uri ->
+      RxImageConverters.uriToFile(this, uri, File.createTempFile("image", ".jpg"))
     }.subscribe({
       mFrameUpload.hide()
       mImageSelected.show()
-      mImageSelected.setImageBitmap(it)
+      Glide.with(this).load(it).asBitmap().into(mImageSelected)
+//      val compressedImageFile = Compressor(this).compressToFile(it)
+//      val bitmap = BitmapFactory.decodeFile(compressedImageFile.absolutePath)
+//      mImageSelected.setImageBitmap(bitmap)
     })
   }
 
