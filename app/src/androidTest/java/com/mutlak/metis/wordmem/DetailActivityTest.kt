@@ -34,7 +34,7 @@ class DetailActivityTest {
 
     @Test
     fun checkPokemonDisplays() {
-        val pokemon = TestDataFactory.makePokemon("id")
+        val pokemon = TestDataFactory.makeWord("id")
         stubDataManagerGetPokemon(Single.just(pokemon))
         main.launchActivity(
                 DetailActivity.getStartIntent(InstrumentationRegistry.getContext(), pokemon.name))
@@ -48,7 +48,7 @@ class DetailActivityTest {
     @Test
     fun checkErrorViewDisplays() {
         stubDataManagerGetPokemon(Single.error<Pokemon>(RuntimeException()))
-        val pokemon = TestDataFactory.makePokemon("id")
+        val pokemon = TestDataFactory.makeWord("id")
         main.launchActivity(
                 DetailActivity.getStartIntent(InstrumentationRegistry.getContext(), pokemon.name))
         ErrorTestUtil.checkErrorViewsDisplay()

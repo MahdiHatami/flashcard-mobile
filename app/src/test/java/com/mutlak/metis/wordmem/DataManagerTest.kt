@@ -1,53 +1,49 @@
 package com.mutlak.metis.wordmem
 
-import com.mutlak.metis.wordmem.common.TestDataFactory
-import com.mutlak.metis.wordmem.data.DataManager
-import com.mutlak.metis.wordmem.data.model.PokemonListResponse
-import com.mutlak.metis.wordmem.data.remote.MutlakService
-import com.mutlak.metis.wordmem.util.RxSchedulersOverrideRule
-import io.reactivex.Single
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyInt
+import com.mutlak.metis.wordmem.common.*
+import com.mutlak.metis.wordmem.data.*
+import com.mutlak.metis.wordmem.data.remote.*
+import com.mutlak.metis.wordmem.util.*
+import io.reactivex.*
+import org.junit.*
+import org.junit.runner.*
+import org.mockito.*
 import org.mockito.ArgumentMatchers.anyString
-import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.junit.*
 
 @RunWith(MockitoJUnitRunner::class)
 class DataManagerTest {
 
     @Rule @JvmField val mOverrideSchedulersRule = RxSchedulersOverrideRule()
-    @Mock lateinit var mMockMvpStarterService: MutlakService
+    @Mock lateinit var mMockMutlakService: MutlakService
 
     private var mDataManager: DataManager? = null
 
     @Before
     fun setUp() {
-        mDataManager = DataManager(mMockMvpStarterService)
+        mDataManager = DataManager(mMockMutlakService)
     }
 
     @Test
-    fun getPokemonListCompletesAndEmitsPokemonList() {
-        val namedResourceList = TestDataFactory.makeNamedResourceList(5)
-        val pokemonListResponse = PokemonListResponse(namedResourceList)
+    fun getWordsListCompletesAndEmitsPokemonList() {
+        val wordList = TestDataFactory.makeWordList(5)
+        val wordListResponse = wordList
 
-        `when`(mMockMvpStarterService.getPokemonList(anyInt()))
-                .thenReturn(Single.just(pokemonListResponse))
+        `when`(mMockMutlakService.getWords(anyString()))
+                .thenReturn(Single.just(wordListResponse))
 
-        mDataManager?.getPokemonList(10)
+        mDataManager?.getWords(anyString())
                 ?.test()
                 ?.assertComplete()
-                ?.assertValue(TestDataFactory.makePokemonNameList(namedResourceList))
+                ?.assertValue(TestDataFactory.makeWordList(5))
     }
 
     @Test
     fun getPokemonCompletesAndEmitsPokemon() {
         val name = "charmander"
-        val pokemon = TestDataFactory.makePokemon(name)
-        `when`(mMockMvpStarterService.getPokemon(anyString()))
+        val pokemon = TestDataFactory.makeWord(name)
+        `when`(mMockMutlakService.getPokemon(anyString()))
                 .thenReturn(Single.just(pokemon))
 
         mDataManager?.getPokemon(name)
