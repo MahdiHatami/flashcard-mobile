@@ -1,10 +1,13 @@
 package com.mutlak.metis.wordmem.data
 
-import com.mutlak.metis.wordmem.data.model.*
-import com.mutlak.metis.wordmem.data.remote.*
-import io.reactivex.*
-import okhttp3.*
-import javax.inject.*
+import com.mutlak.metis.wordmem.data.model.Pokemon
+import com.mutlak.metis.wordmem.data.model.Word
+import com.mutlak.metis.wordmem.data.remote.MutlakService
+import io.reactivex.Single
+import okhttp3.MultipartBody
+import okhttp3.ResponseBody
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
 @Singleton
@@ -29,6 +32,10 @@ constructor(private val mutlakService: MutlakService) {
 
   fun sendWord(body: MultipartBody.Part, word: Word): Single<ResponseBody> {
     return mutlakService.sendWord(body, word)
+  }
+
+  fun saveWord(word: Word) {
+
   }
 
 
