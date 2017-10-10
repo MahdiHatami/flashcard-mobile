@@ -6,7 +6,7 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.OnClick
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.NativeExpressAdView
+import com.google.android.gms.ads.AdView
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.data.model.Settings
 import com.mutlak.metis.wordmem.features.base.BaseFragment
@@ -23,7 +23,8 @@ class TakeQuizFragment : BaseFragment() {
 
   @BindView(R.id.result_explore_subtitle_textview) lateinit var mExploreText: TextView
   @BindView(R.id.result_quiz_subtitle_textview) lateinit var mQuizText: TextView
-  @BindView(R.id.native_ad) lateinit var mAdView: NativeExpressAdView
+  @BindView(R.id.adView) lateinit var mAdView: AdView
+
 
   override val layout: Int
     get() = R.layout.fragment_take_quiz
@@ -48,8 +49,8 @@ class TakeQuizFragment : BaseFragment() {
     mQuizText.text = String.format(Locale.US, "%d %s", settings!!.quizLimit,
         getString(R.string.words))
 
-    val request = AdRequest.Builder().build()
-    mAdView.loadAd(request)
+    val adRequest = AdRequest.Builder().build()
+    mAdView.loadAd(adRequest)
   }
 
   @OnClick(R.id.result_home_linear)

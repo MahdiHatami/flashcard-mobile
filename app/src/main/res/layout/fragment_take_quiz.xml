@@ -8,82 +8,91 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <com.google.android.gms.ads.NativeExpressAdView
-        android:id="@+id/native_ad"
+  <com.google.android.gms.ads.AdView
+      android:id="@+id/adView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      ads:adSize="MEDIUM_RECTANGLE"
+      ads:adUnitId="ca-app-pub-3882496792252518/8936656836"
+      >
+  </com.google.android.gms.ads.AdView>
+
+
+  <LinearLayout
+      android:id="@+id/result_explore_linear"
+      style="@style/result_linear_layout_row"
+      >
+
+    <ImageView
+        app:srcCompat="@drawable/ic_random"
+        style="@style/result_image_view"
+        />
+
+    <LinearLayout style="@style/result_texts_row">
+
+      <TextView
+          android:text="@string/result_explore_new_words"
+          style="@style/result_text_title"
+          />
+
+      <TextView
+          android:id="@+id/result_explore_subtitle_textview"
+          tools:text="15 words"
+          style="@style/result_text_subtitle"
+          />
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <include layout="@layout/result_horizontal_divider"/>
+
+  <LinearLayout
+      android:id="@+id/result_quiz_linear"
+      style="@style/result_linear_layout_row"
+      >
+
+    <ImageView
+        app:srcCompat="@drawable/ic_question_red"
+        style="@style/result_image_view"
+        />
+
+    <LinearLayout style="@style/result_texts_row">
+
+      <TextView
+          android:text="@string/review_result_quiz_title"
+          style="@style/result_text_title"
+          />
+
+      <TextView
+          android:id="@+id/result_quiz_subtitle_textview"
+          tools:text="5 words"
+          style="@style/result_text_subtitle"
+          />
+
+    </LinearLayout>
+
+
+  </LinearLayout>
+
+  <include layout="@layout/result_horizontal_divider"/>
+
+  <LinearLayout
+      android:id="@+id/result_home_linear"
+      android:gravity="center"
+      style="@style/result_linear_layout_row"
+      >
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-40dp"
-        android:layout_gravity="center_horizontal"
-        ads:adSize="FULL_WIDTHx300"
-        ads:adUnitId="ca-app-pub-3882496792252518/9939515587"/>
+        app:srcCompat="@drawable/ic_home"
+        style="@style/result_image_view"
+        />
 
-
-    <LinearLayout
-        android:id="@+id/result_explore_linear"
-        style="@style/result_linear_layout_row">
-
-        <ImageView
-            style="@style/result_image_view"
-            app:srcCompat="@drawable/ic_random"/>
-
-        <LinearLayout style="@style/result_texts_row">
-
-            <TextView
-                style="@style/result_text_title"
-                android:text="@string/result_explore_new_words"/>
-
-            <TextView
-                android:id="@+id/result_explore_subtitle_textview"
-                style="@style/result_text_subtitle"
-                tools:text="15 words"
-                />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <include layout="@layout/result_horizontal_divider"/>
-
-    <LinearLayout
-        android:id="@+id/result_quiz_linear"
-        style="@style/result_linear_layout_row">
-
-        <ImageView
-            style="@style/result_image_view"
-            app:srcCompat="@drawable/ic_question_red"/>
-
-        <LinearLayout style="@style/result_texts_row">
-
-            <TextView
-                style="@style/result_text_title"
-                android:text="@string/review_result_quiz_title"/>
-
-            <TextView
-                android:id="@+id/result_quiz_subtitle_textview"
-                style="@style/result_text_subtitle"
-                tools:text="5 words"/>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <include layout="@layout/result_horizontal_divider"/>
-
-    <LinearLayout
-        android:id="@+id/result_home_linear"
-        style="@style/result_linear_layout_row"
-        android:gravity="center">
-
-        <ImageView
-            style="@style/result_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_home"
-            />
-
-    </LinearLayout>
+  </LinearLayout>
 
 </LinearLayout>
