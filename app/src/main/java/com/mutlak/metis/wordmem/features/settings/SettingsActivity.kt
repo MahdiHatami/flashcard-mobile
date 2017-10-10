@@ -1,26 +1,36 @@
 package com.mutlak.metis.wordmem.features.settings
 
-import android.app.*
-import android.content.*
-import android.os.*
+import android.app.AlarmManager
+import android.app.Dialog
+import android.app.PendingIntent
+import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.support.v4.app.DialogFragment
-import android.support.v7.widget.*
+import android.support.v7.widget.AppCompatSpinner
+import android.support.v7.widget.SwitchCompat
 import android.support.v7.widget.Toolbar
-import android.text.format.*
-import android.util.*
-import android.view.*
-import android.widget.*
+import android.text.format.DateFormat
+import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import butterknife.*
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.TimePicker
+import butterknife.BindView
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.R.id
 import com.mutlak.metis.wordmem.R.string
-import com.mutlak.metis.wordmem.data.model.*
-import com.mutlak.metis.wordmem.features.base.*
-import com.mutlak.metis.wordmem.util.*
-import io.realm.*
+import com.mutlak.metis.wordmem.data.model.Settings
+import com.mutlak.metis.wordmem.features.base.BaseActivity
+import com.mutlak.metis.wordmem.util.AlarmReciever
+import io.realm.Realm
 import java.sql.Time
-import java.util.*
+import java.util.Calendar
 
 class SettingsActivity : BaseActivity() {
 
@@ -211,7 +221,7 @@ class SettingsActivity : BaseActivity() {
   class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
     val realm: Realm = Realm.getDefaultInstance()
-    private var result: Settings = realm.where(Settings::class.java).findFirst()
+    val result: Settings = realm.where(Settings::class.java).findFirst()!!
     val settings: Settings = realm.copyFromRealm(result)
 
 

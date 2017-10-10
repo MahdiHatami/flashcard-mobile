@@ -113,7 +113,7 @@ constructor() : WordsRepository, Closeable {
 
   override val settings: Settings
     get() {
-      val settings = realm.where(Settings::class.java).equalTo("id", 1).findFirst()
+      val settings = realm.where(Settings::class.java).findFirst()
       if (settings == null) {
         val s = Settings()
         s.reviewLimit = 10
