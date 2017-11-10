@@ -24,7 +24,7 @@ object MvpStarterServiceFactory {
 
   private fun makeMvpStarterService(gson: Gson): MutlakService {
     val retrofit = Retrofit.Builder()
-        .baseUrl(BuildConfig.POKEAPI_API_URL)
+        .baseUrl(BuildConfig.API_URL)
         .client(makeOkHttpClient())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

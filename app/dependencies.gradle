@@ -1,6 +1,6 @@
 ext {
   versions = [support       : "26.1.0",
-              firebase      : '11.0.2',
+              firebase      : '11.4.0',
               okHttp        : "3.9.0",
               retrofit      : '2.3.0',
               espresso      : '2.2.2',
