@@ -92,4 +92,5 @@
   <string name="word_is_required">Kelime Alani Gereklidir</string>
   <string name="select_from_camera">Kamera Aç</string>
   <string name="select_from_gallery">Galeriden Seç</string>
+  <string name="add_image">Resim Ekle</string>
 </resources>

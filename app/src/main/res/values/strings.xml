@@ -91,4 +91,5 @@
   <string name="word_is_required">Word is required</string>
   <string name="select_from_camera">Select from camera</string>
   <string name="select_from_gallery">Select from gallery</string>
+  <string name="add_image">Add Image</string>
 </resources>

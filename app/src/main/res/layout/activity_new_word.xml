@@ -148,39 +148,20 @@
       <FrameLayout
           android:id="@+id/frame_upload_image"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="32dp"
+          android:layout_height="100dp"
+          android:background="@drawable/add_file_bg"
+          android:layout_marginTop="16dp"
           >
 
-        <ImageView
-            android:id="@+id/image_holder"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_image"
+            android:drawableTop="@drawable/ic_add_image"
+            android:drawablePadding="16dp"
             android:layout_gravity="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
-            app:srcCompat="@drawable/ic_image_holder"
+            android:textSize="18sp"
             />
-
-        <pl.bclogic.pulsator4droid.library.PulsatorLayout
-            android:id="@+id/pulsator"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="-29dp"
-            android:layout_marginTop="-27dp"
-            app:layout_constraintRight_toLeftOf="@id/image_holder"
-            app:layout_constraintTop_toTopOf="@+id/image_holder"
-            app:pulse_color="@color/landing_header_start"
-            app:pulse_count="4"
-            app:pulse_duration="5000"
-            app:pulse_interpolator="Decelerate"
-            app:pulse_repeat="0"
-            app:pulse_startFromScratch="true"
-            >
-        </pl.bclogic.pulsator4droid.library.PulsatorLayout>
-
 
       </FrameLayout>
 
@@ -191,8 +172,8 @@
           android:layout_marginLeft="32dp"
           android:layout_marginRight="32dp"
           android:layout_marginTop="32dp"
-          android:visibility="gone"
           android:scaleType="fitXY"
+          android:visibility="gone"
           />
 
 

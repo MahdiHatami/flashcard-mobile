@@ -1,26 +1,39 @@
 package com.mutlak.metis.wordmem.features.insertWord
 
-import android.content.*
-import android.graphics.*
-import android.os.*
-import android.support.annotation.*
-import android.support.design.widget.*
+import android.content.Context
+import android.graphics.Rect
+import android.os.Bundle
+import android.support.annotation.NonNull
+import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.TextInputEditText
+import android.support.design.widget.TextInputLayout
 import android.support.v7.widget.Toolbar
-import android.view.*
-import android.widget.*
-import butterknife.*
-import com.bumptech.glide.*
-import com.mlsdev.rximagepicker.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import butterknife.BindView
+import butterknife.OnClick
+import com.bumptech.glide.Glide
+import com.mlsdev.rximagepicker.RxImageConverters
+import com.mlsdev.rximagepicker.RxImagePicker
+import com.mlsdev.rximagepicker.Sources
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.R.string
-import com.mutlak.metis.wordmem.data.model.*
-import com.mutlak.metis.wordmem.extension.*
-import com.mutlak.metis.wordmem.features.base.*
-import io.realm.*
-import pl.bclogic.pulsator4droid.library.*
-import timber.log.*
-import java.io.*
-import javax.inject.*
+import com.mutlak.metis.wordmem.data.model.Sentense
+import com.mutlak.metis.wordmem.data.model.Word
+import com.mutlak.metis.wordmem.extension.afterTextChanged
+import com.mutlak.metis.wordmem.extension.hide
+import com.mutlak.metis.wordmem.extension.show
+import com.mutlak.metis.wordmem.features.base.BaseActivity
+import io.realm.RealmList
+import timber.log.Timber
+import java.io.File
+import javax.inject.Inject
 
 
 class NewWordActivity : BaseActivity(), NewWordView {
@@ -31,10 +44,9 @@ class NewWordActivity : BaseActivity(), NewWordView {
 
   private lateinit var mBottomSheetBehavior: BottomSheetBehavior<*>
 
-  var isFormValid: Boolean = false
+  private var isFormValid: Boolean = false
 
   @BindView(R.id.toolbar) lateinit var mToolbar: Toolbar
-  @BindView(R.id.pulsator) lateinit var mPulsator: PulsatorLayout
 
   @BindView(R.id.input_word) lateinit var mTextWord: TextInputEditText
   @BindView(R.id.input_meaning) lateinit var mTextMeaning: EditText
@@ -44,7 +56,6 @@ class NewWordActivity : BaseActivity(), NewWordView {
   @BindView(R.id.input_layout_word) lateinit var mTextLayoutWord: TextInputLayout
 
   @BindView(R.id.new_word_bottom_sheet) lateinit var mBottomSheet: LinearLayout
-  @BindView(R.id.image_holder) lateinit var mImageHolder: ImageView
   @BindView(R.id.frame_upload_image) lateinit var mFrameUpload: FrameLayout
   @BindView(R.id.image_selected) lateinit var mImageSelected: ImageView
 
@@ -70,8 +81,6 @@ class NewWordActivity : BaseActivity(), NewWordView {
         mTextLayoutWord.error = null
       }
     }
-
-    mPulsator.start()
   }
 
   private fun setupBottomSheet() {
@@ -137,7 +146,7 @@ class NewWordActivity : BaseActivity(), NewWordView {
     }
   }
 
-  @OnClick(R.id.image_holder)
+  @OnClick(R.id.frame_upload_image)
   fun imageOnClick() {
     mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
   }
