@@ -57,7 +57,7 @@ constructor(private val repo: WordsRepositoryImpl,
   fun getSettings(): Settings {
     var settings = repo.settings
     val userLanguage = Locale.getDefault().language
-    if (settings == null || settings.quizLimit == 0 || settings.reviewLimit == 0) {
+    if (settings.quizLimit == 0 || settings.reviewLimit == 0) {
       settings = Settings()
       settings.reviewLimit = SettingsActivity.reviewList[TEN_WORD_PER_REVIEW]
       settings.quizLimit = SettingsActivity.quizList[TEN_QUESTION]
@@ -79,7 +79,6 @@ constructor(private val repo: WordsRepositoryImpl,
     dataManager.getWords(lastFetchDate)
         .compose<List<Word>>(SchedulerUtils.ioToMain<List<Word>>())
         .subscribe({ words ->
-
           view?.hideBookLoading()
           updateWordsFetchedDate()
           if (words.isNotEmpty()) {

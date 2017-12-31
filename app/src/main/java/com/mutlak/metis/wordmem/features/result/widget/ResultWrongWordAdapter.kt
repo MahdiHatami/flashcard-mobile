@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.data.model.Question
+import com.mutlak.metis.wordmem.data.model.pojo.Question
 import com.mutlak.metis.wordmem.data.model.Settings
 import com.mutlak.metis.wordmem.features.settings.SettingsActivity
 

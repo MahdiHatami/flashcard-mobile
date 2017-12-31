@@ -3,7 +3,7 @@ package com.mutlak.metis.wordmem.features.quiz.widgets
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.google.gson.Gson
-import com.mutlak.metis.wordmem.data.model.ExamSession
+import com.mutlak.metis.wordmem.data.model.pojo.ExamSession
 import com.mutlak.metis.wordmem.features.quiz.QuestionFragment
 
 

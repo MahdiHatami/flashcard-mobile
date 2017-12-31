@@ -1,5 +1,6 @@
-package com.mutlak.metis.wordmem.data.model
+package com.mutlak.metis.wordmem.data.model.pojo
 
+import com.mutlak.metis.wordmem.data.model.Word
 import java.io.Serializable
 
 

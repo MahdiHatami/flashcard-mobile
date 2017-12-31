@@ -13,6 +13,7 @@ open class Word(
     // Properties can be annotated with PrimaryKey or Index.
     // If you use non-nullable types, properties must be initialized with non-null values.
     @PrimaryKey var english: String = "",
+    var isCreatedByUser: Boolean = false,
     var id: Int = 0,
     var type: String? = null,
     var meaning: String? = null,

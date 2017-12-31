@@ -1,23 +1,20 @@
 package com.mutlak.metis.wordmem.injection.component
 
-import com.mutlak.metis.wordmem.features.base.*
-import com.mutlak.metis.wordmem.features.detail.*
-import com.mutlak.metis.wordmem.features.insertWord.*
-import com.mutlak.metis.wordmem.features.landing.*
-import com.mutlak.metis.wordmem.features.quiz.*
-import com.mutlak.metis.wordmem.features.result.*
-import com.mutlak.metis.wordmem.features.review.*
-import com.mutlak.metis.wordmem.features.settings.*
-import com.mutlak.metis.wordmem.injection.*
-import com.mutlak.metis.wordmem.injection.module.*
-import dagger.*
+import com.mutlak.metis.wordmem.features.base.BaseActivity
+import com.mutlak.metis.wordmem.features.insertWord.NewWordActivity
+import com.mutlak.metis.wordmem.features.landing.LandingActivity
+import com.mutlak.metis.wordmem.features.quiz.QuizActivity
+import com.mutlak.metis.wordmem.features.result.ResultActivity
+import com.mutlak.metis.wordmem.features.review.ReviewActivity
+import com.mutlak.metis.wordmem.features.settings.SettingsActivity
+import com.mutlak.metis.wordmem.injection.PerActivity
+import com.mutlak.metis.wordmem.injection.module.ActivityModule
+import dagger.Subcomponent
 
 @PerActivity
 @Subcomponent(modules = arrayOf(ActivityModule::class))
 interface ActivityComponent {
   fun inject(baseActivity: BaseActivity)
-
-  fun inject(detailActivity: DetailActivity)
 
   fun inject(settingsActivity: SettingsActivity)
 
