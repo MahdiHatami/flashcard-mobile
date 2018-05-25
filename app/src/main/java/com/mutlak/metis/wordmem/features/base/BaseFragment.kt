@@ -39,7 +39,7 @@ abstract class BaseFragment : Fragment() {
     if (sComponentsArray.get(mFragmentId) == null) {
       Timber.i("Creating new ConfigPersistentComponent id=%d", mFragmentId)
       configPersistentComponent = DaggerConfigPersistentComponent.builder()
-          .applicationComponent(MutlakApplication[activity].component)
+          .applicationComponent(MutlakApplication[this.activity!!].component)
           .build()
       sComponentsArray.put(mFragmentId, configPersistentComponent)
     } else {
@@ -49,22 +49,28 @@ abstract class BaseFragment : Fragment() {
     mFragmentComponent = configPersistentComponent.fragmentComponent(FragmentModule(this))
   }
 
-  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
-    val view: View? = inflater?.inflate(layout, container, false)
+    val view: View? = inflater.inflate(layout, container, false)
     ButterKnife.bind(this, view as View)
     return view
   }
+//  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+//      savedInstanceState: Bundle?): View? {
+//    val view: View? = inflater?.inflate(layout, container, false)
+//    ButterKnife.bind(this, view as View)
+//    return view
+//  }
 
   abstract val layout: Int
 
-  override fun onSaveInstanceState(outState: Bundle?) {
+  override fun onSaveInstanceState(outState: Bundle) {
     super.onSaveInstanceState(outState)
-    outState?.putLong(KEY_FRAGMENT_ID, mFragmentId)
+    outState.putLong(KEY_FRAGMENT_ID, mFragmentId)
   }
 
   override fun onDestroy() {
-    if (!activity.isChangingConfigurations) {
+    if (!activity?.isChangingConfigurations!!) {
       Timber.i("Clearing ConfigPersistentComponent id=%d", mFragmentId)
       sComponentsArray.remove(mFragmentId)
     }
@@ -76,10 +82,12 @@ abstract class BaseFragment : Fragment() {
   }
 
   fun showProgress() {
-    mProgress = MaterialDialog.Builder(activity).progress(true, 0)
-        .widgetColorRes(R.color.primary)
-        .cancelable(false)
-        .show()
+    mProgress = activity?.let {
+      MaterialDialog.Builder(it).progress(true, 0)
+          .widgetColorRes(R.color.primary)
+          .cancelable(false)
+          .show()
+    }
   }
 
   fun hideProgress() {

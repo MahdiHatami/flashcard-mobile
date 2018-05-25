@@ -3,10 +3,9 @@ package com.mutlak.metis.wordmem.injection.module
 import android.app.Activity
 import android.content.Context
 import android.support.v4.app.Fragment
-
+import com.mutlak.metis.wordmem.injection.ActivityContext
 import dagger.Module
 import dagger.Provides
-import com.mutlak.metis.wordmem.injection.ActivityContext
 
 @Module
 class FragmentModule(private val mFragment: Fragment) {
@@ -18,13 +17,13 @@ class FragmentModule(private val mFragment: Fragment) {
 
   @Provides
   internal fun provideActivity(): Activity {
-    return mFragment.activity
+    return mFragment.activity!!
   }
 
   @Provides
   @ActivityContext
   internal fun providesContext(): Context {
-    return mFragment.activity
+    return mFragment.activity!!
   }
 
 }

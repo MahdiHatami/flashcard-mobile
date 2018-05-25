@@ -32,6 +32,9 @@ constructor(private val mutlakService: MutlakService) {
   fun sendWord(body: MultipartBody.Part, word: Word): Single<ResponseBody> {
     return mutlakService.sendWord(body, word)
   }
+  fun sendWord(word: Word): Single<ResponseBody> {
+    return mutlakService.sendWord(word)
+  }
 
   fun saveWord(word: Word) {
 

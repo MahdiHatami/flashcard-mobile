@@ -93,4 +93,8 @@
   <string name="select_from_camera">Kamera Aç</string>
   <string name="select_from_gallery">Galeriden Seç</string>
   <string name="add_image">Resim Ekle</string>
+  <string name="word_already_has_been_added">Bu kelime önceden eklenmiş. Lütfen başka bir kelime ekleyin</string>
+  <string name="word_added_successfully">Kelime başarı ile eklendi.</string>
+  <string name="word_could_not_be_added">Kelime eklenemedi. Lütfen tekrar deneyin.</string>
+  <string name="word_min_length">Kelime uzunluğu %d harften az olamaz.</string>
 </resources>

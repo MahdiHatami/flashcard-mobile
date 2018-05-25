@@ -55,7 +55,7 @@ class TakeQuizFragment : BaseFragment() {
 
   @OnClick(R.id.result_home_linear)
   fun homeOnClick() {
-    activity.finish()
+    activity?.finish()
     startActivity(Intent(activity, LandingActivity::class.java))
   }
 

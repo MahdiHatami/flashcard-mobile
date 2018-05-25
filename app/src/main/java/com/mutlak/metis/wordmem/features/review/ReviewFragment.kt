@@ -1,29 +1,35 @@
 package com.mutlak.metis.wordmem.features.review
 
-import android.os.*
-import android.support.v4.content.*
-import android.support.v4.view.*
-import android.support.v7.app.*
+import android.content.Context
+import android.os.Bundle
+import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.*
-import android.widget.*
-import butterknife.*
-import com.afollestad.materialdialogs.*
-import com.github.amlcurran.showcaseview.*
-import com.github.amlcurran.showcaseview.targets.*
-import com.github.florent37.tutoshowcase.*
-import com.github.zagum.switchicon.*
+import android.view.View
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.TextView
+import butterknife.BindView
+import com.afollestad.materialdialogs.MaterialDialog
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ViewTarget
+import com.github.florent37.tutoshowcase.TutoShowcase
+import com.github.zagum.switchicon.SwitchIconView
 import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.data.local.*
-import com.mutlak.metis.wordmem.data.model.*
-import com.mutlak.metis.wordmem.features.base.*
-import com.mutlak.metis.wordmem.features.landing.*
-import java.util.*
-import javax.inject.*
+import com.mutlak.metis.wordmem.data.local.PreferencesHelper
+import com.mutlak.metis.wordmem.data.model.Word
+import com.mutlak.metis.wordmem.features.base.BaseFragment
+import com.mutlak.metis.wordmem.features.landing.LandingActivity
+import java.util.Date
+import javax.inject.Inject
 
 
 class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
 
+  override fun getContext(): Context {
+    return activity!!.applicationContext
+  }
 
   private var checkDirection: Boolean = false
   private var scrollStarted: Boolean = false
@@ -66,7 +72,7 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
     super.onCreate(savedInstanceState)
     fragmentComponent().inject(this)
     mPresenter.attachView(this)
-    reviewType = activity.intent.extras.getInt(LandingActivity.REVIEW_TYPE)
+    reviewType = activity!!.intent.extras.getInt(LandingActivity.REVIEW_TYPE)
 
     isShowViewPresented = mPref.getBoolean(ShowView.REVIEW, false)
   }
@@ -208,17 +214,19 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
   }
 
   private fun redirectBack() {
-    activity.finish()
+    activity!!.finish()
   }
 
   override fun showAlert(title: Int, content: Int) {
     if (mAlertDialog == null) {
-      mAlertDialog = MaterialDialog.Builder(activity).title(title)
-          .content(content)
-          .cancelable(false)
-          .positiveText(R.string.ok)
-          .onPositive { _, _ -> redirectBack() }
-          .show()
+      mAlertDialog = activity?.let {
+        MaterialDialog.Builder(it).title(title)
+            .content(content)
+            .cancelable(false)
+            .positiveText(R.string.ok)
+            .onPositive { _, _ -> redirectBack() }
+            .show()
+      }
     } else {
       mAlertDialog!!.setContent(content)
       mAlertDialog!!.show()
@@ -267,13 +275,15 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
   }
 
   private fun displaySwipe() {
-    TutoShowcase.from(activity)
+    activity?.let {
+      TutoShowcase.from(it)
         .setContentView(R.layout.review_show_case)
         .on(R.id.card_view)
         .displaySwipableLeft()
         .delayed(400)
         .animated(true)
         .show()
+    }
   }
 
   private fun setAlpha(alpha: Float, vararg views: View) {

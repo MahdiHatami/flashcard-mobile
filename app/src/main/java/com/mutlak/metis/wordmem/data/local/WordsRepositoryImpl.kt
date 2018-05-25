@@ -16,6 +16,15 @@ import javax.inject.Singleton
 @Singleton
 class WordsRepositoryImpl @Inject
 constructor() : WordsRepository, Closeable {
+  override fun saveWord(word: Word) {
+    realm.executeTransaction { realm1 -> realm1.insert(word) }
+  }
+
+  override fun isWordExist(word: Word): Boolean {
+    val result = realm.where(Word::class.java).equalTo("english", word.english.trim()).findFirst()
+
+    return result != null
+  }
 
   var realm: Realm = Realm.getDefaultInstance()
 
@@ -28,15 +37,15 @@ constructor() : WordsRepository, Closeable {
           .equalTo(IGNORE, false)
           .notEqualTo(BOOKMARK, true)
           .notEqualTo(LEARNT, true)
-          .findAllSorted(LAST_SEEN, Sort.ASCENDING)
+          .sort(LAST_SEEN, Sort.ASCENDING).findAll();
       LandingActivity.REVIEW_TYPE_BOOKMARK -> result = realm.where(Word::class.java)
           .equalTo(IGNORE, false)
           .equalTo(BOOKMARK, true)
-          .findAllSorted(LAST_SEEN, Sort.ASCENDING)
+          .sort(LAST_SEEN, Sort.ASCENDING).findAll()
       LandingActivity.REVIEW_TYPE_LEARNT -> result = realm.where(Word::class.java)
           .equalTo(IGNORE, false)
           .equalTo(LEARNT, true)
-          .findAllSorted(LAST_SEEN, Sort.ASCENDING)
+          .sort(LAST_SEEN, Sort.ASCENDING).findAll()
     }
     val list = realm.copyFromRealm(result)
     if (reviewType != LandingActivity.REVIEW_TYPE_NEW) {
@@ -91,11 +100,11 @@ constructor() : WordsRepository, Closeable {
   }
 
   fun getQuizWords(limit: Int): List<Word> {
-    val result = realm.where(Word::class.java).findAllSorted(LAST_SEEN, Sort.DESCENDING)
+    val result = realm.where(Word::class.java).sort(LAST_SEEN, Sort.DESCENDING).findAll()
     var list = realm.copyFromRealm(result)
     list = list.take(limit)
     list = randomize(limit, list)
-    Collections.shuffle(list)
+    list.shuffle()
     return list
   }
 

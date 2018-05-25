@@ -30,8 +30,10 @@ constructor(val context: Context, private val question: Question,
   private var isSelected = false
   private val options = ArrayList(Arrays.asList("A", "B", "C", "D", "E", "F"))
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
-    val view: View
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    var view: View
+    view = LayoutInflater.from(parent.context)
+        .inflate(R.layout.answers_list_item, parent, false)
     when (viewType) {
       SettingsActivity.QUIZ_TYPE_WORD -> {
         view = LayoutInflater.from(parent.context)
@@ -44,7 +46,7 @@ constructor(val context: Context, private val question: Question,
         return SentenceTypeViewHolder(view)
       }
     }
-    return null
+    return WordTypeViewHolder(view)
   }
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

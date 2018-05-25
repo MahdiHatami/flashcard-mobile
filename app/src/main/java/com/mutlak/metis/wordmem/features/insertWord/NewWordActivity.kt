@@ -16,6 +16,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.OnClick
 import com.bumptech.glide.Glide
@@ -30,6 +31,7 @@ import com.mutlak.metis.wordmem.extension.afterTextChanged
 import com.mutlak.metis.wordmem.extension.hide
 import com.mutlak.metis.wordmem.extension.show
 import com.mutlak.metis.wordmem.features.base.BaseActivity
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog
 import io.realm.RealmList
 import timber.log.Timber
 import java.io.File
@@ -38,25 +40,23 @@ import javax.inject.Inject
 
 class NewWordActivity : BaseActivity(), NewWordView {
 
-  @Inject lateinit var mPresenter: NewWordPresenter
+  @Inject
+  lateinit var mPresenter: NewWordPresenter
 
   val TAG: String = NewWordActivity::class.java.simpleName
-
   private lateinit var mBottomSheetBehavior: BottomSheetBehavior<*>
-
   private var isFormValid: Boolean = false
+  private var mFile: File? = null
 
   @BindView(R.id.toolbar) lateinit var mToolbar: Toolbar
-
   @BindView(R.id.input_word) lateinit var mTextWord: TextInputEditText
   @BindView(R.id.input_meaning) lateinit var mTextMeaning: EditText
   @BindView(R.id.input_sentence) lateinit var mTextSentence: EditText
   @BindView(R.id.input_type) lateinit var mTextType: EditText
-
   @BindView(R.id.input_layout_word) lateinit var mTextLayoutWord: TextInputLayout
-
+  @BindView(R.id.input_layout_meaning) lateinit var mTextLayoutMeaning: TextInputLayout
   @BindView(R.id.new_word_bottom_sheet) lateinit var mBottomSheet: LinearLayout
-  @BindView(R.id.frame_upload_image) lateinit var mFrameUpload: FrameLayout
+  @BindView(R.id.frame_image_section) lateinit var mFrameUpload: FrameLayout
   @BindView(R.id.image_selected) lateinit var mImageSelected: ImageView
 
   override val layout: Int
@@ -120,13 +120,38 @@ class NewWordActivity : BaseActivity(), NewWordView {
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return when (item.itemId) {
       R.id.action_save_word -> {
-        doSubmit()
+        if (isFormValid())
+          doSubmit()
         true
       }
       else -> {
         return super.onOptionsItemSelected(item)
       }
     }
+  }
+
+  private fun isFormValid(): Boolean {
+    var isValid = true
+
+    if (mTextWord.text.isEmpty()) {
+      isValid = false
+      mTextLayoutWord.error = getString(string.word_is_required)
+    }
+    if (mTextWord.text.length < 2) {
+      isValid = false
+      mTextLayoutWord.error = getString(string.word_min_length, 2)
+    }
+
+    if (mTextMeaning.text.isEmpty()) {
+      isValid = false
+      mTextLayoutMeaning.error = getString(string.word_is_required)
+    }
+    if (mTextMeaning.text.length < 5) {
+      isValid = false
+      mTextLayoutMeaning.error = getString(string.word_min_length, 5)
+    }
+
+    return isValid
   }
 
   private fun doSubmit() {
@@ -138,15 +163,10 @@ class NewWordActivity : BaseActivity(), NewWordView {
     sentences.add(sentence)
     val type = mTextType.text.toString().trim()
     val word = Word(english = english, meaning = meaning, sentences = sentences, type = type)
-    if (!isFormValid) {
-      mTextLayoutWord.error = getString(string.word_is_required)
-    } else {
-      mTextLayoutWord.error = null
-      mPresenter.sendWord(word)
-    }
+    mPresenter.saveWord(word, mFile)
   }
 
-  @OnClick(R.id.frame_upload_image)
+  @OnClick(R.id.frame_image_section)
   fun imageOnClick() {
     mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
   }
@@ -177,6 +197,7 @@ class NewWordActivity : BaseActivity(), NewWordView {
     pickImage(Sources.GALLERY)
   }
 
+
   private fun pickImage(source: Sources) {
     mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     RxImagePicker.with(this).requestImage(source).flatMap { uri ->
@@ -185,15 +206,30 @@ class NewWordActivity : BaseActivity(), NewWordView {
       mFrameUpload.hide()
       mImageSelected.show()
       Glide.with(this).load(it).asBitmap().into(mImageSelected)
-//      val compressedImageFile = Compressor(this).compressToFile(it)
-//      val bitmap = BitmapFactory.decodeFile(compressedImageFile.absolutePath)
-//      mImageSelected.setImageBitmap(bitmap)
+      mFile = it
     })
   }
 
+  override fun cleanForm() {
+    mTextWord.text.clear()
+    mTextMeaning.text.clear()
+    mTextSentence.text.clear()
+    mTextType.text.clear()
+    mImageSelected.hide()
+    mFrameUpload.show()
+
+    mTextWord.requestFocus()
+  }
+
+  override fun showAlert(title: Int, message: Int, type: Int) {
+    SweetAlertDialog(this, type).setTitleText(getString(title))
+        .setContentText(getString(message))
+        .show()
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+  }
+
   override fun showError(throwable: Throwable) {
-    // show error
-    Timber.e(throwable, "There was a problem retrieving the pokemon...")
+    Timber.e(throwable, "There was a problem retrieving the ...")
   }
 
   override fun getContext(): Context {

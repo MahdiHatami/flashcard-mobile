@@ -9,11 +9,15 @@ interface WordsRepository {
 
   fun saveWords(wordList: List<Word>)
 
+  fun saveWord(word: Word)
+
   fun updateWord(word: Word)
 
   val settings: Settings
 
   fun updateSettings(settings: Settings)
+
+  fun isWordExist(word: Word): Boolean
 
   val allWords: List<Word>
 

@@ -37,7 +37,7 @@
   <string name="wrong">Wrong</string>
   <string name="result_item_your_answered_title">Your answer :</string>
   <string name="landing_menu_quiz_subtitle">Feeling confident? Take a quiz now!</string>
-  <string name="voice_not_available">We can not file audio file for this word !</string>
+  <string name="voice_not_available">We can not find audio file for this word !</string>
   <string name="resutl_quiz_again_title">Quiz again!</string>
   <string name="quiz_type">Quiz Type : </string>
   <string name="word_to_word">Word to Word</string>
@@ -92,4 +92,8 @@
   <string name="select_from_camera">Select from camera</string>
   <string name="select_from_gallery">Select from gallery</string>
   <string name="add_image">Add Image</string>
+  <string name="word_already_has_been_added">This word already has been added. Please try another word</string>
+  <string name="word_added_successfully">Word has been successfully added.</string>
+  <string name="word_could_not_be_added">The word could not be added. Please try again.</string>
+  <string name="word_min_length">Word length could not be less than %d</string>
 </resources>

@@ -18,8 +18,12 @@ interface MutlakService {
   fun getWords(@Query("date") date: String): Single<List<Word>>
 
   @Multipart
-  @POST("kelimeEzber/sendWord.php")
+  @POST("kelimeEzber/add_word.php")
   fun sendWord(@Part file: MultipartBody.Part, @Part("body") result: Word): Single<ResponseBody>
+
+  @Multipart
+  @POST("kelimeEzber/add_word.php")
+  fun sendWord(@Part("body") result: Word): Single<ResponseBody>
 
 }
 

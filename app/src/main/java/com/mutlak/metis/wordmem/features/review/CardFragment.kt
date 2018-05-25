@@ -51,13 +51,13 @@ class CardFragment : Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val mWordString = arguments.getString(CURRENT_WORD)
+    val mWordString = arguments?.getString(CURRENT_WORD)
     mWord = Gson().fromJson(mWordString, Word::class.java)
   }
 
-  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
-    val rootView = inflater!!.inflate(R.layout.fragment_card, container, false) as ViewGroup
+    val rootView = inflater.inflate(R.layout.fragment_card, container, false) as ViewGroup
     ButterKnife.bind(this, rootView)
 
     setupTextToSpeech()
@@ -101,7 +101,8 @@ class CardFragment : Fragment() {
 
       override fun onDone(utteranceId: String) {
         mVoiceBtn.isEnabled = true
-        mVoiceBtn.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_voice))
+        mVoiceBtn.setImageDrawable(
+            activity?.let { ContextCompat.getDrawable(it, R.drawable.ic_voice) })
       }
 
       override fun onError(utteranceId: String) {

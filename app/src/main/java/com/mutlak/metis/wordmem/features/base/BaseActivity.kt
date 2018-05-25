@@ -105,11 +105,11 @@ abstract class BaseActivity : AppCompatActivity() {
   fun hideProgress() {
     try {
       Thread.sleep(TimeUnit.SECONDS.toMillis(1))
+      mProgress?.dismiss()
     } catch (e: InterruptedException) {
       e.printStackTrace()
     }
 
-    mProgress?.dismiss()
     Log.d(TAG, "hideProgress: ")
 
   }

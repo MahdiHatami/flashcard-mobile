@@ -146,7 +146,7 @@
       </android.support.constraint.ConstraintLayout>
 
       <FrameLayout
-          android:id="@+id/frame_upload_image"
+          android:id="@+id/frame_image_section"
           android:layout_width="match_parent"
           android:layout_height="100dp"
           android:background="@drawable/add_file_bg"

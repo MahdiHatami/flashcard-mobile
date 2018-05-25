@@ -242,8 +242,8 @@ class SettingsActivity : BaseActivity() {
     }
 
     override fun onTimeSet(view: TimePicker, hour: Int, minute: Int) {
-      val switchCompat = activity.findViewById<SwitchCompat>(R.id.reminder_switch)
-      switchCompat.isChecked = true
+      val switchCompat = activity?.findViewById<SwitchCompat>(R.id.reminder_switch)
+      switchCompat?.isChecked = true
 
       val cal = Calendar.getInstance()
       cal.set(Calendar.HOUR, hour)
@@ -257,7 +257,7 @@ class SettingsActivity : BaseActivity() {
       realm.executeTransaction { it.insertOrUpdate(settings) }
 
       val pendingIntent: PendingIntent
-      val manager: AlarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+      val manager: AlarmManager = activity?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
       val alarmIntent = Intent(activity, AlarmReciever::class.java)
       pendingIntent = PendingIntent.getBroadcast(activity, ALARM_REQUEST_CODE, alarmIntent, 0)
 

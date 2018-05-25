@@ -15,8 +15,8 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.google.gson.Gson
 import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.data.model.pojo.Question
 import com.mutlak.metis.wordmem.data.model.Settings
+import com.mutlak.metis.wordmem.data.model.pojo.Question
 import com.mutlak.metis.wordmem.features.quiz.widgets.AnswerAdapter
 import com.mutlak.metis.wordmem.features.quiz.widgets.GridSpacingItemDecoration
 import com.mutlak.metis.wordmem.features.settings.SettingsActivity
@@ -51,7 +51,7 @@ class QuestionFragment : Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val mWordString = arguments.getString(CURRENT_WORD)
+    val mWordString = arguments?.getString(CURRENT_WORD)
     mQuestion = Gson().fromJson(mWordString, Question::class.java)
     realm = Realm.getDefaultInstance()
     setttings = realm.where(Settings::class.java).findFirst()
@@ -64,9 +64,9 @@ class QuestionFragment : Fragment() {
         TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), r.displayMetrics))
   }
 
-  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
-    val rootView = inflater!!.inflate(R.layout.fragment_question, container, false) as ViewGroup
+    val rootView = inflater.inflate(R.layout.fragment_question, container, false) as ViewGroup
     ButterKnife.bind(this, rootView)
 
     mEnglish.text = mQuestion!!.question.english
@@ -79,7 +79,7 @@ class QuestionFragment : Fragment() {
     var col = 1
     if (setttings!!.quizType == 0) setttings!!.quizType = SettingsActivity.QUIZ_TYPE_WORD
     if (setttings!!.quizType == SettingsActivity.QUIZ_TYPE_WORD) col = 2
-    adapter = AnswerAdapter(activity, mQuestion!!, setttings!!.quizType)
+    adapter = activity?.let { AnswerAdapter(it, mQuestion!!, setttings!!.quizType) }
     val mLayoutManager = GridLayoutManager(activity, col)
     recyclerView.layoutManager = mLayoutManager
     recyclerView.addItemDecoration(GridSpacingItemDecoration(col, dpToPx(10), true))
