@@ -17,7 +17,8 @@
       >
     <meta-data
         android:name="io.fabric.ApiKey"
-        android:value="493c45a79f584085d4b92e79f6a68431a441191a"/>
+        android:value="91e8708966e6ce5915461bc5dcad58e7f286a5e4"
+        />
 
     <receiver android:name=".util.AlarmReciever"/>
 

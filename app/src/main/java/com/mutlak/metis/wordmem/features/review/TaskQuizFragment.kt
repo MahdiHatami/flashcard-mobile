@@ -7,12 +7,14 @@ import butterknife.BindView
 import butterknife.OnClick
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.data.model.Settings
 import com.mutlak.metis.wordmem.features.base.BaseFragment
 import com.mutlak.metis.wordmem.features.landing.LandingActivity
 import com.mutlak.metis.wordmem.features.quiz.QuizActivity
 import com.mutlak.metis.wordmem.features.settings.SettingsActivity
+import com.mutlak.metis.wordmem.util.AdsUtil
 import io.realm.Realm
 import java.util.Locale
 
@@ -49,6 +51,8 @@ class TakeQuizFragment : BaseFragment() {
     mQuizText.text = String.format(Locale.US, "%d %s", settings!!.quizLimit,
         getString(R.string.words))
 
+
+    MobileAds.initialize(activity, AdsUtil.APP_ID)
     val adRequest = AdRequest.Builder().build()
     mAdView.loadAd(adRequest)
   }

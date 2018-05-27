@@ -1,37 +1,47 @@
 package com.mutlak.metis.wordmem.features.result
 
-import android.content.*
-import android.os.*
-import android.support.annotation.*
-import android.support.design.widget.*
-import android.support.v7.widget.*
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.support.annotation.NonNull
+import android.support.design.widget.BottomSheetBehavior
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.LayoutManager
-import android.view.*
-import android.view.animation.*
-import android.widget.*
-import butterknife.*
-import com.google.android.gms.ads.*
-import com.google.gson.*
+import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Interpolator
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
+import butterknife.BindView
+import butterknife.OnClick
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
+import com.google.gson.Gson
 import com.mutlak.metis.wordmem.R
-import com.mutlak.metis.wordmem.data.model.*
+import com.mutlak.metis.wordmem.data.model.Settings
 import com.mutlak.metis.wordmem.data.model.pojo.ExamSession
-import com.mutlak.metis.wordmem.features.base.*
-import com.mutlak.metis.wordmem.features.landing.*
-import com.mutlak.metis.wordmem.features.quiz.*
-import com.mutlak.metis.wordmem.features.result.widget.*
-import com.mutlak.metis.wordmem.features.review.*
-import timber.log.*
-import uk.co.chrisjenx.calligraphy.*
-import java.util.*
-import javax.inject.*
+import com.mutlak.metis.wordmem.features.base.BaseActivity
+import com.mutlak.metis.wordmem.features.landing.LandingActivity
+import com.mutlak.metis.wordmem.features.quiz.QuizActivity
+import com.mutlak.metis.wordmem.features.result.widget.CircleProgressView
+import com.mutlak.metis.wordmem.features.result.widget.ResultWrongWordAdapter
+import com.mutlak.metis.wordmem.features.review.ReviewActivity
+import com.mutlak.metis.wordmem.util.AdsUtil
+import timber.log.Timber
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import java.util.Locale
+import javax.inject.Inject
 
 
 class ResultActivity : BaseActivity(), ResultView {
 
   companion object {
-    val AD_INTERSTITIAL = "ca-app-pub-3882496792252518/2230803188"
-    val AD_NATIVE_EXPRESS = "ca-app-pub-3882496792252518/9939515587"
-
+    const val AD_INTERSTITIAL = "ca-app-pub-4458047788519500/6772225515"
   }
 
   private val TAG = "ResultActivity"
@@ -40,7 +50,8 @@ class ResultActivity : BaseActivity(), ResultView {
   private lateinit var examSession: ExamSession
   private var mSettings: Settings? = null
 
-  lateinit var mInterstitial: InterstitialAd
+  private lateinit var mInterstitialAd: InterstitialAd
+
 
   @Inject lateinit var mPresenter: ResultPresenter
 
@@ -73,16 +84,14 @@ class ResultActivity : BaseActivity(), ResultView {
 
     mSettings = mPresenter.getSetting()
 
-    val request = AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build()
+    MobileAds.initialize(this, AdsUtil.APP_ID)
+    mInterstitialAd = InterstitialAd(this)
+    mInterstitialAd.adUnitId = AD_INTERSTITIAL
+    val request = AdRequest.Builder()
+        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)  // An example device ID
+        .build()
+    mInterstitialAd.loadAd(request)
 
-    mInterstitial = InterstitialAd(this)
-    mInterstitial.adUnitId = AD_INTERSTITIAL
-    mInterstitial.loadAd(request)
-    mInterstitial.adListener = object : AdListener() {
-      override fun onAdLoaded() {
-        mInterstitial.show()
-      }
-    }
 
     if (intent.hasExtra(QuizActivity.EXAM_SESSION)) {
       val s = intent.getSerializableExtra(QuizActivity.EXAM_SESSION).toString()
@@ -176,7 +185,7 @@ class ResultActivity : BaseActivity(), ResultView {
 
   override fun onDestroy() {
     mPresenter.detachView()
-    mInterstitial.adListener = null
+    mInterstitialAd.adListener = null
     super.onDestroy()
   }
 

@@ -1,43 +1,39 @@
 {
   "project_info": {
-    "project_number": "936565154642",
-    "firebase_url": "https://wordmemo-ef3de.firebaseio.com",
-    "project_id": "wordmemo-ef3de",
-    "storage_bucket": "wordmemo-ef3de.appspot.com"
+    "project_number": "254128634331",
+    "firebase_url": "https://memo-27fa1.firebaseio.com",
+    "project_id": "memo-27fa1",
+    "storage_bucket": "memo-27fa1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:936565154642:android:85aa04cd549fd8cc",
+        "mobilesdk_app_id": "1:254128634331:android:85aa04cd549fd8cc",
         "android_client_info": {
           "package_name": "com.mutlak.metis.wordmem"
         }
       },
       "oauth_client": [
         {
-          "client_id": "936565154642-uf4dmb9fgivhddtoh9517cj73q3qm1qj.apps.googleusercontent.com",
+          "client_id": "254128634331-0rr0s70ks02nn1m8r0o64edpq547f29m.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mutlak.metis.wordmem",
-            "certificate_hash": "9c37fa5fa28a99312361166053f85a524797e970"
+            "certificate_hash": "5265ce8525b720823efb65005bf99be56a61229d"
           }
         },
         {
-          "client_id": "936565154642-tg6cuakog8bj584nga042qs0kt9mtbt2.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.mutlak.metis.wordmem",
-            "certificate_hash": "832bed87f21a194169c2ec82f50c51b993a6a151"
-          }
+          "client_id": "254128634331-d9bda0am4b8ccebhrc8f5sevf2ok1je5.apps.googleusercontent.com",
+          "client_type": 3
         },
         {
-          "client_id": "936565154642-odvjdnf2umoqh76m4g3nekm0ub176878.apps.googleusercontent.com",
+          "client_id": "254128634331-d9bda0am4b8ccebhrc8f5sevf2ok1je5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCPnmAkuBQ5My7muAJTSN5UvLRgbubbB8M"
+          "current_key": "AIzaSyDH0fs57tWbl0ZWuT6Cv1IOYbtrDof5sz8"
         }
       ],
       "services": {
@@ -45,8 +41,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254128634331-d9bda0am4b8ccebhrc8f5sevf2ok1je5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

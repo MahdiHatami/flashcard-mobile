@@ -1,6 +1,6 @@
 ext {
   versions = [support       : "27.1.1",
-              firebase      : '11.8.0',
+              firebase      : '15.0.0',
               okHttp        : "3.10.0",
               retrofit      : '2.4.0',
               espresso      : '2.2.2',
@@ -20,24 +20,19 @@ ext {
                  appcompatV7      : "com.android.support:appcompat-v7:$versions.support",
                  design           : "com.android.support:design:$versions.support",
                  recyclerView     : "com.android.support:recyclerview-v7:$versions.support",
-                 supportAnnotation: "com.android.support:support-annotations:$versions.support",
-                 gridLayout       : "com.android.support:gridlayout-v7:$versions.support"]
+                 supportAnnotation: "com.android.support:support-annotations:$versions.support",]
+
 
   rxJava = [rxKotlin : 'io.reactivex.rxjava2:rxkotlin:2.2.0',
             rxAndroid: "io.reactivex.rxjava2:rxandroid:2.0.1"]
 
   retrofit = [retrofit     : "com.squareup.retrofit2:retrofit:$versions.retrofit",
               rxAdapter    : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
-              gsonConverter: "com.squareup.retrofit2:converter-gson:$versions.retrofit",
-              sqlbrite     : "com.squareup.sqlbrite:sqlbrite:1.1.2"]
+              gsonConverter: "com.squareup.retrofit2:converter-gson:$versions.retrofit",]
+
 
   okHttp = [logger: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
             okhttp: "com.squareup.okhttp3:okhttp:$versions.okHttp"]
-
-  googlePlay = [maps             : "com.google.android.gms:play-services-maps:$versions.firebase",
-                firebaseCore     : "com.google.firebase:firebase-core:$versions.firebase",
-                firebaseMessaging: "com.google.firebase:firebase-messaging:$versions.firebase",
-                firebaseAds      : "com.google.firebase:firebase-ads:$versions.firebase"]
 
   unitTest = [harcrestCore       : "org.hamcrest:hamcrest-core:$versions.hamcrest",
               harmcrestLib       : "org.hamcrest:hamcrest-library:$versions.hamcrest",
@@ -60,7 +55,6 @@ ext {
   supportLibs = supportDeps.values()
   networkLibs = retrofit.values() + okHttp.values()
   rxJavaLibs = rxJava.values()
-  googlePlayLibs = googlePlay.values()
   unitTestLibs = unitTest.values()
   androidTestsLibs = androidTests.values() + supportLibs
 
