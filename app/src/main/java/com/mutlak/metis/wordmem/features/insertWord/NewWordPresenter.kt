@@ -8,6 +8,7 @@ import com.mutlak.metis.wordmem.features.base.BasePresenter
 import com.mutlak.metis.wordmem.injection.ConfigPersistent
 import com.mutlak.metis.wordmem.util.rx.scheduler.SchedulerUtils
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog
+import id.zelory.compressor.Compressor
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -34,7 +35,9 @@ constructor(private val mRepo: WordsRepositoryImpl,
     mDataManager.saveWord(word)
     view?.showProgress()
     if (file != null) {
-      val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+      val compressFile: File = Compressor.Builder(view?.getContext())
+          .setMaxWidth(400F).setMaxHeight(400F).build().compressToFile(file)
+      val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), compressFile)
       val body = MultipartBody.Part.createFormData("uploaded_file", file.name, requestFile)
       mDataManager.sendWord(body, word)
           .compose<ResponseBody>(SchedulerUtils.ioToMain<ResponseBody>())

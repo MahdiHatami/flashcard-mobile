@@ -237,6 +237,7 @@ class NewWordActivity : BaseActivity(), NewWordView {
   override fun cleanForm() {
     mTextWord.text.clear()
     mTextMeaning.text.clear()
+    mTextTurkish.text.clear()
     mTextSentence.text.clear()
     mTextType.text.clear()
     mImageSelected.hide()
