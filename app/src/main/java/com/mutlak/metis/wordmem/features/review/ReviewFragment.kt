@@ -105,17 +105,24 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
       mLearnt.switchState()
       currentWord!!.learnt = mLearnt.isIconEnabled
       mPresenter.updateWord(currentWord!!)
+      nextCard()
     }
     mIgnoreLayout.setOnClickListener { _ ->
       mIgnore.switchState()
       currentWord?.ignored = mIgnore.isIconEnabled
       mPresenter.updateWord(currentWord!!)
+      nextCard()
     }
     mFlagLayout.setOnClickListener { _ ->
       mBookmark.switchState()
       currentWord?.bookmarked = mBookmark.isIconEnabled
       mPresenter.updateWord(currentWord!!)
+      nextCard()
     }
+  }
+
+  private fun nextCard() {
+    mViewPager.setCurrentItem(mViewPager.currentItem + 1, true)
   }
 
   private fun setupViewPager() {
@@ -277,12 +284,12 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
   private fun displaySwipe() {
     activity?.let {
       TutoShowcase.from(it)
-        .setContentView(R.layout.review_show_case)
-        .on(R.id.card_view)
-        .displaySwipableLeft()
-        .delayed(400)
-        .animated(true)
-        .show()
+          .setContentView(R.layout.review_show_case)
+          .on(R.id.card_view)
+          .displaySwipableLeft()
+          .delayed(400)
+          .animated(true)
+          .show()
     }
   }
 
