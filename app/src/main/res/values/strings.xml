@@ -82,7 +82,7 @@
   <string name="landing_learnt_title">LEARNT</string>
   <string name="landing_bookmarked_title">FAVORITES</string>
   <string name="landing_all_learned_words_count_title">Learnt Words</string>
-  <string name="landing_header_learnt_words">%d Kelime</string>
+  <string name="landing_header_learnt_words">%d Words</string>
   <string name="insert_word_title">Add New Word</string>
   <string name="new_word">Word</string>
   <string name="new_meaning">Meaning</string>
