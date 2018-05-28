@@ -35,6 +35,7 @@ import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog
 import io.realm.RealmList
 import timber.log.Timber
 import java.io.File
+import java.util.Locale
 import javax.inject.Inject
 
 
@@ -51,16 +52,20 @@ class NewWordActivity : BaseActivity(), NewWordView {
   @BindView(R.id.toolbar) lateinit var mToolbar: Toolbar
   @BindView(R.id.input_word) lateinit var mTextWord: TextInputEditText
   @BindView(R.id.input_meaning) lateinit var mTextMeaning: EditText
+  @BindView(R.id.input_turkish) lateinit var mTextTurkish: EditText
   @BindView(R.id.input_sentence) lateinit var mTextSentence: EditText
   @BindView(R.id.input_type) lateinit var mTextType: EditText
   @BindView(R.id.input_layout_word) lateinit var mTextLayoutWord: TextInputLayout
   @BindView(R.id.input_layout_meaning) lateinit var mTextLayoutMeaning: TextInputLayout
+  @BindView(R.id.input_layout_turkish) lateinit var mTextLayoutTurkish: TextInputLayout
   @BindView(R.id.new_word_bottom_sheet) lateinit var mBottomSheet: LinearLayout
   @BindView(R.id.frame_image_section) lateinit var mFrameUpload: FrameLayout
   @BindView(R.id.image_selected) lateinit var mImageSelected: ImageView
 
   override val layout: Int
     get() = R.layout.activity_new_word
+
+  private lateinit var userLanguage: String
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -72,6 +77,12 @@ class NewWordActivity : BaseActivity(), NewWordView {
     setupToolbar()
 
     setupBottomSheet()
+    userLanguage = Locale.getDefault().language
+
+    if (userLanguage != "tr") {
+      mTextLayoutTurkish.visibility = View.GONE
+    }
+
     mTextWord.afterTextChanged {
       if (mTextWord.text.toString().trim().isEmpty()) {
         mTextLayoutWord.error = getString(R.string.word_is_required)
@@ -142,6 +153,17 @@ class NewWordActivity : BaseActivity(), NewWordView {
       mTextLayoutWord.error = getString(string.word_min_length, 2)
     }
 
+    if (userLanguage == "tr") {
+      if (mTextTurkish.text.isEmpty()) {
+        isValid = false
+        mTextLayoutTurkish.error = getString(string.word_is_required)
+      }
+      if (mTextTurkish.text.length < 2) {
+        isValid = false
+        mTextLayoutTurkish.error = getString(string.word_min_length, 2)
+      }
+    }
+
     if (mTextMeaning.text.isEmpty()) {
       isValid = false
       mTextLayoutMeaning.error = getString(string.word_is_required)
@@ -156,13 +178,15 @@ class NewWordActivity : BaseActivity(), NewWordView {
 
   private fun doSubmit() {
     val english = mTextWord.text.toString().trim()
+    val turkish = mTextTurkish.text.toString().trim()
     val meaning = mTextMeaning.text.toString().trim()
     val sen = mTextSentence.text.toString().trim()
     val sentence = Sentense(title = sen)
     val sentences: RealmList<Sentense> = RealmList()
     sentences.add(sentence)
     val type = mTextType.text.toString().trim()
-    val word = Word(english = english, meaning = meaning, sentences = sentences, type = type)
+    val word = Word(english = english, turkish = turkish, meaning = meaning, sentences = sentences,
+        type = type)
     mPresenter.saveWord(word, mFile)
   }
 

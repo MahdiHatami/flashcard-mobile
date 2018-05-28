@@ -86,6 +86,7 @@
   <string name="insert_word_title">Add New Word</string>
   <string name="new_word">Word</string>
   <string name="new_meaning">Meaning</string>
+  <string name="new_turkish">Turkish meaning</string>
   <string name="new_sentence">Sentence</string>
   <string name="new_type">Type (noun, verb, etc.)</string>
   <string name="word_is_required">Word is required</string>

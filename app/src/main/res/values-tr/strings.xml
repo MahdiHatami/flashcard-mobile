@@ -85,7 +85,8 @@
   <string name="landing_all_learned_words_count_title">Öğrendiğim Kelimeler</string>
   <string name="landing_header_learnt_words">%d Kelime</string>
   <string name="new_word">Kelime</string>
-  <string name="new_meaning">Anlam</string>
+  <string name="new_meaning">İngilizge anlamı</string>
+  <string name="new_turkish">Türkçe anlamı</string>
   <string name="new_sentence">Cümle</string>
   <string name="new_type">Tip (noun, verb, etc.)</string>
   <string name="insert_word_title">Yeni Kelime Ekle</string>
