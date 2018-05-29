@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.support.annotation.NonNull
+import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.TextInputEditText
 import android.support.design.widget.TextInputLayout
@@ -61,6 +62,7 @@ class NewWordActivity : BaseActivity(), NewWordView {
   @BindView(R.id.new_word_bottom_sheet) lateinit var mBottomSheet: LinearLayout
   @BindView(R.id.frame_image_section) lateinit var mFrameUpload: FrameLayout
   @BindView(R.id.image_selected) lateinit var mImageSelected: ImageView
+  @BindView(R.id.constraint_turkish) lateinit var mConstraintTurkish: ConstraintLayout
 
   override val layout: Int
     get() = R.layout.activity_new_word
@@ -80,7 +82,7 @@ class NewWordActivity : BaseActivity(), NewWordView {
     userLanguage = Locale.getDefault().language
 
     if (userLanguage != "tr") {
-      mTextLayoutTurkish.visibility = View.GONE
+      mConstraintTurkish.visibility = View.GONE
     }
 
     mTextWord.afterTextChanged {
