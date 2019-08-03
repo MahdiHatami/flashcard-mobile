@@ -1,4 +1,4 @@
-package com.mutlak.metis.wordmem.features.landing;
+package com.mutlak.metis.wordmem.features.landing
 
 import com.mutlak.metis.wordmem.features.base.BaseView
 

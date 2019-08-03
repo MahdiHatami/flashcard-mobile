@@ -2,9 +2,9 @@ package com.mutlak.metis.wordmem.features.landing
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
@@ -100,7 +100,7 @@ class LandingActivity : BaseActivity(), LandingMvpView {
   }
 
   override fun onResume() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && launchedActivity) {
+    if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP && launchedActivity) {
       startRippleTransitionUnreveal()
       launchedActivity = false
     }
@@ -116,10 +116,11 @@ class LandingActivity : BaseActivity(), LandingMvpView {
   }
 
 
+  @SuppressLint("CheckResult")
   private fun setupView() {
     RxView.clicks(mPlusView).debounce(500, MILLISECONDS, AndroidSchedulers.mainThread())
         .subscribe {
-          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+          if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
             startRippleTransitionReveal()
           } else {
             startActivity()
@@ -190,7 +191,7 @@ class LandingActivity : BaseActivity(), LandingMvpView {
     val snackbar = Snackbar.make(mParentView, R.string.internet_not_available,
         Snackbar.LENGTH_INDEFINITE)
     snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.yellow))
-    snackbar.setAction(R.string.action_settings) { _ ->
+    snackbar.setAction(R.string.action_settings) {
       val intent = Intent(android.provider.Settings.ACTION_SETTINGS)
       startActivity(intent)
     }
@@ -258,7 +259,7 @@ class LandingActivity : BaseActivity(), LandingMvpView {
     mTotalLearntWordsView.text = getString(R.string.landing_header_learnt_words, totalLearnt)
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+  @RequiresApi(api = VERSION_CODES.LOLLIPOP)
   private fun startRippleTransitionUnreveal() {
     val animator: Animator = ViewAnimationUtils.createCircularReveal(
         mRippleView,
@@ -283,7 +284,7 @@ class LandingActivity : BaseActivity(), LandingMvpView {
     animator.start()
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+  @RequiresApi(api = VERSION_CODES.LOLLIPOP)
   private fun startRippleTransitionReveal() {
     mPlusView.visibility = View.INVISIBLE
     val animator: Animator = ViewAnimationUtils.createCircularReveal(mRippleView,

@@ -1,5 +1,6 @@
 package com.mutlak.metis.wordmem.features.landing
 
+import android.annotation.SuppressLint
 import com.mutlak.metis.wordmem.data.DataManager
 import com.mutlak.metis.wordmem.data.local.WordsRepositoryImpl
 import com.mutlak.metis.wordmem.data.model.Settings
@@ -74,10 +75,11 @@ constructor(private val repo: WordsRepositoryImpl,
   }
 
 
+  @SuppressLint("CheckResult")
   fun loadWords(lastFetchDate: String = "") {
     view?.showBookLoading()
     dataManager.getWords(lastFetchDate)
-        .compose<List<Word>>(SchedulerUtils.ioToMain<List<Word>>())
+        .compose(SchedulerUtils.ioToMain<List<Word>>())
         .subscribe({ words ->
           view?.hideBookLoading()
           updateWordsFetchedDate()
