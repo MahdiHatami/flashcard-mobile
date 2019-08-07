@@ -4,21 +4,12 @@ import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.support.annotation.NonNull
-import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.TextInputEditText
-import android.support.design.widget.TextInputLayout
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.Toast
-import butterknife.BindView
 import butterknife.OnClick
 import com.bumptech.glide.Glide
 import com.mlsdev.rximagepicker.RxImageConverters
@@ -33,7 +24,21 @@ import com.mutlak.metis.wordmem.extension.hide
 import com.mutlak.metis.wordmem.extension.show
 import com.mutlak.metis.wordmem.features.base.BaseActivity
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog
+import io.reactivex.disposables.Disposable
 import io.realm.RealmList
+import kotlinx.android.synthetic.main.activity_new_word.constraintTurkish
+import kotlinx.android.synthetic.main.activity_new_word.frameImageSection
+import kotlinx.android.synthetic.main.activity_new_word.imageSelected
+import kotlinx.android.synthetic.main.activity_new_word.inputLayoutMeaning
+import kotlinx.android.synthetic.main.activity_new_word.inputLayoutTurkish
+import kotlinx.android.synthetic.main.activity_new_word.inputLayoutWord
+import kotlinx.android.synthetic.main.activity_new_word.inputMeaning
+import kotlinx.android.synthetic.main.activity_new_word.inputSentence
+import kotlinx.android.synthetic.main.activity_new_word.inputTurkish
+import kotlinx.android.synthetic.main.activity_new_word.inputType
+import kotlinx.android.synthetic.main.activity_new_word.inputWord
+import kotlinx.android.synthetic.main.activity_new_word.toolbarNewWord
+import kotlinx.android.synthetic.main.choose_photo_source.bottomSheetNewWord
 import timber.log.Timber
 import java.io.File
 import java.util.Locale
@@ -45,24 +50,10 @@ class NewWordActivity : BaseActivity(), NewWordView {
   @Inject
   lateinit var mPresenter: NewWordPresenter
 
-  val TAG: String = NewWordActivity::class.java.simpleName
+  private var disposable: Disposable? = null
   private lateinit var mBottomSheetBehavior: BottomSheetBehavior<*>
   private var isFormValid: Boolean = false
   private var mFile: File? = null
-
-  @BindView(R.id.toolbar) lateinit var mToolbar: Toolbar
-  @BindView(R.id.input_word) lateinit var mTextWord: TextInputEditText
-  @BindView(R.id.input_meaning) lateinit var mTextMeaning: EditText
-  @BindView(R.id.input_turkish) lateinit var mTextTurkish: EditText
-  @BindView(R.id.input_sentence) lateinit var mTextSentence: EditText
-  @BindView(R.id.input_type) lateinit var mTextType: EditText
-  @BindView(R.id.input_layout_word) lateinit var mTextLayoutWord: TextInputLayout
-  @BindView(R.id.input_layout_meaning) lateinit var mTextLayoutMeaning: TextInputLayout
-  @BindView(R.id.input_layout_turkish) lateinit var mTextLayoutTurkish: TextInputLayout
-  @BindView(R.id.new_word_bottom_sheet) lateinit var mBottomSheet: LinearLayout
-  @BindView(R.id.frame_image_section) lateinit var mFrameUpload: FrameLayout
-  @BindView(R.id.image_selected) lateinit var mImageSelected: ImageView
-  @BindView(R.id.constraint_turkish) lateinit var mConstraintTurkish: ConstraintLayout
 
   override val layout: Int
     get() = R.layout.activity_new_word
@@ -82,42 +73,36 @@ class NewWordActivity : BaseActivity(), NewWordView {
     userLanguage = Locale.getDefault().language
 
     if (userLanguage != "tr") {
-      mConstraintTurkish.visibility = View.GONE
+      constraintTurkish.visibility = View.GONE
     }
 
-    mTextWord.afterTextChanged {
-      if (mTextWord.text.toString().trim().isEmpty()) {
-        mTextLayoutWord.error = getString(R.string.word_is_required)
+    inputWord.afterTextChanged {
+      if (inputWord.text.toString().trim().isEmpty()) {
+        inputLayoutWord.error = getString(string.word_is_required)
         isFormValid = false
       } else {
         isFormValid = true
-        mTextLayoutWord.error = null
+        inputLayoutWord.error = null
       }
     }
   }
 
   private fun setupBottomSheet() {
 
-    mBottomSheetBehavior = BottomSheetBehavior.from<View>(mBottomSheet)
+    mBottomSheetBehavior = BottomSheetBehavior.from<View>(bottomSheetNewWord)
     mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
     mBottomSheetBehavior.setBottomSheetCallback(
         object : BottomSheetBehavior.BottomSheetCallback() {
           override fun onSlide(@NonNull bottomSheet: View, slideOffset: Float) {}
 
-          override fun onStateChanged(@NonNull bottomSheet: View, newState: Int) {
-            when (newState) {
-              BottomSheetBehavior.STATE_SETTLING -> Timber.i(TAG, "onStateChanged: settle")
-              BottomSheetBehavior.STATE_COLLAPSED -> Timber.i(TAG, "onStateChanged: collapsed")
-              BottomSheetBehavior.STATE_EXPANDED -> Timber.i(TAG, "onStateChanged: expanded")
-            }
-          }
+          override fun onStateChanged(@NonNull bottomSheet: View, newState: Int) {}
         })
 
   }
 
   private fun setupToolbar() {
-    setSupportActionBar(mToolbar)
+    setSupportActionBar(toolbarNewWord)
     if (supportActionBar != null) {
       supportActionBar!!.setDisplayHomeAsUpEnabled(true)
       supportActionBar!!.setDisplayShowHomeEnabled(true)
@@ -146,53 +131,53 @@ class NewWordActivity : BaseActivity(), NewWordView {
   private fun isFormValid(): Boolean {
     var isValid = true
 
-    if (mTextWord.text.isEmpty()) {
+    if (inputWord.text.isEmpty()) {
       isValid = false
-      mTextLayoutWord.error = getString(string.word_is_required)
+      inputLayoutWord.error = getString(string.word_is_required)
     }
-    if (mTextWord.text.length < 2) {
+    if (inputWord.text.length < 2) {
       isValid = false
-      mTextLayoutWord.error = getString(string.word_min_length, 2)
+      inputLayoutWord.error = getString(string.word_min_length, 2)
     }
 
     if (userLanguage == "tr") {
-      if (mTextTurkish.text.isEmpty()) {
+      if (inputTurkish.text.isEmpty()) {
         isValid = false
-        mTextLayoutTurkish.error = getString(string.word_is_required)
+        inputLayoutTurkish.error = getString(string.word_is_required)
       }
-      if (mTextTurkish.text.length < 2) {
+      if (inputTurkish.text.length < 2) {
         isValid = false
-        mTextLayoutTurkish.error = getString(string.word_min_length, 2)
+        inputLayoutTurkish.error = getString(string.word_min_length, 2)
       }
     }
 
-    if (mTextMeaning.text.isEmpty()) {
+    if (inputMeaning.text.isEmpty()) {
       isValid = false
-      mTextLayoutMeaning.error = getString(string.word_is_required)
+      inputLayoutMeaning.error = getString(string.word_is_required)
     }
-    if (mTextMeaning.text.length < 5) {
+    if (inputMeaning.text.length < 5) {
       isValid = false
-      mTextLayoutMeaning.error = getString(string.word_min_length, 5)
+      inputLayoutMeaning.error = getString(string.word_min_length, 5)
     }
 
     return isValid
   }
 
   private fun doSubmit() {
-    val english = mTextWord.text.toString().trim()
-    val turkish = mTextTurkish.text.toString().trim()
-    val meaning = mTextMeaning.text.toString().trim()
-    val sen = mTextSentence.text.toString().trim()
+    val english = inputWord.text.toString().trim()
+    val turkish = inputTurkish.text.toString().trim()
+    val meaning = inputMeaning.text.toString().trim()
+    val sen = inputSentence.text.toString().trim()
     val sentence = Sentense(title = sen)
     val sentences: RealmList<Sentense> = RealmList()
     sentences.add(sentence)
-    val type = mTextType.text.toString().trim()
+    val type = inputType.text.toString().trim()
     val word = Word(english = english, turkish = turkish, meaning = meaning, sentences = sentences,
         type = type)
     mPresenter.saveWord(word, mFile)
   }
 
-  @OnClick(R.id.frame_image_section)
+  @OnClick(R.id.frameImageSection)
   fun imageOnClick() {
     mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
   }
@@ -203,7 +188,7 @@ class NewWordActivity : BaseActivity(), NewWordView {
           mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
 
         val outRect = Rect()
-        mBottomSheet.getGlobalVisibleRect(outRect)
+        bottomSheetNewWord.getGlobalVisibleRect(outRect)
 
         if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt()))
           mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -226,26 +211,31 @@ class NewWordActivity : BaseActivity(), NewWordView {
 
   private fun pickImage(source: Sources) {
     mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-    RxImagePicker.with(this).requestImage(source).flatMap { uri ->
+    disposable = RxImagePicker.with(this).requestImage(source).flatMap { uri ->
       RxImageConverters.uriToFile(this, uri, File.createTempFile("image", ".jpg"))
-    }.subscribe({
-      mFrameUpload.hide()
-      mImageSelected.show()
-      Glide.with(this).load(it).asBitmap().into(mImageSelected)
+    }.subscribe {
+      frameImageSection.hide()
+      imageSelected.show()
+      Glide.with(this).load(it).asBitmap().into(imageSelected)
       mFile = it
-    })
+    }
   }
 
   override fun cleanForm() {
-    mTextWord.text.clear()
-    mTextMeaning.text.clear()
-    mTextTurkish.text.clear()
-    mTextSentence.text.clear()
-    mTextType.text.clear()
-    mImageSelected.hide()
-    mFrameUpload.show()
+    inputWord.text.clear()
+    inputMeaning.text.clear()
+    inputTurkish.text.clear()
+    inputSentence.text.clear()
+    inputType.text.clear()
+    imageSelected.hide()
+    frameImageSection.show()
 
-    mTextWord.requestFocus()
+    inputWord.requestFocus()
+  }
+
+  override fun onDestroy() {
+    disposable?.dispose()
+    super.onDestroy()
   }
 
   override fun showAlert(title: Int, message: Int, type: Int) {

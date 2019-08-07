@@ -14,7 +14,7 @@
       >
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarNewWord"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/landing_plus"
@@ -29,7 +29,6 @@
       android:fillViewport="true"
       >
     <LinearLayout
-        android:id="@+id/constraint_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -53,13 +52,13 @@
             style="@style/new_word_icon"
             />
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_word"
+            android:id="@+id/inputLayoutWord"
             app:errorEnabled="true"
             style="@style/new_word_input_layout"
             >
 
           <android.support.design.widget.TextInputEditText
-              android:id="@+id/input_word"
+              android:id="@+id/inputWord"
               android:hint="@string/new_word"
               style="@style/new_word_input"
               />
@@ -68,7 +67,7 @@
 
       <!--turkish-->
       <android.support.constraint.ConstraintLayout
-          android:id="@+id/constraint_turkish"
+          android:id="@+id/constraintTurkish"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/new_word_row_margin_top"
@@ -83,12 +82,12 @@
             app:srcCompat="@drawable/ic_contract"
             />
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_turkish"
+            android:id="@+id/inputLayoutTurkish"
             app:errorEnabled="true"
             style="@style/new_word_input_layout"
             >
           <EditText
-              android:id="@+id/input_turkish"
+              android:id="@+id/inputTurkish"
               android:hint="@string/new_turkish"
               style="@style/new_word_input"
               />
@@ -110,12 +109,12 @@
             style="@style/new_word_icon"
             />
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_meaning"
+            android:id="@+id/inputLayoutMeaning"
             app:errorEnabled="true"
             style="@style/new_word_input_layout"
             >
           <EditText
-              android:id="@+id/input_meaning"
+              android:id="@+id/inputMeaning"
               android:hint="@string/new_meaning"
               style="@style/new_word_input"
               />
@@ -138,12 +137,12 @@
             app:srcCompat="@drawable/ic_contract"
             />
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_sentence"
+            android:id="@+id/inputLayoutSentence"
             app:errorEnabled="true"
             style="@style/new_word_input_layout"
             >
           <EditText
-              android:id="@+id/input_sentence"
+              android:id="@+id/inputSentence"
               android:hint="@string/new_sentence"
               style="@style/new_word_input"
               />
@@ -166,12 +165,12 @@
             app:srcCompat="@drawable/ic_contract"
             />
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_type"
+            android:id="@+id/inputLayoutType"
             app:errorEnabled="true"
             style="@style/new_word_input_layout"
             >
           <EditText
-              android:id="@+id/input_type"
+              android:id="@+id/inputType"
               android:hint="@string/new_type"
               style="@style/new_word_input"
               />
@@ -180,7 +179,7 @@
 
       <!--image upload-->
       <FrameLayout
-          android:id="@+id/frame_image_section"
+          android:id="@+id/frameImageSection"
           android:layout_width="match_parent"
           android:layout_height="100dp"
           android:background="@drawable/add_file_bg"
@@ -200,7 +199,7 @@
       </FrameLayout>
 
       <ImageView
-          android:id="@+id/image_selected"
+          android:id="@+id/imageSelected"
           android:layout_width="match_parent"
           android:layout_height="150dp"
           android:layout_marginLeft="32dp"
