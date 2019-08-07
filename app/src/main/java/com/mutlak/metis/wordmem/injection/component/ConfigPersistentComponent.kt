@@ -1,10 +1,10 @@
 package com.mutlak.metis.wordmem.injection.component
 
+import com.mutlak.metis.wordmem.features.base.BaseActivity
+import com.mutlak.metis.wordmem.features.base.BaseFragment
 import com.mutlak.metis.wordmem.injection.ConfigPersistent
 import com.mutlak.metis.wordmem.injection.module.ActivityModule
 import com.mutlak.metis.wordmem.injection.module.FragmentModule
-import com.mutlak.metis.wordmem.features.base.BaseActivity
-import com.mutlak.metis.wordmem.features.base.BaseFragment
 import dagger.Component
 
 /**
@@ -15,7 +15,7 @@ import dagger.Component
  * configuration changes (for example Presenters).
  */
 @ConfigPersistent
-@Component(dependencies = arrayOf(ApplicationComponent::class))
+@Component(dependencies = [ApplicationComponent::class])
 interface ConfigPersistentComponent {
 
   fun activityComponent(activityModule: ActivityModule): ActivityComponent

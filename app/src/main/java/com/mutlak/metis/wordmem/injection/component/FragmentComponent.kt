@@ -10,7 +10,7 @@ import dagger.Subcomponent
  * This component inject dependencies to all Fragments across the application
  */
 @PerFragment
-@Subcomponent(modules = arrayOf(FragmentModule::class))
+@Subcomponent(modules = [FragmentModule::class])
 interface FragmentComponent {
 
   fun inject(reviewFragment: ReviewFragment)

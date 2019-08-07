@@ -58,7 +58,7 @@ class NewWordActivity : BaseActivity(), NewWordView {
   override val layout: Int
     get() = R.layout.activity_new_word
 
-  private lateinit var userLanguage: String
+  private val userLanguage: String = Locale.getDefault().language
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -70,7 +70,6 @@ class NewWordActivity : BaseActivity(), NewWordView {
     setupToolbar()
 
     setupBottomSheet()
-    userLanguage = Locale.getDefault().language
 
     if (userLanguage != "tr") {
       constraintTurkish.visibility = View.GONE
