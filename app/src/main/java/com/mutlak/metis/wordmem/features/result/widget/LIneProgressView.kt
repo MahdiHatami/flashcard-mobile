@@ -29,9 +29,9 @@ class LIneProgressView(context: Context, attrs: AttributeSet) : View(context, at
 
   private var mTextColor: Int = 0
 
-  private var mRectF: RectF? = null
-  private var mBackgroundPaint: Paint? = null
-  private var mCirclePaint: Paint? = null
+  private lateinit var mRectF: RectF
+  private lateinit var mBackgroundPaint: Paint
+  private lateinit var mCirclePaint: Paint
   var interpolator: Interpolator? = null
 
   private var mIsTextEnabled: Boolean = false
@@ -73,6 +73,7 @@ class LIneProgressView(context: Context, attrs: AttributeSet) : View(context, at
       mTextColor = typedArray.getInt(styleable.CircularProgressView_cpv_text_color, mTextColor)
       mTextSize = typedArray.getInt(styleable.CircularProgressView_cpv_text_size, mTextSize)
       mTextPrefix = typedArray.getString(styleable.CircularProgressView_cpv_text_prefix)
+          .toString()
     } finally {
       typedArray.recycle()
     }

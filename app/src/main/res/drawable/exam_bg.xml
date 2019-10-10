@@ -9,9 +9,5 @@
         android:startColor="@color/landing_header_start"
         android:type="linear"/>
 
-    <corners
-        android:bottomLeftRadius="0dp"
-        android:bottomRightRadius="0dp"
-        />
 
 </shape>

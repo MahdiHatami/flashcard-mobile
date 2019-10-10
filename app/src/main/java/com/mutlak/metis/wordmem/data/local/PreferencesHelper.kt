@@ -31,7 +31,7 @@ constructor(@ApplicationContext context: Context) {
     editor.apply()
   }
 
-  fun getString(key: String, defValue: String): String {
+  fun getString(key: String, defValue: String): String? {
     return mPref.getString(key, defValue)
   }
 

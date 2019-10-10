@@ -72,7 +72,7 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
     super.onCreate(savedInstanceState)
     fragmentComponent().inject(this)
     mPresenter.attachView(this)
-    reviewType = activity!!.intent.extras.getInt(LandingActivity.REVIEW_TYPE)
+    reviewType = activity!!.intent.extras!!.getInt(LandingActivity.REVIEW_TYPE)
 
     isShowViewPresented = mPref.getBoolean(ShowView.REVIEW, false)
   }

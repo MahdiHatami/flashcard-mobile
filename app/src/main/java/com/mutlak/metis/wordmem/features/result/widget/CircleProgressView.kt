@@ -1,6 +1,5 @@
 package com.mutlak.metis.wordmem.features.result.widget
 
-
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.content.Context
@@ -16,7 +15,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.mutlak.metis.wordmem.R
 
-class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, attrs) {
+class CircleProgressView(
+  context: Context,
+  attrs: AttributeSet
+) : View(context, attrs) {
   private var mProgress: Float = 0.toFloat()
   private var circleWidth: Float = 0.toFloat()
   private var backgroundStrokeWidth: Float = 0.toFloat()
@@ -26,9 +28,9 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
 
   private var mTextColor: Int = 0
 
-  private var mRectF: RectF? = null
-  private var mBackgroundPaint: Paint? = null
-  private var mCirclePaint: Paint? = null
+  private lateinit var mRectF: RectF
+  private lateinit var mBackgroundPaint: Paint
+  private lateinit var mCirclePaint: Paint
   var interpolator: Interpolator? = null
 
   private var mIsTextEnabled: Boolean = false
@@ -48,44 +50,56 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
     init(context, attrs)
   }
 
-  private fun init(context: Context, attrs: AttributeSet) {
+  private fun init(
+    context: Context,
+    attrs: AttributeSet
+  ) {
     mRectF = RectF()
 
     setDefaultValues()
-    val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.CircularProgressView,
-        0, 0)
+    val typedArray = context.theme.obtainStyledAttributes(
+        attrs, R.styleable.CircularProgressView,
+        0, 0
+    )
 
     try {
       mProgress = typedArray.getFloat(R.styleable.CircularProgressView_cpv_progress, mProgress)
-      circleWidth = typedArray.getDimension(R.styleable.CircularProgressView_cpv_circle_width,
-          circleWidth)
+      circleWidth = typedArray.getDimension(
+          R.styleable.CircularProgressView_cpv_circle_width,
+          circleWidth
+      )
       backgroundStrokeWidth = typedArray.getDimension(
           R.styleable.CircularProgressView_cpv_background_circle_width,
-          backgroundStrokeWidth)
-      mCircleColor = typedArray.getInt(R.styleable.CircularProgressView_cpv_circle_color,
-          mCircleColor)
+          backgroundStrokeWidth
+      )
+      mCircleColor = typedArray.getInt(
+          R.styleable.CircularProgressView_cpv_circle_color,
+          mCircleColor
+      )
       mBackgroundColor = typedArray.getInt(
           R.styleable.CircularProgressView_cpv_background_circle_color,
-          mBackgroundColor)
+          mBackgroundColor
+      )
       mTextColor = typedArray.getInt(R.styleable.CircularProgressView_cpv_text_color, mTextColor)
       mTextSize = typedArray.getInt(R.styleable.CircularProgressView_cpv_text_size, mTextSize)
       mTextPrefix = typedArray.getString(R.styleable.CircularProgressView_cpv_text_prefix)
+          .toString()
     } finally {
       typedArray.recycle()
     }
 
     // Init Background
     mBackgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    mBackgroundPaint?.color = mBackgroundColor
-    mBackgroundPaint?.style = Paint.Style.STROKE
-    mBackgroundPaint?.strokeWidth = backgroundStrokeWidth
+    mBackgroundPaint.color = mBackgroundColor
+    mBackgroundPaint.style = Paint.Style.STROKE
+    mBackgroundPaint.strokeWidth = backgroundStrokeWidth
 
     // Init Circle
     mCirclePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    mCirclePaint?.color = mCircleColor
-    mCirclePaint?.style = Paint.Style.STROKE
-    mCirclePaint?.strokeCap = Paint.Cap.ROUND
-    mCirclePaint?.strokeWidth = circleWidth
+    mCirclePaint.color = mCircleColor
+    mCirclePaint.style = Paint.Style.STROKE
+    mCirclePaint.strokeCap = Paint.Cap.ROUND
+    mCirclePaint.strokeWidth = circleWidth
 
     // Init TextView
     mTextView = TextView(context)
@@ -129,25 +143,30 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
     canvas.drawArc(mRectF, startAngle, angle, false, mCirclePaint)
 
     // Draw TextView
-    mLayout.measure(canvas.width, canvas.height)
-    mLayout.layout(0, 0, canvas.width, canvas.height)
-    canvas.translate((canvas.width / 2 - mTextView?.width!! / 2).toFloat(),
-        (canvas.height / 2 - mTextView?.height!! / 2).toFloat())
+    mLayout.measure(width, height)
+    mLayout.layout(0, 0, width, height)
+    canvas.translate(
+        (width / 2 - mTextView?.width!! / 2).toFloat(),
+        (height / 2 - mTextView?.height!! / 2).toFloat()
+    )
     mLayout.draw(canvas)
   }
 
-  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+  override fun onMeasure(
+    widthMeasureSpec: Int,
+    heightMeasureSpec: Int
+  ) {
     val height = View.getDefaultSize(suggestedMinimumHeight, heightMeasureSpec)
     val width = View.getDefaultSize(suggestedMinimumWidth, widthMeasureSpec)
     val min = Math.min(width, height)
     setMeasuredDimension(min, min)
     val stroke = if (circleWidth > backgroundStrokeWidth) circleWidth else backgroundStrokeWidth
-    mRectF?.set(0 + stroke / 2, 0 + stroke / 2, min - stroke / 2, min - stroke / 2)
+    mRectF.set(0 + stroke / 2, 0 + stroke / 2, min - stroke / 2, min - stroke / 2)
   }
 
   fun setCirclerWidth(circleWidth: Float) {
     this.circleWidth = circleWidth
-    mCirclePaint?.strokeWidth = circleWidth
+    mCirclePaint.strokeWidth = circleWidth
     requestLayout()
     invalidate()
   }
@@ -156,7 +175,7 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
     get() = mCircleColor
     set(circleColor) {
       this.mCircleColor = circleColor
-      mCirclePaint?.color = circleColor
+      mCirclePaint.color = circleColor
       invalidate()
     }
 
@@ -211,10 +230,14 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
       invalidate()
     }
 
-  fun setProgressWithAnimation(progress: Float, duration: Int) {
+  fun setProgressWithAnimation(
+    progress: Float,
+    duration: Int
+  ) {
     val objectAnimator = ObjectAnimator.ofFloat(this, "progress", progress)
     objectAnimator.duration = duration.toLong()
-    objectAnimator.interpolator = if (interpolator != null) interpolator else DecelerateInterpolator()
+    objectAnimator.interpolator =
+      if (interpolator != null) interpolator else DecelerateInterpolator()
     objectAnimator.addListener(object : Animator.AnimatorListener {
       override fun onAnimationStart(animation: Animator) {
 
