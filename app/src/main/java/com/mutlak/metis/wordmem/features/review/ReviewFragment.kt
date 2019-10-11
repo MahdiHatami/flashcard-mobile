@@ -24,7 +24,6 @@ import com.mutlak.metis.wordmem.features.landing.LandingActivity
 import java.util.Date
 import javax.inject.Inject
 
-
 class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
 
   override fun getContext(): Context {
@@ -88,7 +87,8 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
 
   private fun displayShowcase() {
     if (!isShowViewPresented) {
-      showCaseView = ShowcaseView.Builder(activity).setTarget(ViewTarget(mLearnt))
+      showCaseView = ShowcaseView.Builder(activity)
+          .setTarget(ViewTarget(mLearnt))
           .setStyle(R.style.CustomShowcaseTheme)
           .setContentTitle(getString(R.string.showcase_learnt_title))
           .setContentText(getString(R.string.showcase_learnt_content))
@@ -127,7 +127,11 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
 
   private fun setupViewPager() {
     mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-      override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+      override fun onPageScrolled(
+        position: Int,
+        positionOffset: Float,
+        positionOffsetPixels: Int
+      ) {
         if (checkDirection) {
           if (thresholdOffset > positionOffset) {
             // going right
@@ -185,9 +189,9 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
   }
 
   override fun changeSwitchesState() {
-    mLearnt.isIconEnabled = currentWord!!.learnt
-    mIgnore.isIconEnabled = currentWord!!.ignored
-    mBookmark.isIconEnabled = currentWord!!.bookmarked
+    mLearnt.setIconEnabled(currentWord!!.learnt)
+    mIgnore.setIconEnabled(currentWord!!.ignored)
+    mBookmark.setIconEnabled(currentWord!!.bookmarked)
   }
 
   override fun hideLoading() {
@@ -210,7 +214,8 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
     mViewPager.adapter = adapter
 
     if (currentWord != null) {
-      currentWord = list.iterator().next()
+      currentWord = list.iterator()
+          .next()
       currentWord!!.lastSeen = Date()
       currentWord!!.totalReview = currentWord!!.totalReview.plus(1)
       mPresenter.updateWord(currentWord!!)
@@ -224,10 +229,14 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
     activity!!.finish()
   }
 
-  override fun showAlert(title: Int, content: Int) {
+  override fun showAlert(
+    title: Int,
+    content: Int
+  ) {
     if (mAlertDialog == null) {
       mAlertDialog = activity?.let {
-        MaterialDialog.Builder(it).title(title)
+        MaterialDialog.Builder(it)
+            .title(title)
             .content(content)
             .cancelable(false)
             .positiveText(R.string.ok)
@@ -293,7 +302,10 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
     }
   }
 
-  private fun setAlpha(alpha: Float, vararg views: View) {
+  private fun setAlpha(
+    alpha: Float,
+    vararg views: View
+  ) {
     for (view in views) {
       view.alpha = alpha
     }
@@ -312,7 +324,6 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
       return ReviewFragment()
     }
   }
-
 
   object ShowView {
     val REVIEW = "review_show_case"
