@@ -88,7 +88,7 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
   private fun displayShowcase() {
     if (!isShowViewPresented) {
       showCaseView = ShowcaseView.Builder(activity)
-          .setTarget(ViewTarget(mLearnt))
+          .setTarget(ViewTarget(R.id.learnt_switch, activity))
           .setStyle(R.style.CustomShowcaseTheme)
           .setContentTitle(getString(R.string.showcase_learnt_title))
           .setContentText(getString(R.string.showcase_learnt_content))
@@ -264,13 +264,13 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
   override fun onClick(v: View) {
     when (counter) {
       0 -> {
-        showCaseView!!.setShowcase(ViewTarget(mIgnore), true)
+        showCaseView?.setShowcase(ViewTarget(R.id.ignore_switch, activity), true)
         showCaseView!!.setContentTitle(getString(R.string.showcase_ignore_title))
         showCaseView!!.setContentText(getString(R.string.showcase_ignore_content))
       }
 
       1 -> {
-        showCaseView!!.setShowcase(ViewTarget(mBookmark), true)
+        showCaseView!!.setShowcase(ViewTarget(R.id.bookmark_switch, activity), true)
         showCaseView!!.setContentTitle(getString(R.string.showcase_favorite_title))
         showCaseView!!.setContentText(getString(R.string.showcase_favorite_content))
       }
@@ -283,7 +283,7 @@ class ReviewFragment : BaseFragment(), ReviewView, View.OnClickListener {
       }
       3 -> {
         showCaseView!!.hide()
-        setAlpha(1.0f, mLearnt, mIgnore, mBookmark)
+//        setAlpha(1.0f, mLearnt, mIgnore, mBookmark)
         displaySwipe()
       }
     }
