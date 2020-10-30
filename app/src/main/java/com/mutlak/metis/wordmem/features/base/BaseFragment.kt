@@ -1,11 +1,11 @@
 package com.mutlak.metis.wordmem.features.base
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.util.LongSparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.collection.LongSparseArray
+import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
 import com.afollestad.materialdialogs.MaterialDialog
 import com.mutlak.metis.wordmem.MutlakApplication

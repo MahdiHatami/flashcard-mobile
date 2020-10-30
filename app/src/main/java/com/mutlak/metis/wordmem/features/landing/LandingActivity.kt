@@ -9,12 +9,6 @@ import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.os.Handler
-import android.support.annotation.RequiresApi
-import android.support.constraint.ConstraintLayout
-import android.support.design.widget.Snackbar
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.WindowManager.LayoutParams
@@ -26,8 +20,14 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat
 import butterknife.BindView
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.extension.show
@@ -196,7 +196,7 @@ class LandingActivity : BaseActivity(), LandingMvpView {
       startActivity(intent)
     }
     val view = snackbar.view
-    val tv = view.findViewById<View>(android.support.design.R.id.snackbar_text) as TextView
+    val tv = view.findViewById<View>(com.google.android.material.R.id.snackbar_text) as TextView
     tv.setTextColor(ContextCompat.getColor(this, R.color.accent))
     snackbar.show()
   }

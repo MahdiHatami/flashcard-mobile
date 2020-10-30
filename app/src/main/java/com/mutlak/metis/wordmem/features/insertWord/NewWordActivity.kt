@@ -3,8 +3,6 @@ package com.mutlak.metis.wordmem.features.insertWord
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.support.annotation.NonNull
-import android.support.design.widget.BottomSheetBehavior
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -12,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import butterknife.OnClick
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mlsdev.rximagepicker.RxImageConverters
 import com.mlsdev.rximagepicker.RxImagePicker
 import com.mlsdev.rximagepicker.Sources
@@ -24,6 +23,7 @@ import com.mutlak.metis.wordmem.extension.hide
 import com.mutlak.metis.wordmem.extension.show
 import com.mutlak.metis.wordmem.features.base.BaseActivity
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog
+import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.Disposable
 import io.realm.RealmList
 import kotlinx.android.synthetic.main.activity_new_word.constraintTurkish
@@ -130,11 +130,11 @@ class NewWordActivity : BaseActivity(), NewWordView {
   private fun isFormValid(): Boolean {
     var isValid = true
 
-    if (inputWord.text.isEmpty()) {
+    if (inputWord.text!!.isEmpty()) {
       isValid = false
       inputLayoutWord.error = getString(string.word_is_required)
     }
-    if (inputWord.text.length < 2) {
+    if (inputWord.text!!.length < 2) {
       isValid = false
       inputLayoutWord.error = getString(string.word_min_length, 2)
     }
@@ -221,7 +221,7 @@ class NewWordActivity : BaseActivity(), NewWordView {
   }
 
   override fun cleanForm() {
-    inputWord.text.clear()
+    inputWord.text!!.clear()
     inputMeaning.text.clear()
     inputTurkish.text.clear()
     inputSentence.text.clear()

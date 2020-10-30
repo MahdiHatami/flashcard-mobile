@@ -3,12 +3,6 @@ package com.mutlak.metis.wordmem.features.result
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.NonNull
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.LayoutManager
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Interpolator
@@ -16,11 +10,17 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.NonNull
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import butterknife.BindView
 import butterknife.OnClick
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.data.model.Settings
@@ -84,13 +84,14 @@ class ResultActivity : BaseActivity(), ResultView {
 
     mSettings = mPresenter.getSetting()
 
-    MobileAds.initialize(this, AdsUtil.APP_ID)
+    // todo: commend  lines i was on harry look agai to solve the error :)
+//    MobileAds.initialize(this, AdsUtil.APP_ID)
     mInterstitialAd = InterstitialAd(this)
     mInterstitialAd.adUnitId = AD_INTERSTITIAL
     val request = AdRequest.Builder()
         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)  // An example device ID
         .build()
-    mInterstitialAd.loadAd(request)
+//    mInterstitialAd.loadAd(request)
 
 
     if (intent.hasExtra(QuizActivity.EXAM_SESSION)) {

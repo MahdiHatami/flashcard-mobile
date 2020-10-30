@@ -6,9 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.CardView
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -16,6 +13,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -66,7 +66,7 @@ class CardFragment : Fragment() {
 
     mWordText.text = mWord!!.english
     mMeaning.text = mWord!!.meaning
-    Glide.with(this)
+    Glide.with(activity)
         .load<Any>("http://mutlakyazilim.com/kelimeEzber/" + mWord!!.image)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .into(mWordImage)

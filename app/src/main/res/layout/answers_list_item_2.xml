@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     >
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/answer_card_view"
         style="@style/answer_card"
         android:layout_margin="3dp"
@@ -19,7 +19,7 @@
 
             <TextView
                 android:id="@+id/test_option"
-                fontPath="fonts/Ubuntu-Bold.ttf"
+                android:fontPath="fonts/Ubuntu-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -39,7 +39,7 @@
 
             <TextView
                 android:id="@+id/test_item_word"
-                fontPath="fonts/Ubuntu-Regular.ttf"
+                android:fontPath="fonts/Ubuntu-Regular.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -48,6 +48,6 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

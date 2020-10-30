@@ -51,10 +51,10 @@ class TakeQuizFragment : BaseFragment() {
     mQuizText.text = String.format(Locale.US, "%d %s", settings!!.quizLimit,
         getString(R.string.words))
 
-
-    MobileAds.initialize(activity, AdsUtil.APP_ID)
+    // TODO: 10/30/20  
+//    MobileAds.initialize(activity, AdsUtil.APP_ID)
     val adRequest = AdRequest.Builder().build()
-    mAdView.loadAd(adRequest)
+//    mAdView.loadAd(adRequest)
   }
 
   @OnClick(R.id.result_home_linear)

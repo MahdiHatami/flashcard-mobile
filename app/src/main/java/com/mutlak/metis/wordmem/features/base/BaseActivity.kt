@@ -3,11 +3,11 @@ package com.mutlak.metis.wordmem.features.base
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v4.util.LongSparseArray
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.util.LongSparseArray
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import butterknife.ButterKnife
 import com.afollestad.materialdialogs.MaterialDialog
 import com.mutlak.metis.wordmem.MutlakApplication
@@ -123,6 +123,5 @@ abstract class BaseActivity : AppCompatActivity() {
       window.statusBarColor = ContextCompat.getColor(this, color)
     }
   }
-
 
 }

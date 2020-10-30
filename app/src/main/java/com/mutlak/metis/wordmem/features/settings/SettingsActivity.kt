@@ -7,10 +7,6 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.widget.AppCompatSpinner
-import android.support.v7.widget.SwitchCompat
-import android.support.v7.widget.Toolbar
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
@@ -21,6 +17,9 @@ import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TimePicker
+import androidx.appcompat.widget.AppCompatSpinner
+import androidx.appcompat.widget.SwitchCompat
+import androidx.appcompat.widget.Toolbar
 import butterknife.BindView
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.R.id
@@ -31,6 +30,7 @@ import com.mutlak.metis.wordmem.util.AlarmReciever
 import io.realm.Realm
 import java.sql.Time
 import java.util.Calendar
+import androidx.fragment.app.DialogFragment
 
 class SettingsActivity : BaseActivity() {
 

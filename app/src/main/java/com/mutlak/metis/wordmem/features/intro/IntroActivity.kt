@@ -2,8 +2,8 @@ package com.mutlak.metis.wordmem.features.intro
 
 import android.content.*
 import android.os.*
-import android.support.v4.app.*
-import android.support.v4.content.*
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.github.paolorotolo.appintro.*
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.data.local.*

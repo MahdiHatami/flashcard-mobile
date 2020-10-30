@@ -1,13 +1,11 @@
 package com.mutlak.metis.wordmem
 
 import android.content.*
-import android.support.multidex.*
-import com.crashlytics.android.*
+import androidx.multidex.MultiDexApplication
 import com.facebook.stetho.*
 import com.mutlak.metis.wordmem.injection.component.*
 import com.mutlak.metis.wordmem.injection.module.*
 import com.squareup.leakcanary.*
-import io.fabric.sdk.android.*
 import io.realm.*
 import timber.log.*
 import uk.co.chrisjenx.calligraphy.*
@@ -19,7 +17,6 @@ class MutlakApplication : MultiDexApplication() {
   override fun onCreate() {
     super.onCreate()
 
-    Fabric.with(this, Crashlytics())
 
     if (BuildConfig.DEBUG) {
       Timber.plant(Timber.DebugTree())

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     >
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/result_wrong_cardview"
         style="@style/answer_card"
         android:layout_marginTop="8dp"
@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#515151"
                     android:textSize="20sp"
-                    fontPath="fonts/Ubuntu-Bold.ttf"
+                    android:fontPath="fonts/Ubuntu-Bold.ttf"
                     android:textStyle="bold"
                     tools:text="Word"
                     />
@@ -73,6 +73,6 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

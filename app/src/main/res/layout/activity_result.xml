@@ -1,4 +1,4 @@
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -21,7 +21,7 @@
         >
 
 
-      <android.support.constraint.ConstraintLayout
+      <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:layout_gravity="center"
@@ -52,7 +52,7 @@
             />
 
         <!-- result wrong-correct-->
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             app:layout_constraintRight_toRightOf="parent"
             >
 
-          <android.support.constraint.ConstraintLayout
+          <androidx.constraintlayout.widget.ConstraintLayout
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:divider="@drawable/vertical_divider"
@@ -159,10 +159,10 @@
 
             </LinearLayout>
 
-          </android.support.constraint.ConstraintLayout>
-        </android.support.v7.widget.CardView>
+          </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-      </android.support.constraint.ConstraintLayout>
+      </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
@@ -284,4 +284,4 @@
 
   <include layout="@layout/result_bottom_sheet"/>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

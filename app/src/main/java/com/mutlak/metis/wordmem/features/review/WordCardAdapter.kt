@@ -1,8 +1,8 @@
 package com.mutlak.metis.wordmem.features.review
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.google.gson.Gson
 import com.mutlak.metis.wordmem.data.model.Word
 

@@ -2,14 +2,14 @@ package com.mutlak.metis.wordmem.features.review
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.viewpager.widget.ViewPager
 import butterknife.BindView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.github.amlcurran.showcaseview.ShowcaseView

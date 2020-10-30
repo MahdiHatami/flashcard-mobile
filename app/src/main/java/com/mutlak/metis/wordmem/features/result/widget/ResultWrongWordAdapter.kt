@@ -2,13 +2,13 @@ package com.mutlak.metis.wordmem.features.result.widget
 
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 
 import com.mutlak.metis.wordmem.R
 import com.mutlak.metis.wordmem.data.model.pojo.Question
@@ -47,17 +47,10 @@ class ResultWrongWordAdapter(private val mContext: Context, private val settings
   }
 
   inner class AnswerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    var word: TextView
-    var correctAnswer: TextView
-    var wrongAnswer: TextView
-    var cardView: CardView
+    var word: TextView = view.findViewById<View>(R.id.result_item_word) as TextView
+    var correctAnswer: TextView = view.findViewById<View>(R.id.result_item_correct_meaning) as TextView
+    var wrongAnswer: TextView = view.findViewById<View>(R.id.result_item_user_answer) as TextView
+    var cardView: CardView = view.findViewById<View>(R.id.result_wrong_cardview) as CardView
 
-    init {
-
-      cardView = view.findViewById<View>(R.id.result_wrong_cardview) as CardView
-      word = view.findViewById<View>(R.id.result_item_word) as TextView
-      correctAnswer = view.findViewById<View>(R.id.result_item_correct_meaning) as TextView
-      wrongAnswer = view.findViewById<View>(R.id.result_item_user_answer) as TextView
-    }
   }
 }

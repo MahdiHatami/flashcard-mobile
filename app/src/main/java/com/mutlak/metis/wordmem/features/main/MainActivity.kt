@@ -2,7 +2,7 @@ package com.mutlak.metis.wordmem.features.main
 
 import android.content.*
 import android.os.*
-import android.support.v7.app.*
+import androidx.appcompat.app.AppCompatActivity
 import com.mutlak.metis.wordmem.data.local.*
 import com.mutlak.metis.wordmem.features.intro.*
 import com.mutlak.metis.wordmem.features.landing.*
