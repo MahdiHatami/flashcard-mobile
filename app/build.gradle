@@ -18,6 +18,9 @@ android {
     experimental = true
   }
 
+  def localProperties = new Properties()
+  localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
   defaultConfig {
     defaultPublishConfig 'debug'
 
@@ -29,7 +32,7 @@ android {
     // Major -> Millions, Minor -> Thousands, Bugfix -> Hundreds. E.g 1.3.72 == 1,003,072
     versionName '2.0.1'
 
-    buildConfigField("String", "API_URL", "\"${ApiUrl}\"")
+    buildConfigField("String", "API_URL", localProperties['Url'])
 
     multiDexEnabled true
 
@@ -38,10 +41,10 @@ android {
 
   signingConfigs {
     release {
-      storeFile file(RELEASE_STORE_FILE)
-      storePassword RELEASE_STORE_PASSWORD
-      keyAlias RELEASE_KEY_ALIAS
-      keyPassword RELEASE_KEY_PASSWORD
+      storeFile file(localProperties['RELEASE_STORE_FILE'])
+      storePassword localProperties['RELEASE_STORE_PASSWORD']
+      keyAlias localProperties['RELEASE_KEY_ALIAS']
+      keyPassword localProperties['RELEASE_KEY_PASSWORD']
     }
   }
 
