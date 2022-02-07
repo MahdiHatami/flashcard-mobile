@@ -1,9 +1,10 @@
 
-# ![launcher icon](logo.webp) Flash Card App
+# Flash Card App
 
-This repository contains FlashCard app built for learning english words
+## This repository contains FlashCard app built for learning english words
 PlayStore: https://play.google.com/store/apps/details?id=com.mutlak.metis.wordmem
-![Screenshot](screen1.webp) ![Screenshot](screen2.webp)
+
+![](screen1.webp)  |  ![](screen2.webp)
 
 ## Architecture
 The architecture of this application relies and complies with the following points below:
